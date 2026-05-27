@@ -1,0 +1,42 @@
+{
+  "summary": "Backend-only test pass for Meridian Plywood API. Wrote pytest suite covering health, products catalog, inquiries (create+list+validation), dealers (create+list+validation), samples (create+list+validation), and email graceful degradation. Initial run exposed a critical 500 on POST /api/dealers and POST /api/samples due to MongoDB ObjectId leaking into the response via Motor's insert_one mutating the doc. Applied minimal in-scope fix (pop _id) and re-ran — 19/19 passing.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/dealers, POST /api/samples", "issue": "Returned 500 due to ObjectId in response (Motor's insert_one mutates the dict adding _id, and the endpoint returned that mutated dict). Fixed by popping _id after insert. Inquiry endpoint was unaffected because it returns the Pydantic model, not the inserted dict."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional: Add a response_model for /api/dealers and /api/samples (e.g., Dealer, SampleRequest models) so MongoDB internals never leak and OpenAPI schema is complete.",
+    "Optional: Move PRODUCT_CATALOG to a separate module (server.py is 326 lines and will grow) — not urgent.",
+    "Optional: Consider returning 201 Created for POST endpoints instead of 200 for REST cleanliness.",
+    "Optional: Add a tiny inert /api/products test in CI to catch catalog drift if marketing adds/removes products."
+  ],
+  "critical_code_review_comments": [
+    "Motor's insert_one(doc) mutates the input dict adding `_id`. Two endpoints returned that mutated dict directly causing 500s. Fixed inline. Inquiry endpoint dodged this only because it returned the Pydantic obj instead of the dict — fragile pattern.",
+    "Dealer/Sample endpoints have no response_model — losing Pydantic serialization safety and OpenAPI docs.",
+    "Inquiries, dealers, samples are all stored in the single `inquiries` collection differentiated by `kind`. Acceptable for MVP, but separate collections would be cleaner and avoid accidental cross-leakage if a query forgets the `kind` filter.",
+    "send_email_async exceptions are caught and logged, which is correct. Fire-and-forget asyncio.create_task tasks have no error handler attached — minor risk of swallowed exceptions if the email path ever errors before the try/except.",
+    "CORS allow_origins='*' with allow_credentials=True is invalid per spec (browsers reject). Will not cause test failures but is a misconfiguration."
+  ],
+  "updated_files": [
+    "/app/backend/server.py (popped _id after insert in create_dealer + create_sample)",
+    "/app/backend/tests/backend_test.py (new test suite)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "not tested (per request)"},
+  "test_credentials": "none required",
+  "seed_data_creation": "Tests create TEST_-prefixed inquiry/dealer/sample documents in MongoDB; not cleaned up (kept for inspection). Safe to drop the `inquiries` collection between runs if needed.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend at https://plywood-studio.preview.emergentagent.com. Test file at /app/backend/tests/backend_test.py runs via `pytest backend/tests/backend_test.py -v`. Email is intentionally disabled (RESEND_API_KEY empty) — health reports email_enabled=false and creates still succeed (verified). All inquiries/dealers/samples stored in the single `inquiries` collection, differentiated by `kind` field. Frontend not tested in this iteration.",
+  "rca of the issue": "AsyncIOMotorCollection.insert_one(doc) mutates the passed dict by attaching the generated `_id` ObjectId. create_dealer and create_sample built `doc`, inserted it, then returned the same `doc` — so FastAPI's jsonable_encoder hit a bson.ObjectId it could not serialize and raised 500. Reproduction: POST any valid payload to /api/dealers or /api/samples before the fix → 500. Mitigation: `doc.pop('_id', None)` immediately after insert_one. Long-term: define proper response_model Pydantic schemas for these endpoints (matching what was done for /api/inquiries which dodged the bug by returning the Pydantic obj instead of the dict)."
+}
