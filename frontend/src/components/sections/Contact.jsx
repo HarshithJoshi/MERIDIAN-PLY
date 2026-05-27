@@ -46,7 +46,7 @@ export default function Contact() {
     <section
       id="contact"
       data-testid="contact-section"
-      className="relative bg-[#0B0B0B] py-24 md:py-32 lg:py-44 overflow-hidden"
+      className="relative bg-[#0B0B0B] pt-24 md:pt-32 lg:pt-40 pb-12 md:pb-16 overflow-hidden"
     >
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[420px] w-[820px] rounded-full blur-[160px] opacity-40 pointer-events-none"
            style={{ background: "radial-gradient(ellipse at center, rgba(184,115,51,0.35), transparent 65%)" }} />

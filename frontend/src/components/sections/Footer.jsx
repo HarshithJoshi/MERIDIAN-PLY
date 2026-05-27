@@ -3,20 +3,25 @@ import { Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer data-testid="footer" className="relative bg-[#080808] border-t border-white/[0.06] pt-20 pb-8">
+    <footer data-testid="footer" className="relative bg-[#080808] border-t border-white/[0.06] pt-10 md:pt-14 pb-8">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24">
         {/* Massive brand wordmark */}
-        <div className="overflow-hidden border-b border-white/5 pb-10 md:pb-16">
+        <div className="overflow-hidden border-b border-white/5 pb-6 md:pb-10">
           <div
-            className="font-display text-[#141414] select-none leading-[0.85] tracking-[-0.04em] text-[20vw]"
-            style={{ fontWeight: 700, WebkitTextStroke: "1px rgba(184,115,51,0.18)" }}
+            className="font-display text-[#141414] select-none leading-[0.82] tracking-[-0.05em] text-center"
+            style={{
+              fontWeight: 700,
+              WebkitTextStroke: "1px rgba(184,115,51,0.18)",
+              fontSize: "clamp(64px, 14.2vw, 220px)",
+              whiteSpace: "nowrap",
+            }}
             aria-hidden
           >
             MERIDIAN
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="mt-10 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-10">
           <div>
             <div className="eyebrow">Brand</div>
             <p className="mt-4 text-[13px] text-[#F6F1E9]/55 leading-relaxed max-w-xs">

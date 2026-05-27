@@ -8,9 +8,11 @@ import { Toaster } from "@/components/ui/sonner";
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.25,
+      duration: 0.9,
       smoothWheel: true,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      wheelMultiplier: 1,
+      touchMultiplier: 1.4,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
     });
     let rafId;
     function raf(time) {

@@ -70,8 +70,8 @@ function StoryPanel({ item, index }) {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.08, 1.02, 1.08]);
+  const y = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.04, 1.0, 1.04]);
   const flip = index % 2 === 1;
 
   return (
@@ -87,8 +87,8 @@ function StoryPanel({ item, index }) {
           <motion.img
             src={item.image}
             alt={item.title}
-            style={{ y, scale }}
-            className="absolute inset-0 h-[120%] w-full object-cover"
+            style={{ y, scale, willChange: "transform" }}
+            className="absolute inset-0 h-[110%] w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/55 via-transparent to-transparent" />
         </div>

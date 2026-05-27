@@ -1,20 +1,40 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GALLERY } from "@/lib/meridian";
 
 export default function Interiors() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  // translate horizontally as user scrolls
-  const x = useTransform(scrollYProgress, [0, 1], ["2%", "-72%"]);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const [travelPx, setTravelPx] = useState(0); // how many px the track needs to scroll horizontally
+
+  // Measure track width vs viewport width to compute exact horizontal travel
+  useEffect(() => {
+    const measure = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      const viewportW = window.innerWidth;
+      const trackW = track.scrollWidth;
+      const t = Math.max(0, trackW - viewportW);
+      setTravelPx(t);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const x = useTransform(scrollYProgress, [0, 1], [0, -travelPx]);
+
+  // Section height: 1 viewport for the fixed pin + travelPx of vertical scroll for the traversal
+  const sectionHeight = `calc(100vh + ${travelPx}px)`;
 
   return (
     <section
       id="interiors"
       data-testid="interiors-section"
-      ref={ref}
+      ref={sectionRef}
       className="relative bg-[#0B0B0B]"
-      style={{ height: `${GALLERY.length * 80}vh` }}
+      style={{ height: sectionHeight }}
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center bg-grain">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24 w-full">
@@ -36,12 +56,16 @@ export default function Interiors() {
           </div>
         </div>
 
-        <motion.div style={{ x }} className="flex gap-6 md:gap-8 px-6 md:px-12 lg:px-24 pl-6">
+        <motion.div
+          ref={trackRef}
+          style={{ x, willChange: "transform" }}
+          className="flex gap-6 md:gap-8 px-6 md:px-12 lg:px-24"
+        >
           {GALLERY.map((g, i) => (
             <motion.figure
               key={g.title}
               data-testid={`interior-card-${i}`}
-              className="relative shrink-0 w-[78vw] sm:w-[58vw] md:w-[48vw] lg:w-[40vw] aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 group"
+              className="relative shrink-0 w-[78vw] sm:w-[58vw] md:w-[44vw] lg:w-[36vw] aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 group"
               whileHover={{ y: -6 }}
               transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
             >
@@ -64,7 +88,8 @@ export default function Interiors() {
               </figcaption>
             </motion.figure>
           ))}
-          <div className="shrink-0 w-[20vw]" />
+          {/* Trailing breathing room so the last card lands cleanly off the right edge */}
+          <div className="shrink-0 w-[6vw]" aria-hidden />
         </motion.div>
       </div>
     </section>

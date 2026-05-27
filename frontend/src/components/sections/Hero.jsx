@@ -6,9 +6,9 @@ import { IMAGES, BRAND } from "@/lib/meridian";
 export default function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+  const yImg = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   return (
     <section
@@ -20,8 +20,8 @@ export default function Hero() {
       {/* Background image */}
       <motion.div
         aria-hidden
-        style={{ y: yImg }}
-        className="absolute inset-0 -top-[8%] -bottom-[8%]"
+        style={{ y: yImg, willChange: "transform" }}
+        className="absolute inset-0 -top-[5%] -bottom-[5%]"
       >
         <img
           src={IMAGES.hero}
