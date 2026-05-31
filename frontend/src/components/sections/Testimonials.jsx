@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IMAGES } from "@/lib/meridian";
 import { Quote } from "lucide-react";
 
 const ITEMS = [
@@ -9,21 +8,21 @@ const ITEMS = [
       "We specified Meridian across a 14-villa development. Three monsoons later, not a single panel has moved — the cabinetry still reads as it did on day one.",
     name: "Aanya Mehta",
     role: "Principal Architect · Studio Volume",
-    portrait: IMAGES.portrait1,
+    portrait: "/images/portrait_aanya.jpg",
   },
   {
     quote:
       "The cross-band consistency is what separates Meridian. Our routers stay sharp longer, our finishes lay flatter — the math just works.",
     name: "Rohan Iyer",
     role: "Head of Production · Atelier Carve",
-    portrait: IMAGES.portrait2,
+    portrait: "/images/portrait_rohan.jpg",
   },
   {
     quote:
       "I've worked with every BWP brand in India. Meridian is the only one I would call architectural-grade without qualification.",
     name: "Priya Saxena",
     role: "Interior Designer · Saxena & Co.",
-    portrait: IMAGES.portrait3,
+    portrait: "/images/portrait_priya.jpg",
   },
 ];
 
