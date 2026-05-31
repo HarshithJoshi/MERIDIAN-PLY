@@ -10,7 +10,7 @@ export const BRAND = {
 };
 
 export const IMAGES = {
-  hero: "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/0cf3f068a0a6780383a3819febba2773ee1ddc84e807f489a9da368e4c591b9d.png",
+  hero: "/images/hero-plywood-slab.png",
   exploded:
     "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/25815b3d59b495af0f8b427a7748dbd9e8ade893e183e2c9e418d2e114d8f20b.png",
   water:
