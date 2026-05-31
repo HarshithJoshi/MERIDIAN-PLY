@@ -103,7 +103,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 1.2, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-16 hidden md:grid grid-cols-3 max-w-3xl gap-10 border-t border-white/10 pt-8"
+          className="mt-12 sm:mt-14 md:mt-16 grid grid-cols-3 max-w-3xl gap-6 md:gap-10 border-t border-white/10 pt-6 md:pt-8"
         >
           {[
             { k: "72 hrs", v: "Boiling Water Test" },
@@ -111,10 +111,10 @@ export default function Hero() {
             { k: "Lifetime", v: "Performance Warranty" },
           ].map((s) => (
             <div key={s.v} data-testid={`hero-stat-${s.v}`}>
-              <div className="font-display text-[32px] text-[#F6F1E9] tracking-tight" style={{ fontWeight: 600 }}>
+              <div className="font-display text-[22px] sm:text-[26px] md:text-[32px] text-[#F6F1E9] tracking-tight" style={{ fontWeight: 600 }}>
                 {s.k}
               </div>
-              <div className="mt-1 text-[12px] tracking-[0.18em] uppercase text-[#A3A3A3]">{s.v}</div>
+              <div className="mt-1 text-[10px] md:text-[12px] tracking-[0.18em] uppercase text-[#A3A3A3]">{s.v}</div>
             </div>
           ))}
         </motion.div>

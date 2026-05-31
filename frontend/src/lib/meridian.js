@@ -3,9 +3,9 @@ export const BRAND = {
   name: "Meridian Plywood",
   tagline: "Built to Endure. Designed to Inspire.",
   short: "Meridian",
-  whatsapp: "+919999999999",
+  whatsapp: "+919629783971",
   email: "hello@meridianplywood.com",
-  phone: "+91 99999 99999",
+  phone: "+91 96297 83971",
   address: "Industrial Estate, Yamunanagar, Haryana 135001, India",
 };
 

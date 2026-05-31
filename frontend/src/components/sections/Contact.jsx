@@ -67,7 +67,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
           {/* Form */}
           <motion.form
             initial={{ opacity: 0, y: 30 }}
@@ -76,7 +76,7 @@ export default function Contact() {
             transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
             onSubmit={submit}
             data-testid="contact-form"
-            className="lg:col-span-7 rounded-3xl border border-white/10 bg-gradient-to-b from-[#111111] to-[#0B0B0B] p-7 md:p-10"
+            className="md:col-span-7 rounded-3xl border border-white/10 bg-gradient-to-b from-[#111111] to-[#0B0B0B] p-6 md:p-8 lg:p-10"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <Field label="Full name" required>
@@ -164,8 +164,8 @@ export default function Contact() {
           </motion.form>
 
           {/* Contact details */}
-          <div className="lg:col-span-5 space-y-5">
-            <InfoCard icon={<Phone size={18} />} label="Phone" value={BRAND.phone} href={`tel:${BRAND.phone.replace(/\s/g, "")}`} testid="contact-info-phone" />
+          <div className="md:col-span-5 space-y-5">
+            <PhoneCard />
             <InfoCard icon={<Mail size={18} />} label="Email" value={BRAND.email} href={`mailto:${BRAND.email}`} testid="contact-info-email" />
             <InfoCard icon={<MapPin size={18} />} label="Manufacturing" value={BRAND.address} testid="contact-info-address" />
 
@@ -236,5 +236,52 @@ function InfoCard({ icon, label, value, href, testid }) {
         {value}
       </div>
     </Tag>
+  );
+}
+
+function PhoneCard() {
+  const waNumber = BRAND.whatsapp.replace(/\D/g, "");
+  const waMsg = encodeURIComponent(
+    `Hi Meridian — I'd like to discuss a project specification.`
+  );
+  return (
+    <div
+      data-testid="contact-info-phone"
+      className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-[#B87333]/55 transition-colors duration-500 group"
+    >
+      <div className="flex items-center gap-3 text-[#B87333]">
+        <Phone size={18} />
+        <span className="eyebrow" style={{ color: "#B87333" }}>Phone</span>
+      </div>
+      <a
+        href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
+        data-testid="contact-phone-link"
+        className="mt-3 block font-display text-[18px] md:text-[20px] text-[#F6F1E9] hover:text-[#F6F1E9] tracking-tight"
+        style={{ fontWeight: 500 }}
+      >
+        {BRAND.phone}
+      </a>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <a
+          href={`https://wa.me/${waNumber}?text=${waMsg}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="contact-phone-whatsapp-btn"
+          className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-4 py-2 text-[12.5px] font-medium hover:bg-[#1ebd5b] transition-colors duration-300 shadow-[0_10px_24px_-12px_rgba(37,211,102,0.55)]"
+        >
+          <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor" aria-hidden>
+            <path d="M19.11 17.18c-.27-.13-1.58-.78-1.82-.87-.24-.09-.42-.13-.6.13-.18.27-.69.86-.85 1.04-.16.18-.31.2-.58.07-.27-.13-1.13-.42-2.16-1.33-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.55.12-.12.27-.31.4-.46.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.47-.07-.13-.6-1.44-.82-1.97-.22-.52-.44-.45-.6-.46l-.51-.01c-.18 0-.47.07-.71.34-.24.27-.93.91-.93 2.21 0 1.3.95 2.56 1.08 2.74.13.18 1.86 2.84 4.5 3.99.63.27 1.12.43 1.5.55.63.2 1.21.17 1.66.1.5-.08 1.58-.65 1.8-1.27.22-.62.22-1.15.15-1.27-.07-.12-.24-.18-.51-.31zM16.02 4C9.4 4 4.04 9.36 4.04 16c0 2.05.54 4.06 1.56 5.83L4 28l6.34-1.66A11.95 11.95 0 0 0 16.02 28C22.66 28 28 22.64 28 16S22.66 4 16.02 4zm0 21.83c-1.81 0-3.58-.49-5.13-1.41l-.37-.22-3.76.99 1-3.67-.24-.38a9.92 9.92 0 0 1-1.52-5.14c0-5.49 4.48-9.97 9.97-9.97s9.97 4.48 9.97 9.97-4.46 9.83-9.92 9.83z" />
+          </svg>
+          Message on WhatsApp
+        </a>
+        <a
+          href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
+          data-testid="contact-phone-call-btn"
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-[12.5px] text-[#F6F1E9]/85 hover:text-[#F6F1E9] hover:border-[#B87333]/60 transition-colors"
+        >
+          <Phone size={13} /> Call
+        </a>
+      </div>
+    </div>
   );
 }

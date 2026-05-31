@@ -78,11 +78,11 @@ function StoryPanel({ item, index }) {
     <div
       ref={ref}
       data-testid={`material-panel-${index}`}
-      className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${
-        flip ? "lg:[direction:rtl]" : ""
+      className={`grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center ${
+        flip ? "md:[direction:rtl]" : ""
       }`}
     >
-      <div className="lg:col-span-7 [direction:ltr]">
+      <div className="md:col-span-7 [direction:ltr]">
         <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 aspect-[4/3] md:aspect-[5/4]">
           <motion.img
             src={item.image}
@@ -98,7 +98,7 @@ function StoryPanel({ item, index }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 1, ease: [0.2, 0.7, 0.2, 1] }}
-        className="lg:col-span-5 [direction:ltr]"
+        className="md:col-span-5 [direction:ltr]"
       >
         <span className="eyebrow">{item.eyebrow}</span>
         <h3

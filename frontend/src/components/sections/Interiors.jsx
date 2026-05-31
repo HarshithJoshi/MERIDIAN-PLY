@@ -1,32 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { GALLERY } from "@/lib/meridian";
 
 export default function Interiors() {
   const sectionRef = useRef(null);
-  const trackRef = useRef(null);
-  const [travelPx, setTravelPx] = useState(0); // how many px the track needs to scroll horizontally
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
 
-  // Measure track width vs viewport width to compute exact horizontal travel
-  useEffect(() => {
-    const measure = () => {
-      const track = trackRef.current;
-      if (!track) return;
-      const viewportW = window.innerWidth;
-      const trackW = track.scrollWidth;
-      const t = Math.max(0, trackW - viewportW);
-      setTravelPx(t);
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -travelPx]);
-
-  // Section height: 1 viewport for the fixed pin + travelPx of vertical scroll for the traversal
-  const sectionHeight = `calc(100vh + ${travelPx}px)`;
+  // Smooth out the scroll-driven values for buttery cross-dissolves
+  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
 
   return (
     <section
@@ -34,64 +18,142 @@ export default function Interiors() {
       data-testid="interiors-section"
       ref={sectionRef}
       className="relative bg-[#0B0B0B]"
-      style={{ height: sectionHeight }}
+      // 1 viewport per slide for the pinned sequence
+      style={{ height: `${GALLERY.length * 100}vh` }}
     >
-      <div className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center bg-grain">
-        <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24 w-full">
-          <div className="flex items-end justify-between mb-10 md:mb-14">
-            <div className="max-w-xl">
-              <span className="eyebrow">— Interior Applications</span>
-              <h2
-                className="mt-4 font-display text-[32px] sm:text-[44px] md:text-[60px] leading-[1.02] text-[#F6F1E9]"
-                style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
-              >
-                Spaces specified
-                <br />
-                <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>in Meridian</span>.
-              </h2>
-            </div>
-            <div className="hidden md:block text-[11px] text-[#F6F1E9]/45 tracking-[0.22em] uppercase font-mono">
-              Scroll to traverse →
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
+        {/* Slides stack — each fades + zooms into view at its scroll segment */}
+        {GALLERY.map((g, i) => (
+          <Slide key={g.title} item={g} index={i} total={GALLERY.length} progress={smooth} />
+        ))}
+
+        {/* Persistent overlay: eyebrow + counter + progress rail */}
+        <div className="pointer-events-none absolute inset-0 z-30 flex flex-col">
+          {/* Top eyebrow */}
+          <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pt-28 md:pt-32">
+            <div className="flex items-center justify-between">
+              <span className="eyebrow text-shadow-cinema">— Interior Applications</span>
+              <Counter progress={smooth} total={GALLERY.length} />
             </div>
           </div>
-        </div>
 
-        <motion.div
-          ref={trackRef}
-          style={{ x, willChange: "transform" }}
-          className="flex gap-6 md:gap-8 px-6 md:px-12 lg:px-24"
-        >
-          {GALLERY.map((g, i) => (
-            <motion.figure
-              key={g.title}
-              data-testid={`interior-card-${i}`}
-              className="relative shrink-0 w-[78vw] sm:w-[58vw] md:w-[44vw] lg:w-[36vw] aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 group"
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
-            >
-              <img
-                src={g.src}
-                alt={g.title}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-[1.06]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/95 via-[#0B0B0B]/30 to-transparent" />
-              <figcaption className="absolute bottom-0 left-0 right-0 p-7 md:p-9">
-                <div className="text-[10px] tracking-[0.28em] uppercase text-[#B87333] font-mono">
-                  {String(i + 1).padStart(2, "0")} / {String(GALLERY.length).padStart(2, "0")}
-                </div>
-                <h3 className="mt-3 font-display text-[22px] md:text-[28px] text-[#F6F1E9]" style={{ fontWeight: 600, letterSpacing: "-0.015em" }}>
-                  {g.title}
-                </h3>
-                <p className="mt-1 text-[12.5px] text-[#F6F1E9]/65">{g.location}</p>
-                <p className="mt-3 text-[11.5px] text-[#F6F1E9]/45 tracking-[0.12em] uppercase font-mono">{g.finish}</p>
-              </figcaption>
-            </motion.figure>
-          ))}
-          {/* Trailing breathing room so the last card lands cleanly off the right edge */}
-          <div className="shrink-0 w-[6vw]" aria-hidden />
-        </motion.div>
+          <div className="flex-1" />
+
+          {/* Bottom progress rail */}
+          <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-10 md:pb-14">
+            <ProgressRail progress={smooth} total={GALLERY.length} />
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function Slide({ item, index, total, progress }) {
+  // Each slide owns the segment [i/total, (i+1)/total]
+  const seg = 1 / total;
+  const segStart = index * seg;
+  const segEnd = (index + 1) * seg;
+
+  // Crossfade windows — gentle 35% overlap so slides cross-dissolve
+  const fadeIn = segStart - seg * 0.35;
+  const fadeOut = segEnd - seg * 0.05;
+
+  const opacity = useTransform(
+    progress,
+    [Math.max(0, fadeIn), segStart + seg * 0.05, fadeOut, Math.min(1, fadeOut + seg * 0.35)],
+    [0, 1, 1, 0]
+  );
+
+  // Ken Burns: continuous slow zoom + slight pan throughout the slide window
+  const scale = useTransform(progress, [segStart - seg * 0.5, segEnd + seg * 0.5], [1.18, 1.0]);
+  const yImg = useTransform(progress, [segStart - seg * 0.5, segEnd + seg * 0.5], ["-3%", "3%"]);
+
+  // Caption motion
+  const captionY = useTransform(progress, [segStart - seg * 0.2, segStart + seg * 0.1, segEnd - seg * 0.05, segEnd + seg * 0.2], [40, 0, 0, -30]);
+  const captionOpacity = useTransform(progress, [segStart - seg * 0.2, segStart + seg * 0.1, segEnd - seg * 0.05, segEnd + seg * 0.2], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      data-testid={`interior-slide-${index}`}
+      style={{ opacity }}
+      className="absolute inset-0"
+    >
+      {/* Background image with ken-burns */}
+      <motion.div style={{ scale, y: yImg, willChange: "transform" }} className="absolute inset-0 -top-[4%] -bottom-[4%]">
+        <img
+          src={item.src}
+          alt={item.title}
+          loading={index === 0 ? "eager" : "lazy"}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </motion.div>
+
+      {/* Cinematic gradient legibility */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_120%,rgba(11,11,11,0.0)_0%,rgba(11,11,11,0.45)_55%,rgba(11,11,11,0.92)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,11,11,0.78)_0%,rgba(11,11,11,0.35)_28%,rgba(11,11,11,0.0)_55%,rgba(11,11,11,0.0)_100%)]" />
+
+      {/* Caption — bottom-left, Apple style */}
+      <motion.div
+        style={{ y: captionY, opacity: captionOpacity }}
+        className="absolute bottom-0 left-0 right-0 z-10"
+      >
+        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-28 md:pb-32">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 text-[10px] tracking-[0.32em] uppercase text-[#B87333] font-mono">
+              <span>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
+              <span className="h-px w-10 bg-[#B87333]/55" />
+              <span className="text-[#F6F1E9]/55">{item.location}</span>
+            </div>
+            <h3
+              className="mt-5 font-display text-[40px] sm:text-[56px] md:text-[72px] leading-[1.02] text-[#F6F1E9] text-shadow-cinema"
+              style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
+            >
+              {item.title}
+            </h3>
+            <p className="mt-4 text-[12.5px] md:text-[13px] tracking-[0.18em] uppercase font-mono text-[#F6F1E9]/65">
+              {item.finish}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function Counter({ progress, total }) {
+  // Format like "01 — 05" with the current index reactive
+  const indexMV = useTransform(progress, (p) => {
+    const i = Math.min(total - 1, Math.max(0, Math.floor(p * total + 0.0001)));
+    return String(i + 1).padStart(2, "0");
+  });
+  return (
+    <div className="flex items-baseline gap-2 font-mono text-[11px] tracking-[0.28em] uppercase text-[#F6F1E9]/70 text-shadow-cinema">
+      <motion.span data-testid="interiors-counter-current">{indexMV}</motion.span>
+      <span className="text-[#F6F1E9]/35">/</span>
+      <span className="text-[#F6F1E9]/35">{String(total).padStart(2, "0")}</span>
+    </div>
+  );
+}
+
+function ProgressRail({ progress, total }) {
+  const fill = useTransform(progress, [0, 1], ["0%", "100%"]);
+  return (
+    <div className="w-full">
+      <div className="flex items-center gap-3 mb-3">
+        <span className="text-[10px] tracking-[0.28em] uppercase text-[#F6F1E9]/45 font-mono">
+          Scroll to traverse
+        </span>
+      </div>
+      <div className="relative h-px w-full bg-white/15 overflow-hidden">
+        <motion.div style={{ width: fill }} className="absolute left-0 top-0 h-full bg-[#B87333]" />
+        {/* Segment ticks */}
+        <div className="absolute inset-0 flex justify-between pointer-events-none">
+          {Array.from({ length: total + 1 }).map((_, i) => (
+            <span key={i} className="h-[7px] -translate-y-[3px] w-px bg-white/30" />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

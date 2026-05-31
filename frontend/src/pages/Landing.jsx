@@ -10,6 +10,7 @@ import Portal from "@/components/sections/Portal";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
+import FloatingWhatsApp from "@/components/sections/FloatingWhatsApp";
 
 export default function Landing() {
   return (
@@ -26,6 +27,7 @@ export default function Landing() {
       <Testimonials />
       <Contact />
       <Footer />
+      <FloatingWhatsApp />
     </main>
   );
 }

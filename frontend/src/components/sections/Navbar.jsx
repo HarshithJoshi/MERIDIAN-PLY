@@ -41,31 +41,31 @@ export default function Navbar() {
           </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-9">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-9">
           {NAV.map((n) => (
             <a
               key={n.id}
               data-testid={`nav-link-${n.id}`}
               href={`#${n.id}`}
-              className="link-underline text-[13px] text-[#F6F1E9]/80 hover:text-[#F6F1E9] transition-colors"
+              className="link-underline text-[12px] lg:text-[13px] text-[#F6F1E9]/80 hover:text-[#F6F1E9] transition-colors"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3">
           <a
             data-testid="navbar-cta-catalogue"
             href="#contact"
-            className="btn-pill btn-pill-ghost text-[12px]"
+            className="btn-pill btn-pill-ghost text-[11px] lg:text-[12px] hidden lg:inline-flex"
           >
             Catalogue
           </a>
           <a
             data-testid="navbar-cta-contact"
             href="#contact"
-            className="btn-pill btn-pill-primary text-[12px]"
+            className="btn-pill btn-pill-primary text-[11px] lg:text-[12px] whitespace-nowrap"
           >
             Speak to specifier
           </a>
@@ -73,7 +73,7 @@ export default function Navbar() {
 
         <button
           data-testid="navbar-mobile-toggle"
-          className="lg:hidden text-[#F6F1E9]"
+          className="md:hidden text-[#F6F1E9]"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -89,7 +89,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.2, 0.7, 0.2, 1] }}
-            className="lg:hidden overflow-hidden glass-strong border-t border-white/5"
+            className="md:hidden overflow-hidden glass-strong border-t border-white/5"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {NAV.map((n) => (

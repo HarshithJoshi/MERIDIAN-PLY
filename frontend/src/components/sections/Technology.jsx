@@ -29,8 +29,8 @@ export default function Technology() {
            style={{ background: "radial-gradient(ellipse at center, rgba(184,115,51,0.35), transparent 65%)" }} />
 
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+          <div className="md:col-span-5">
             <span className="eyebrow">— BWP Technology</span>
             <h2
               className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[72px] leading-[1.02] text-[#F6F1E9]"
@@ -48,13 +48,14 @@ export default function Technology() {
             </p>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="relative h-[440px] sm:h-[520px] md:h-[600px] rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden bg-gradient-to-b from-[#141414] to-[#0B0B0B]">
+          <div className="md:col-span-7">
+            <div className="relative h-[420px] sm:h-[520px] md:h-[560px] lg:h-[600px] rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden bg-gradient-to-b from-[#141414] to-[#0B0B0B]">
               <div className="absolute inset-0 wood-stripes opacity-30 pointer-events-none" />
               <Canvas
                 shadows
                 camera={{ position: [0, 1.8, 5.6], fov: 35 }}
-                dpr={[1, 1.6]}
+                dpr={[1, 1.4]}
+                gl={{ antialias: true, powerPreference: "high-performance" }}
                 data-testid="technology-3d-canvas"
               >
                 <PlyLights />
