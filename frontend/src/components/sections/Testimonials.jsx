@@ -5,6 +5,13 @@ import { Quote } from "lucide-react";
 const ITEMS = [
   {
     quote:
+      "I've worked with every BWP brand in India. Meridian is the only one I would call architectural-grade without qualification.",
+    name: "Priya Saxena",
+    role: "Interior Designer · Saxena & Co.",
+    portrait: "/images/portrait_priya.jpg",
+  },
+  {
+    quote:
       "We specified Meridian across a 14-villa development. Three monsoons later, not a single panel has moved — the cabinetry still reads as it did on day one.",
     name: "Aanya Mehta",
     role: "Principal Architect · Studio Volume",
@@ -16,13 +23,6 @@ const ITEMS = [
     name: "Rohan Iyer",
     role: "Head of Production · Atelier Carve",
     portrait: "/images/portrait_rohan.jpg",
-  },
-  {
-    quote:
-      "I've worked with every BWP brand in India. Meridian is the only one I would call architectural-grade without qualification.",
-    name: "Priya Saxena",
-    role: "Interior Designer · Saxena & Co.",
-    portrait: "/images/portrait_priya.jpg",
   },
 ];
 
