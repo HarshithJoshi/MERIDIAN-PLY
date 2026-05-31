@@ -104,7 +104,7 @@ function Slide({ item, index, total, progress, isMounted, isLCP }) {
         alt={item.title}
         loading={isLCP ? "eager" : "lazy"}
         decoding="async"
-        fetchpriority={isLCP ? "high" : "auto"}
+        fetchPriority={isLCP ? "high" : "auto"}
         style={{
           scale: kb,
           transformOrigin: "50% 55%",
