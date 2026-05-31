@@ -61,6 +61,30 @@ let webpackConfig = {
 };
 
 webpackConfig.devServer = (devServerConfig) => {
+  // Configure webpack-dev-server's runtime error overlay to ignore opaque
+  // cross-origin "Script error." messages (no detail, browser-stripped for CORS).
+  // These come from third-party scripts (PostHog session-replay, analytics,
+  // OpenStreetMap iframe, browser extensions) and have no actionable info.
+  devServerConfig.client = {
+    ...(devServerConfig.client || {}),
+    overlay: {
+      errors: true,
+      warnings: false,
+      runtimeErrors: (error) => {
+        try {
+          const msg = (error && (error.message || String(error))) || "";
+          // Swallow generic cross-origin script errors
+          if (msg === "Script error." || msg === "" || msg === "Script error") return false;
+          // Swallow ResizeObserver loop warnings (benign, fires on transition)
+          if (msg.indexOf("ResizeObserver loop") !== -1) return false;
+          return true;
+        } catch (_) {
+          return true;
+        }
+      },
+    },
+  };
+
   // Add health check endpoints if enabled
   if (config.enableHealthCheck && setupHealthEndpoints && healthPluginInstance) {
     const originalSetupMiddlewares = devServerConfig.setupMiddlewares;
