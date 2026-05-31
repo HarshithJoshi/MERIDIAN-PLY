@@ -29,37 +29,37 @@ export const IMAGES = {
     "https://images.unsplash.com/photo-1613064756072-52b429a1e06f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxibGFjayUyMGFuZCUyMHdoaXRlJTIwYXJjaGl0ZWN0JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc5OTA4ODU3fDA&ixlib=rb-4.1.0&q=85",
 };
 
-// Curated additional gallery images (Unsplash, dark luxury interiors)
+// Curated cinematic woody luxury interiors — AI-generated (Gemini Nano Banana)
 export const GALLERY = [
   {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    src: "/images/interior_kitchen.jpg",
     title: "The Atelier Kitchen",
     location: "Mumbai · Private Residence",
-    finish: "BWP Gurjan 19mm · Smoked Walnut Veneer",
+    finish: "BWP Gurjan 19mm · Fluted Walnut Veneer",
   },
   {
-    src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80",
+    src: "/images/interior_wardrobe.jpg",
     title: "Walk-In Wardrobe",
     location: "Bengaluru · Penthouse",
-    finish: "BWP Gurjan 16mm · Matte Laminate",
+    finish: "BWP Gurjan 16mm · Vertical Reeded Walnut",
   },
   {
-    src: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1600&q=80",
+    src: "/images/interior_lobby.jpg",
     title: "Hotel Lobby Panels",
     location: "Goa · Boutique Hotel",
-    finish: "Decorative Veneer · Architectural Grade",
+    finish: "Book-matched Walnut Veneer · Architectural Grade",
   },
   {
-    src: "https://images.unsplash.com/photo-1618219740975-d40978bb7378?auto=format&fit=crop&w=1600&q=80",
+    src: "/images/interior_library.jpg",
     title: "Reading Library",
     location: "Delhi · Villa",
-    finish: "Block Board · Hand-finished Oil",
+    finish: "Solid Walnut Shelving · Hand-finished Oil",
   },
   {
-    src: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&w=1600&q=80",
+    src: "/images/interior_bath.jpg",
     title: "Sculpted Bath",
     location: "Hyderabad · Apartment",
-    finish: "Marine Grade 18mm",
+    finish: "Marine Grade 18mm · Slatted Walnut Screen",
   },
 ];
 
