@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { GALLERY } from "@/lib/meridian";
 
 export default function Interiors() {
@@ -9,8 +9,15 @@ export default function Interiors() {
     offset: ["start start", "end end"],
   });
 
-  // Smooth out the scroll-driven values for buttery cross-dissolves
-  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
+  // Active slide index — only this one (+ next, for crossfade) is mounted/animated.
+  // Heavy reduction in concurrent layer work => smooth scroll on iPad / mid-range GPUs.
+  const [active, setActive] = useState(0);
+  const total = GALLERY.length;
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const i = Math.min(total - 1, Math.max(0, Math.floor(v * total + 0.0001)));
+    setActive(i);
+  });
 
   return (
     <section
@@ -18,30 +25,34 @@ export default function Interiors() {
       data-testid="interiors-section"
       ref={sectionRef}
       className="relative bg-[#0B0B0B]"
-      // 1 viewport per slide for the pinned sequence
-      style={{ height: `${GALLERY.length * 100}vh` }}
+      style={{ height: `${total * 100}vh` }}
     >
-      <div className="sticky top-0 h-[100svh] overflow-hidden">
-        {/* Slides stack — each fades + zooms into view at its scroll segment */}
+      <div className="sticky top-0 h-[100svh] overflow-hidden bg-[#0B0B0B]">
         {GALLERY.map((g, i) => (
-          <Slide key={g.title} item={g} index={i} total={GALLERY.length} progress={smooth} />
+          <Slide
+            key={g.title}
+            item={g}
+            index={i}
+            total={total}
+            progress={scrollYProgress}
+            isMounted={Math.abs(i - active) <= 1}
+            isLCP={i === 0}
+          />
         ))}
 
         {/* Persistent overlay: eyebrow + counter + progress rail */}
         <div className="pointer-events-none absolute inset-0 z-30 flex flex-col">
-          {/* Top eyebrow */}
           <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pt-28 md:pt-32">
             <div className="flex items-center justify-between">
               <span className="eyebrow text-shadow-cinema">— Interior Applications</span>
-              <Counter progress={smooth} total={GALLERY.length} />
+              <Counter active={active} total={total} />
             </div>
           </div>
 
           <div className="flex-1" />
 
-          {/* Bottom progress rail */}
           <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-10 md:pb-14">
-            <ProgressRail progress={smooth} total={GALLERY.length} />
+            <ProgressRail progress={scrollYProgress} total={total} />
           </div>
         </div>
       </div>
@@ -49,56 +60,67 @@ export default function Interiors() {
   );
 }
 
-function Slide({ item, index, total, progress }) {
-  // Each slide owns the segment [i/total, (i+1)/total]
+function Slide({ item, index, total, progress, isMounted, isLCP }) {
+  // Linear opacity ramp across an overlap window — no spring, no nested transforms.
   const seg = 1 / total;
   const segStart = index * seg;
   const segEnd = (index + 1) * seg;
-
-  // Crossfade windows — gentle 35% overlap so slides cross-dissolve
-  const fadeIn = segStart - seg * 0.35;
-  const fadeOut = segEnd - seg * 0.05;
+  const halo = seg * 0.18; // small overlap for crossfade
 
   const opacity = useTransform(
     progress,
-    [Math.max(0, fadeIn), segStart + seg * 0.05, fadeOut, Math.min(1, fadeOut + seg * 0.35)],
+    [
+      Math.max(0, segStart - halo),
+      segStart + halo * 0.6,
+      segEnd - halo * 0.6,
+      Math.min(1, segEnd + halo),
+    ],
     [0, 1, 1, 0]
   );
 
-  // Ken Burns: continuous slow zoom + slight pan throughout the slide window
-  const scale = useTransform(progress, [segStart - seg * 0.5, segEnd + seg * 0.5], [1.18, 1.0]);
-  const yImg = useTransform(progress, [segStart - seg * 0.5, segEnd + seg * 0.5], ["-3%", "3%"]);
+  // Single, gentle ken-burns: combined scale on a CSS variable — one transform, one layer.
+  // We use a SINGLE composite transform so the GPU only has to push one matrix per frame.
+  const kb = useTransform(progress, [segStart - seg * 0.5, segEnd + seg * 0.5], [1.12, 1.0]);
 
-  // Caption motion
-  const captionY = useTransform(progress, [segStart - seg * 0.2, segStart + seg * 0.1, segEnd - seg * 0.05, segEnd + seg * 0.2], [40, 0, 0, -30]);
-  const captionOpacity = useTransform(progress, [segStart - seg * 0.2, segStart + seg * 0.1, segEnd - seg * 0.05, segEnd + seg * 0.2], [0, 1, 1, 0]);
+  // Mount nothing outside the active window — saves layout/paint cost on 4 hidden slides.
+  if (!isMounted) return null;
 
   return (
     <motion.div
       data-testid={`interior-slide-${index}`}
-      style={{ opacity }}
+      style={{
+        opacity,
+        // Promote to its own compositor layer & isolate paint:
+        transform: "translate3d(0,0,0)",
+        backfaceVisibility: "hidden",
+        contain: "layout paint",
+        willChange: "opacity",
+      }}
       className="absolute inset-0"
     >
-      {/* Background image with ken-burns */}
-      <motion.div style={{ scale, y: yImg, willChange: "transform" }} className="absolute inset-0 -top-[4%] -bottom-[4%]">
-        <img
-          src={item.src}
-          alt={item.title}
-          loading={index === 0 ? "eager" : "lazy"}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      </motion.div>
+      {/* Image layer — ONE transform driving ken-burns. No nested motion divs. */}
+      <motion.img
+        src={item.src}
+        alt={item.title}
+        loading={isLCP ? "eager" : "lazy"}
+        decoding="async"
+        fetchpriority={isLCP ? "high" : "auto"}
+        style={{
+          scale: kb,
+          transformOrigin: "50% 55%",
+          willChange: "transform",
+        }}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
 
-      {/* Cinematic gradient legibility */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_120%,rgba(11,11,11,0.0)_0%,rgba(11,11,11,0.45)_55%,rgba(11,11,11,0.92)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,11,11,0.78)_0%,rgba(11,11,11,0.35)_28%,rgba(11,11,11,0.0)_55%,rgba(11,11,11,0.0)_100%)]" />
+      {/* Static legibility gradient — pure CSS, no per-frame work */}
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(180deg,rgba(11,11,11,0.35)_0%,rgba(11,11,11,0)_25%,rgba(11,11,11,0)_55%,rgba(11,11,11,0.92)_100%)]" />
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(11,11,11,0.6)_0%,rgba(11,11,11,0)_35%)]" />
 
-      {/* Caption — bottom-left, Apple style */}
-      <motion.div
-        style={{ y: captionY, opacity: captionOpacity }}
-        className="absolute bottom-0 left-0 right-0 z-10"
-      >
-        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-28 md:pb-32">
+      {/* Caption — animated via CSS opacity inheritance from parent for performance.
+          (We tied it to the slide's own opacity rather than a separate motion value.) */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-24 md:pb-28">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 text-[10px] tracking-[0.32em] uppercase text-[#B87333] font-mono">
               <span>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
@@ -116,20 +138,15 @@ function Slide({ item, index, total, progress }) {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
 
-function Counter({ progress, total }) {
-  // Format like "01 — 05" with the current index reactive
-  const indexMV = useTransform(progress, (p) => {
-    const i = Math.min(total - 1, Math.max(0, Math.floor(p * total + 0.0001)));
-    return String(i + 1).padStart(2, "0");
-  });
+function Counter({ active, total }) {
   return (
     <div className="flex items-baseline gap-2 font-mono text-[11px] tracking-[0.28em] uppercase text-[#F6F1E9]/70 text-shadow-cinema">
-      <motion.span data-testid="interiors-counter-current">{indexMV}</motion.span>
+      <span data-testid="interiors-counter-current">{String(active + 1).padStart(2, "0")}</span>
       <span className="text-[#F6F1E9]/35">/</span>
       <span className="text-[#F6F1E9]/35">{String(total).padStart(2, "0")}</span>
     </div>
@@ -147,7 +164,6 @@ function ProgressRail({ progress, total }) {
       </div>
       <div className="relative h-px w-full bg-white/15 overflow-hidden">
         <motion.div style={{ width: fill }} className="absolute left-0 top-0 h-full bg-[#B87333]" />
-        {/* Segment ticks */}
         <div className="absolute inset-0 flex justify-between pointer-events-none">
           {Array.from({ length: total + 1 }).map((_, i) => (
             <span key={i} className="h-[7px] -translate-y-[3px] w-px bg-white/30" />
