@@ -57,7 +57,15 @@ export default function Footer() {
             <div className="mt-4 space-y-2 text-[13.5px] text-[#F6F1E9]/65">
               <div>{BRAND.phone}</div>
               <div>{BRAND.email}</div>
-              <div className="text-[12.5px] leading-relaxed text-[#F6F1E9]/45">{BRAND.address}</div>
+              <a
+                href={BRAND.mapShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[12.5px] leading-relaxed text-[#F6F1E9]/45 hover:text-[#B87333] transition-colors duration-300"
+                data-testid="footer-address"
+              >
+                {BRAND.address}
+              </a>
             </div>
             <div className="mt-5 flex gap-3 text-[#F6F1E9]/60">
               <a href="#" aria-label="Instagram" data-testid="social-instagram" className="hover:text-[#B87333] transition-colors"><Instagram size={17} /></a>

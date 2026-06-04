@@ -167,24 +167,37 @@ export default function Contact() {
           <div className="md:col-span-5 space-y-5">
             <PhoneCard />
             <InfoCard icon={<Mail size={18} />} label="Email" value={BRAND.email} href={`mailto:${BRAND.email}`} testid="contact-info-email" />
-            <InfoCard icon={<MapPin size={18} />} label="Manufacturing" value={BRAND.address} testid="contact-info-address" />
+            <InfoCard
+              icon={<MapPin size={18} />}
+              label="Showroom"
+              value={BRAND.address}
+              href={BRAND.mapShareUrl}
+              testid="contact-info-address"
+            />
 
-            <motion.div
+            <motion.a
+              href={BRAND.mapShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="rounded-2xl border border-white/10 overflow-hidden h-56 relative"
+              className="block rounded-2xl border border-white/10 overflow-hidden h-56 relative group"
               data-testid="contact-map"
+              aria-label="Open Meridian Plywood location in Google Maps"
             >
               <iframe
-                title="Meridian Plywood Location"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=77.27%2C30.10%2C77.32%2C30.16&layer=mapnik"
-                className="w-full h-full grayscale-[0.4] invert-[0.85] hue-rotate-180 contrast-110"
+                title="Meridian Plywood Location — Aghapura, Hyderabad"
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${BRAND.mapLng - 0.006}%2C${BRAND.mapLat - 0.004}%2C${BRAND.mapLng + 0.006}%2C${BRAND.mapLat + 0.004}&layer=mapnik&marker=${BRAND.mapLat}%2C${BRAND.mapLng}`}
+                className="w-full h-full grayscale-[0.4] invert-[0.85] hue-rotate-180 contrast-110 pointer-events-none"
                 loading="lazy"
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-white/10 rounded-2xl" />
-            </motion.div>
+              <div className="absolute bottom-3 right-3 glass-strong rounded-full px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase font-mono text-[#F6F1E9]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Open in Maps ↗
+              </div>
+            </motion.a>
           </div>
         </div>
       </div>

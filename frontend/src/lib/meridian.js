@@ -6,7 +6,12 @@ export const BRAND = {
   whatsapp: "+919629783971",
   email: "hello@meridianplywood.com",
   phone: "+91 96297 83971",
-  address: "Industrial Estate, Yamunanagar, Haryana 135001, India",
+  address:
+    "14-1-327/328, Behind Prakash Talkies Lane, Near Jain Mandir, Aghapura, Hyderabad, Telangana 500028, India",
+  // For the OpenStreetMap iframe embed
+  mapLat: 17.3911,
+  mapLng: 78.4625,
+  mapShareUrl: "https://share.google/oH6zkfr89LhvWRCUa",
 };
 
 export const IMAGES = {
