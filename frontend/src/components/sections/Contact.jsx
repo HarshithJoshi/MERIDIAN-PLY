@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, MessageCircle, Send, Loader2 } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Send, Loader2, Store, BadgeCheck } from "lucide-react";
 import { BRAND } from "@/lib/meridian";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -167,13 +167,17 @@ export default function Contact() {
           <div className="md:col-span-5 space-y-5">
             <PhoneCard />
             <InfoCard icon={<Mail size={18} />} label="Email" value={BRAND.email} href={`mailto:${BRAND.email}`} testid="contact-info-email" />
+
+            {/* Manufacturing (Yamunanagar) */}
             <InfoCard
               icon={<MapPin size={18} />}
-              label="Showroom"
-              value={BRAND.address}
-              href={BRAND.mapShareUrl}
-              testid="contact-info-address"
+              label="Manufacturing"
+              value={BRAND.manufacturing}
+              testid="contact-info-manufacturing"
             />
+
+            {/* Authorised distributor / Flagship store (Hyderabad — Aghapura) */}
+            <ShowroomCard />
 
             <motion.a
               href={BRAND.mapShareUrl}
@@ -298,3 +302,47 @@ function PhoneCard() {
     </div>
   );
 }
+
+function ShowroomCard() {
+  return (
+    <a
+      href={BRAND.mapShareUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-testid="contact-info-showroom"
+      className="block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-[#B87333]/55 transition-colors duration-500 group relative overflow-hidden"
+    >
+      {/* Subtle copper glow accent */}
+      <div className="pointer-events-none absolute -top-16 -right-12 h-40 w-40 rounded-full bg-[#B87333]/12 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+
+      <div className="flex items-start justify-between gap-3 relative">
+        <div className="flex items-center gap-3 text-[#B87333]">
+          <Store size={18} />
+          <span className="eyebrow" style={{ color: "#B87333" }}>
+            {BRAND.showroomLabel}
+          </span>
+        </div>
+        {/* Flagship badge */}
+        <span
+          data-testid="contact-flagship-badge"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[#B87333]/15 border border-[#B87333]/35 px-2.5 py-1 text-[10px] tracking-[0.16em] uppercase font-mono text-[#B87333] whitespace-nowrap"
+        >
+          <BadgeCheck size={11} strokeWidth={2.5} />
+          {BRAND.showroomBadge}
+        </span>
+      </div>
+
+      <div
+        className="mt-4 font-display text-[15.5px] md:text-[16px] leading-relaxed text-[#F6F1E9] relative"
+        style={{ fontWeight: 500 }}
+      >
+        {BRAND.showroomAddress}
+      </div>
+
+      <div className="mt-3 text-[11px] tracking-[0.22em] uppercase font-mono text-[#F6F1E9]/45 group-hover:text-[#B87333] transition-colors duration-300 relative">
+        Open in Maps ↗
+      </div>
+    </a>
+  );
+}
+

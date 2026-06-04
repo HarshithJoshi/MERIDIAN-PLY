@@ -6,9 +6,17 @@ export const BRAND = {
   whatsapp: "+919629783971",
   email: "hello@meridianplywood.com",
   phone: "+91 96297 83971",
+  // Primary manufacturing facility
+  manufacturing: "Industrial Estate, Yamunanagar, Haryana 135001, India",
+  // Authorised distributor + flagship company store (Telangana)
+  showroomAddress:
+    "14-1-327/328, Behind Prakash Talkies Lane, Near Jain Mandir, Aghapura, Hyderabad, Telangana 500028, India",
+  showroomLabel: "Authorised Distributor · Telangana",
+  showroomBadge: "Flagship Company Store",
+  // Backwards-compat alias used by the Footer + general "address" references
   address:
     "14-1-327/328, Behind Prakash Talkies Lane, Near Jain Mandir, Aghapura, Hyderabad, Telangana 500028, India",
-  // For the OpenStreetMap iframe embed
+  // For the OpenStreetMap iframe embed (Aghapura, Hyderabad)
   mapLat: 17.3911,
   mapLng: 78.4625,
   mapShareUrl: "https://share.google/oH6zkfr89LhvWRCUa",
