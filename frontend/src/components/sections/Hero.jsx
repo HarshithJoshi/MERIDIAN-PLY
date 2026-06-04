@@ -30,30 +30,6 @@ export default function Hero() {
           loading="eager"
         />
 
-        {/* Boxed Meridian logo, engraved into the floating plywood slab.
-            Positioned over the visible wood face with a slight perspective skew
-            that follows the slab's tilt, and 'overlay' blend so it picks up the
-            wood grain like a real burnt-in brand stamp. */}
-        <img
-          src={IMAGES.logoBox}
-          alt=""
-          aria-hidden
-          data-testid="hero-slab-logo"
-          className="pointer-events-none absolute select-none hidden sm:block"
-          style={{
-            // Lock onto the slab's top face (right side of frame)
-            right: "16%",
-            top: "44%",
-            width: "clamp(220px, 22vw, 360px)",
-            transform: "translate(0, -50%) rotate(-3deg) skewX(-9deg) skewY(-1deg)",
-            transformOrigin: "center",
-            mixBlendMode: "overlay",
-            opacity: 0.88,
-            filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.45))",
-          }}
-          draggable={false}
-        />
-
         {/* cinematic gradient overlays for legibility */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(11,11,11,0)_0%,rgba(11,11,11,0.55)_55%,rgba(11,11,11,0.9)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,11,11,0.55)_0%,rgba(11,11,11,0.0)_30%,rgba(11,11,11,0.0)_55%,rgba(11,11,11,0.85)_100%)]" />
