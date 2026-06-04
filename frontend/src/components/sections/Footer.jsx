@@ -1,23 +1,30 @@
-import { BRAND, NAV } from "@/lib/meridian";
+import { BRAND, IMAGES, NAV } from "@/lib/meridian";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer data-testid="footer" className="relative bg-[#080808] border-t border-white/[0.06] pt-10 md:pt-14 pb-8">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24">
-        {/* Massive brand wordmark */}
-        <div className="overflow-hidden border-b border-white/5 pb-6 md:pb-10">
-          <div
-            className="font-display text-[#141414] select-none leading-[0.82] tracking-[-0.05em] text-center"
+        {/* Full Meridian horizontal logo — extracted from official brand sheet */}
+        <div className="overflow-hidden border-b border-white/5 pb-8 md:pb-12 flex flex-col items-center sm:flex-row sm:items-end sm:justify-between gap-6">
+          <img
+            src={IMAGES.logoFull}
+            alt="Meridian Plywood — always with you. Plywood · Block Board · Flush Door"
+            data-testid="footer-logo-full"
+            className="w-full max-w-[680px] h-auto select-none"
             style={{
-              fontWeight: 700,
-              WebkitTextStroke: "1px rgba(184,115,51,0.18)",
-              fontSize: "clamp(64px, 14.2vw, 220px)",
-              whiteSpace: "nowrap",
+              filter:
+                "invert(94%) sepia(8%) saturate(220%) hue-rotate(348deg) brightness(101%) contrast(96%)",
             }}
-            aria-hidden
-          >
-            MERIDIAN
+          />
+          <div className="text-right hidden sm:block">
+            <div className="eyebrow">— Tagline</div>
+            <div
+              className="mt-3 font-display text-[15px] text-[#F6F1E9]/85"
+              style={{ fontWeight: 500, letterSpacing: "-0.005em" }}
+            >
+              {BRAND.tagline}
+            </div>
           </div>
         </div>
 

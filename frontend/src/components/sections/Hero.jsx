@@ -35,6 +35,21 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,11,11,0.55)_0%,rgba(11,11,11,0)_28%,rgba(11,11,11,0)_70%,rgba(11,11,11,0.55)_100%)]" />
       </motion.div>
 
+      {/* Massive brand mark watermark, sitting behind the headline.
+          Subtle copper-tinted, vertically tracked with reduced parallax. */}
+      <motion.img
+        src={IMAGES.logoMark}
+        alt=""
+        aria-hidden
+        style={{
+          y: yText,
+          willChange: "transform",
+          filter:
+            "invert(56%) sepia(34%) saturate(620%) hue-rotate(348deg) brightness(82%) contrast(95%)",
+        }}
+        className="hidden md:block pointer-events-none absolute right-[2%] lg:right-[6%] top-1/2 -translate-y-1/2 z-[5] h-[60vh] max-h-[640px] w-auto opacity-[0.07] select-none"
+      />
+
       {/* Foreground content */}
       <motion.div
         style={{ y: yText, opacity }}
@@ -44,9 +59,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.2, 0.7, 0.2, 1] }}
-          className="eyebrow"
+          className="flex items-center gap-3"
         >
-          BWP · GURJAN · ISI 710
+          <span className="eyebrow">BWP · GURJAN · ISI 710</span>
+          <span className="hidden sm:inline text-[#F6F1E9]/35">·</span>
+          <span className="hidden sm:inline italic text-[12px] tracking-[0.06em] text-[#B87333]/85">
+            {BRAND.legacyTagline}
+          </span>
         </motion.div>
 
         <motion.h1

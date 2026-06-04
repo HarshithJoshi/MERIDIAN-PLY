@@ -2,6 +2,9 @@
 export const BRAND = {
   name: "Meridian Plywood",
   tagline: "Built to Endure. Designed to Inspire.",
+  // Heritage tagline carried forward from the original brand mark
+  legacyTagline: "always with you…",
+  productLine: "Plywood · Block Board · Flush Door",
   short: "Meridian",
   whatsapp: "+919629783971",
   email: "hello@meridianplywood.com",
@@ -24,6 +27,10 @@ export const BRAND = {
 
 export const IMAGES = {
   hero: "/images/hero-plywood-slab.png",
+  // Brand identity assets (extracted from supplied Meridian PDF)
+  logoMark: "/images/logo-mark.png",        // tree-in-hands symbol only
+  logoWordmark: "/images/logo-wordmark.png", // boxed simplified wordmark
+  logoFull: "/images/logo-full.png",         // horizontal mark + wordmark + tagline + products
   exploded:
     "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/25815b3d59b495af0f8b427a7748dbd9e8ade893e183e2c9e418d2e114d8f20b.png",
   water:

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { BRAND, NAV } from "@/lib/meridian";
+import { BRAND, IMAGES, NAV } from "@/lib/meridian";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,17 +28,25 @@ export default function Navbar() {
         <a
           href="#top"
           data-testid="navbar-logo"
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2.5 group"
           aria-label="Meridian Plywood Home"
         >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" className="text-[#B87333] group-hover:rotate-90 transition-transform duration-700">
-            <rect x="1" y="1" width="20" height="20" rx="4" stroke="currentColor" strokeWidth="1.4" />
-            <path d="M1 7h20M1 13h20" stroke="currentColor" strokeWidth="1.2" opacity="0.7" />
-            <path d="M7 1v20M15 1v20" stroke="currentColor" strokeWidth="0.8" opacity="0.45" />
-          </svg>
-          <span className="font-display font-medium tracking-[0.22em] text-[12px] uppercase text-[#F6F1E9]">
-            {BRAND.short}
-          </span>
+          {/* Brand mark — tree-in-hands symbol from the official Meridian logo */}
+          <img
+            src={IMAGES.logoMark}
+            alt=""
+            aria-hidden
+            className="h-7 w-7 md:h-[30px] md:w-[30px] object-contain transition-transform duration-700 group-hover:scale-[1.08]"
+            style={{ filter: "invert(94%) sepia(8%) saturate(220%) hue-rotate(348deg) brightness(101%) contrast(96%)" }}
+          />
+          <div className="flex flex-col leading-none">
+            <span className="font-display font-medium tracking-[0.22em] text-[12px] uppercase text-[#F6F1E9]">
+              {BRAND.short}
+            </span>
+            <span className="hidden sm:block mt-1 italic text-[9.5px] tracking-[0.06em] text-[#B87333]/85 lowercase">
+              {BRAND.legacyTagline}
+            </span>
+          </div>
         </a>
 
         <nav className="hidden md:flex items-center gap-6 lg:gap-9">
