@@ -5,19 +5,16 @@ export default function Footer() {
   return (
     <footer data-testid="footer" className="relative bg-[#080808] border-t border-white/[0.06] pt-10 md:pt-14 pb-8">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24">
-        {/* Full Meridian horizontal logo — extracted from official brand sheet */}
+        {/* Official Meridian brand mark — boxed rectangular wordmark */}
         <div className="overflow-hidden border-b border-white/5 pb-8 md:pb-12 flex flex-col items-center sm:flex-row sm:items-end sm:justify-between gap-6">
           <img
-            src={IMAGES.logoFull}
+            src={IMAGES.logoBox}
             alt="Meridian Plywood — always with you. Plywood · Block Board · Flush Door"
             data-testid="footer-logo-full"
-            className="w-full max-w-[680px] h-auto select-none"
-            style={{
-              filter:
-                "invert(94%) sepia(8%) saturate(220%) hue-rotate(348deg) brightness(101%) contrast(96%)",
-            }}
+            className="w-full max-w-[460px] sm:max-w-[520px] h-auto select-none"
+            draggable={false}
           />
-          <div className="text-right hidden sm:block">
+          <div className="text-center sm:text-right">
             <div className="eyebrow">— Tagline</div>
             <div
               className="mt-3 font-display text-[15px] text-[#F6F1E9]/85"

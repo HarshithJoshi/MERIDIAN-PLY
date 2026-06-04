@@ -28,25 +28,17 @@ export default function Navbar() {
         <a
           href="#top"
           data-testid="navbar-logo"
-          className="flex items-center gap-2.5 group"
+          className="flex items-center group shrink-0"
           aria-label="Meridian Plywood Home"
         >
-          {/* Brand mark — tree-in-hands symbol from the official Meridian logo */}
+          {/* Primary brand mark — boxed rectangular Meridian logo from the official brand sheet */}
           <img
-            src={IMAGES.logoMark}
-            alt=""
-            aria-hidden
-            className="h-7 w-7 md:h-[30px] md:w-[30px] object-contain transition-transform duration-700 group-hover:scale-[1.08]"
-            style={{ filter: "invert(94%) sepia(8%) saturate(220%) hue-rotate(348deg) brightness(101%) contrast(96%)" }}
+            src={IMAGES.logoBox}
+            alt={`${BRAND.name} — ${BRAND.legacyTagline}`}
+            data-testid="navbar-logo-img"
+            className="h-9 sm:h-10 md:h-11 w-auto select-none transition-transform duration-500 group-hover:scale-[1.04]"
+            draggable={false}
           />
-          <div className="flex flex-col leading-none">
-            <span className="font-display font-medium tracking-[0.22em] text-[12px] uppercase text-[#F6F1E9]">
-              {BRAND.short}
-            </span>
-            <span className="hidden sm:block mt-1 italic text-[9.5px] tracking-[0.06em] text-[#B87333]/85 lowercase">
-              {BRAND.legacyTagline}
-            </span>
-          </div>
         </a>
 
         <nav className="hidden md:flex items-center gap-6 lg:gap-9">
