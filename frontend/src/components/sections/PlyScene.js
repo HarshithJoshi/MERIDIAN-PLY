@@ -7,8 +7,19 @@ import * as THREE from "three";
 
 const e = React.createElement;
 
-const LAYERS = 9;
-const COLORS = ["#6A442B", "#7d5132", "#5a3a25", "#8b5a39", "#4a2f1e", "#7d5132", "#6A442B", "#8b5a39", "#5a3a25"];
+const LAYERS = 13;
+// 13 distinct walnut tones (cross-banded look) — index alternates for clear stripes
+const COLORS = [
+  "#6A442B", "#7d5132", "#5a3a25", "#8b5a39", "#4a2f1e",
+  "#7d5132", "#6A442B", "#8b5a39", "#5a3a25", "#7d5132",
+  "#4a2f1e", "#8b5a39", "#6A442B",
+];
+
+// Per-layer geometry — tuned so 13 layers stay nicely framed in the camera view.
+// Closed stack thickness: 13 * 0.095 ≈ 1.24 units (similar visual height to old 9-layer stack).
+const LAYER_THICKNESS = 0.10;
+const SPACING_CLOSED = 0.105; // distance between layer centres when stack is "closed"
+const SPACING_EXPLODE = 0.30; // additional separation at full explode (progress=1)
 
 export function PlyExploded({ progress }) {
   const groupRef = useRef();
@@ -20,7 +31,7 @@ export function PlyExploded({ progress }) {
     grp.children.forEach((child, i) => {
       const center = (grp.children.length - 1) / 2;
       const offset = i - center;
-      const yTarget = offset * (0.14 + p * 0.42);
+      const yTarget = offset * (SPACING_CLOSED + p * SPACING_EXPLODE);
       child.position.y = THREE.MathUtils.lerp(child.position.y, yTarget, 0.08);
     });
     grp.rotation.y += 0.0028;
@@ -34,11 +45,11 @@ export function PlyExploded({ progress }) {
       "mesh",
       {
         key: i,
-        position: [0, offset * 0.14, 0],
+        position: [0, offset * SPACING_CLOSED, 0],
         castShadow: true,
         receiveShadow: true,
       },
-      e("boxGeometry", { args: [3.4, 0.12, 2.2] }),
+      e("boxGeometry", { args: [3.4, LAYER_THICKNESS, 2.2] }),
       e("meshStandardMaterial", { color: COLORS[i % COLORS.length], roughness: 0.78, metalness: 0.05 })
     );
   });

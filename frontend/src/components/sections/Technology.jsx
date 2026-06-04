@@ -6,7 +6,7 @@ import { PlyExploded, PlyLights } from "@/components/sections/PlyScene";
 
 const FEATURES = [
   { Icon: Droplets, title: "Boiling Waterproof", body: "72-hour boil test pass. Marine-grade adhesive bond." },
-  { Icon: Layers, title: "11-Layer Construction", body: "Cross-banded Gurjan veneers, calibrated to tolerance." },
+  { Icon: Layers, title: "13-Layer Construction", body: "Cross-banded Gurjan veneers, calibrated to tolerance." },
   { Icon: Hammer, title: "Screw Holding 280kgf", body: "Industry-leading face & edge withdrawal strength." },
   { Icon: Flame, title: "Fire Retardant Treated", body: "Self-extinguishing core with ISI 5509 compliance." },
   { Icon: ShieldCheck, title: "Termite & Borer Proof", body: "Pressure-impregnated preservation, lifetime guard." },
@@ -42,7 +42,7 @@ export default function Technology() {
               <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>layer</span>.
             </h2>
             <p className="mt-6 max-w-md text-[15px] md:text-[16px] leading-relaxed text-[#F6F1E9]/65">
-              Scroll to deconstruct a Meridian panel. Nine cross-banded Gurjan
+              Scroll to deconstruct a Meridian panel. Thirteen cross-banded Gurjan
               veneers, bonded under high pressure with phenolic resin — performance
               built layer by layer.
             </p>
@@ -62,7 +62,7 @@ export default function Technology() {
                 <PlyExploded progress={progress} />
               </Canvas>
               <div className="absolute bottom-4 left-5 right-5 flex justify-between text-[10px] font-mono uppercase tracking-[0.22em] text-[#F6F1E9]/55 pointer-events-none">
-                <span>9 layers · gurjan</span>
+                <span>13 layers · gurjan</span>
                 <span>cross-banded · phenolic</span>
               </div>
             </div>
