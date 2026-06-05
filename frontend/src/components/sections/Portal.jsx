@@ -18,12 +18,12 @@ const BIM = [
 ];
 
 const DEALERS = [
-  { city: "Mumbai", region: "Western India", count: 14 },
-  { city: "Delhi NCR", region: "Northern India", count: 22 },
-  { city: "Bengaluru", region: "Southern India", count: 11 },
-  { city: "Hyderabad", region: "Southern India", count: 8 },
-  { city: "Chennai", region: "Southern India", count: 9 },
-  { city: "Kolkata", region: "Eastern India", count: 7 },
+  { city: "Mumbai", region: "Western India", count: 3 },
+  { city: "Delhi NCR", region: "Northern India", count: 3 },
+  { city: "Bengaluru", region: "Southern India", count: 2 },
+  { city: "Hyderabad", region: "Southern India", count: 3 },
+  { city: "Chennai", region: "Southern India", count: 2 },
+  { city: "Kolkata", region: "Eastern India", count: 2 },
 ];
 
 function downloadStub(name) {
