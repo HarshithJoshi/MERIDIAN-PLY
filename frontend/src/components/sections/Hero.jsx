@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, ArrowRight, ShieldCheck, BadgeCheck } from "lucide-react";
 import { IMAGES, BRAND } from "@/lib/meridian";
-import VerticalBrandTape from "@/components/sections/VerticalBrandTape";
 
 export default function Hero() {
   const ref = useRef(null);
@@ -36,13 +35,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,11,11,0.55)_0%,rgba(11,11,11,0.0)_30%,rgba(11,11,11,0.0)_55%,rgba(11,11,11,0.85)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,11,11,0.55)_0%,rgba(11,11,11,0)_28%,rgba(11,11,11,0)_70%,rgba(11,11,11,0.55)_100%)]" />
       </motion.div>
-
-      {/* Vertical edge brand tape — the signature "stamped along the edge of a
-          plywood door" treatment from the official brand sheet. Hidden on small
-          screens to keep the headline readable. */}
-      <div className="hidden lg:block">
-        <VerticalBrandTape count={7} side="left" opacity={0.16} testId="hero-brand-tape" />
-      </div>
 
       {/* Massive brand mark watermark, sitting behind the headline.
           Subtle copper-tinted, vertically tracked with reduced parallax. */}
