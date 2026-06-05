@@ -9,7 +9,7 @@ export const BRAND = {
   productLine: "Plywood · Block Board · Flush Door",
   short: "Meridian",
   whatsapp: "+919629783971",
-  email: "hello@meridianplywood.com",
+  email: "info@meridianply.com",
   phone: "+91 96297 83971",
   // Primary manufacturing facility
   manufacturing: "Industrial Estate, Yamunanagar, Haryana 135001, India",
