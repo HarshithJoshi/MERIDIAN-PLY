@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight, ShieldCheck, BadgeCheck } from "lucide-react";
 import { IMAGES, BRAND } from "@/lib/meridian";
+import VerticalBrandTape from "@/components/sections/VerticalBrandTape";
 
 export default function Hero() {
   const ref = useRef(null);
@@ -35,6 +36,13 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,11,11,0.55)_0%,rgba(11,11,11,0.0)_30%,rgba(11,11,11,0.0)_55%,rgba(11,11,11,0.85)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,11,11,0.55)_0%,rgba(11,11,11,0)_28%,rgba(11,11,11,0)_70%,rgba(11,11,11,0.55)_100%)]" />
       </motion.div>
+
+      {/* Vertical edge brand tape — the signature "stamped along the edge of a
+          plywood door" treatment from the official brand sheet. Hidden on small
+          screens to keep the headline readable. */}
+      <div className="hidden lg:block">
+        <VerticalBrandTape count={7} side="left" opacity={0.16} testId="hero-brand-tape" />
+      </div>
 
       {/* Massive brand mark watermark, sitting behind the headline.
           Subtle copper-tinted, vertically tracked with reduced parallax. */}
@@ -116,6 +124,34 @@ export default function Hero() {
           >
             Download Technical Catalogue
           </a>
+        </motion.div>
+
+        {/* Trust pills — ISO 9001 + 25-year warranty, plus secondary tagline.
+            Cue from the official brand sheet ("AN ISO 9001:2008 CERTIFIED CO"
+            badge and "25 Year Warranty" mark on the product door). */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.15, ease: [0.2, 0.7, 0.2, 1] }}
+          className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3"
+        >
+          <span
+            data-testid="hero-trust-iso"
+            className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/10 px-3.5 py-1.5 text-[11px] tracking-[0.16em] uppercase font-mono text-[#F6F1E9]/85"
+          >
+            <ShieldCheck size={13} className="text-[#B87333]" strokeWidth={2.2} />
+            ISO 9001:2008 Certified
+          </span>
+          <span
+            data-testid="hero-trust-warranty"
+            className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/10 px-3.5 py-1.5 text-[11px] tracking-[0.16em] uppercase font-mono text-[#F6F1E9]/85"
+          >
+            <BadgeCheck size={13} className="text-[#B87333]" strokeWidth={2.2} />
+            25-Year Warranty
+          </span>
+          <span className="hidden sm:inline italic text-[12.5px] tracking-[0.005em] text-[#F6F1E9]/55">
+            — {BRAND.buildTagline}
+          </span>
         </motion.div>
 
         {/* Stat row */}

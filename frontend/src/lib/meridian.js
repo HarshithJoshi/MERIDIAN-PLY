@@ -4,6 +4,8 @@ export const BRAND = {
   tagline: "Built to Endure. Designed to Inspire.",
   // Heritage tagline carried forward from the original brand mark
   legacyTagline: "always with you…",
+  // Product-line tagline from official brand collateral
+  buildTagline: "Strength you can build on.",
   productLine: "Plywood · Block Board · Flush Door",
   short: "Meridian",
   whatsapp: "+919629783971",
