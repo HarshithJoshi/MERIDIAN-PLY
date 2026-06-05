@@ -111,10 +111,10 @@ export default function Hero() {
           </a>
           <a
             href="#contact"
-            data-testid="hero-cta-catalogue"
+            data-testid="hero-cta-contact"
             className="btn-pill btn-pill-ghost"
           >
-            Download Technical Catalogue
+            Speak to a Specifier
           </a>
         </motion.div>
 

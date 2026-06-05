@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, FileText } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import axios from "axios";
-import { toast } from "sonner";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -234,15 +233,11 @@ function ProductModal({ product, onClose }) {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                onClick={() => { toast.success("Technical PDF coming your way", { description: "We'll email the latest spec sheet shortly." }); onClose(); }}
-                className="btn-pill btn-pill-copper"
-                data-testid="product-download-pdf"
-              >
-                <FileText size={15} /> Technical PDF
-              </button>
-              <a href="#contact" onClick={onClose} className="btn-pill btn-pill-ghost" data-testid="product-request-sample">
+              <a href="#contact" onClick={onClose} className="btn-pill btn-pill-copper" data-testid="product-request-sample">
                 Request Sample
+              </a>
+              <a href="#contact" onClick={onClose} className="btn-pill btn-pill-ghost" data-testid="product-contact-specifier">
+                Speak to a Specifier
               </a>
             </div>
           </motion.div>

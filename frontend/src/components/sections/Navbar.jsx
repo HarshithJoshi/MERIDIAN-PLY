@@ -56,13 +56,6 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
           <a
-            data-testid="navbar-cta-catalogue"
-            href="#contact"
-            className="btn-pill btn-pill-ghost text-[11px] lg:text-[12px] hidden lg:inline-flex"
-          >
-            Catalogue
-          </a>
-          <a
             data-testid="navbar-cta-contact"
             href="#contact"
             className="btn-pill btn-pill-primary text-[11px] lg:text-[12px] whitespace-nowrap"
