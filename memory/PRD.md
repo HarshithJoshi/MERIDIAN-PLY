@@ -29,6 +29,15 @@ World-class luxury website for a premium BWP Gurjan plywood brand "Meridian Plyw
 - Contact — full inquiry form, role/project type selects, WhatsApp deep link, OpenStreetMap embed, MongoDB-backed submission, toast feedback
 - Footer — massive wordmark, brand grid
 
+## iPad / iOS Safari Smoothness Pass (Feb 2026)
+- Lenis smooth-scroll skipped entirely on iOS / iPadOS / Android (native momentum is better; Lenis RAF was fighting it and causing jank)
+- Three.js canvas: lowered dpr to `[1,1]` on touch, dropped shadows on touch, paused frameloop ("demand") when section off-screen via IntersectionObserver
+- Disabled scroll-coupled parallax / scale transforms on touch devices in Hero (bg-img + watermark + content), MaterialStory (per-panel y + scale), Sustainability (forest backdrop), Interiors (per-slide ken-burns)
+- Dropped the heavy multi-channel `filter()` on the Hero watermark logo on touch (was being re-rasterised every scroll frame)
+- CSS `@media (hover: none) and (pointer: coarse)` guard: removes `bg-grain::after` `mix-blend-mode` overlay site-wide, swaps `backdrop-filter: blur(28px)` Navbar to solid translucent, disables WhatsApp button `animate-ping`
+- Navbar + FloatingWhatsApp scroll listeners throttled via `requestAnimationFrame`
+- New util: `/app/frontend/src/lib/useIsTouchDevice.js` (`useIsTouchDevice()` hook + `isIOSLike()` UA helper)
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 

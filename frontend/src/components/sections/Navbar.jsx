@@ -8,7 +8,15 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 24);
+        ticking = false;
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -20,9 +28,10 @@ export default function Navbar() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 ${
         scrolled ? "glass-strong" : "bg-transparent"
       }`}
+      style={{ transition: "background-color 320ms ease, backdrop-filter 320ms ease" }}
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 h-16 md:h-[68px] flex items-center justify-between">
         <a

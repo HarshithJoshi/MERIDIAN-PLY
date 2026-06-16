@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { IMAGES } from "@/lib/meridian";
+import useIsTouchDevice from "@/lib/useIsTouchDevice";
 
 const STORY = [
   {
@@ -66,12 +67,20 @@ export default function MaterialStory() {
 
 function StoryPanel({ item, index }) {
   const ref = useRef(null);
+  const isTouch = useIsTouchDevice();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.04, 1.0, 1.04]);
+  // Scroll-coupled `y` + `scale` on a 5/4 image is the heaviest single op per
+  // panel on iPad Safari. We freeze the image transform on touch devices —
+  // the entrance fade alone is plenty of motion on a finger-scrolled device.
+  const y = useTransform(scrollYProgress, [0, 1], isTouch ? ["0%", "0%"] : ["6%", "-6%"]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    isTouch ? [1, 1, 1] : [1.04, 1.0, 1.04]
+  );
   const flip = index % 2 === 1;
 
   return (

@@ -2,13 +2,18 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, ArrowRight, ShieldCheck, BadgeCheck } from "lucide-react";
 import { IMAGES, BRAND } from "@/lib/meridian";
+import useIsTouchDevice from "@/lib/useIsTouchDevice";
 
 export default function Hero() {
   const ref = useRef(null);
+  const isTouch = useIsTouchDevice();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  // On iPad/iOS, scroll-coupled transforms on a full-bleed image are the single
+  // biggest source of jank — every scroll event invalidates a huge layer.
+  // Keep transforms static (constant motion values) on touch devices.
+  const yImg = useTransform(scrollYProgress, [0, 1], isTouch ? ["0%", "0%"] : ["0%", "14%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], isTouch ? ["0%", "0%"] : ["0%", "-8%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], isTouch ? [1, 1] : [1, 0]);
 
   return (
     <section
@@ -37,16 +42,20 @@ export default function Hero() {
       </motion.div>
 
       {/* Massive brand mark watermark, sitting behind the headline.
-          Subtle copper-tinted, vertically tracked with reduced parallax. */}
+          Subtle copper-tinted, vertically tracked with reduced parallax.
+          The heavy multi-channel filter is dropped on touch devices to avoid
+          a full-screen GPU recolour every scroll frame on iPad Safari. */}
       <motion.img
         src={IMAGES.logoMark}
         alt=""
         aria-hidden
         style={{
           y: yText,
-          willChange: "transform",
-          filter:
-            "invert(56%) sepia(34%) saturate(620%) hue-rotate(348deg) brightness(82%) contrast(95%)",
+          willChange: isTouch ? "auto" : "transform",
+          filter: isTouch
+            ? "none"
+            : "invert(56%) sepia(34%) saturate(620%) hue-rotate(348deg) brightness(82%) contrast(95%)",
+          opacity: isTouch ? 0.04 : undefined,
         }}
         className="hidden md:block pointer-events-none absolute right-[2%] lg:right-[6%] top-1/2 -translate-y-1/2 z-[5] h-[60vh] max-h-[640px] w-auto opacity-[0.07] select-none"
       />

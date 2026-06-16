@@ -46,8 +46,6 @@ export function PlyExploded({ progress }) {
       {
         key: i,
         position: [0, offset * SPACING_CLOSED, 0],
-        castShadow: true,
-        receiveShadow: true,
       },
       e("boxGeometry", { args: [3.4, LAYER_THICKNESS, 2.2] }),
       e("meshStandardMaterial", { color: COLORS[i % COLORS.length], roughness: 0.78, metalness: 0.05 })
@@ -61,14 +59,14 @@ export function PlyExploded({ progress }) {
   );
 }
 
-export function PlyLights() {
+export function PlyLights({ castShadow = true }) {
   return e(
     React.Fragment,
     null,
     e("color", { attach: "background", args: ["#0B0B0B"] }),
     e("fog", { attach: "fog", args: ["#0B0B0B", 7, 12] }),
     e("ambientLight", { intensity: 0.4 }),
-    e("directionalLight", { position: [3, 5, 2], intensity: 1.6, color: "#F6F1E9", castShadow: true }),
+    e("directionalLight", { position: [3, 5, 2], intensity: 1.6, color: "#F6F1E9", castShadow }),
     e("directionalLight", { position: [-3, -2, -3], intensity: 0.45, color: "#B87333" })
   );
 }

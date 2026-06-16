@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Droplets, Flame, Hammer, Layers, ShieldCheck, Wind } from "lucide-react";
 import { PlyExploded, PlyLights } from "@/components/sections/PlyScene";
+import useIsTouchDevice from "@/lib/useIsTouchDevice";
 
 const FEATURES = [
   { Icon: Droplets, title: "Boiling Waterproof", body: "72-hour boil test pass. Marine-grade adhesive bond." },
@@ -15,8 +16,29 @@ const FEATURES = [
 
 export default function Technology() {
   const sectionRef = useRef(null);
+  const canvasWrapRef = useRef(null);
+  const isTouch = useIsTouchDevice();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const progress = useTransform(scrollYProgress, [0.15, 0.6], [0, 1]);
+
+  // Pause the WebGL render loop whenever the 3D panel is off-screen.
+  // On iPad Safari, an always-running r3f canvas (even hidden) keeps GPU
+  // busy and starves the scroll compositor — this single change removes
+  // most of the global scroll jank on iPad.
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = canvasWrapRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => setInView(e.isIntersecting)),
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section
@@ -49,16 +71,21 @@ export default function Technology() {
           </div>
 
           <div className="md:col-span-7">
-            <div className="relative h-[420px] sm:h-[520px] md:h-[560px] lg:h-[600px] rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden bg-gradient-to-b from-[#141414] to-[#0B0B0B]">
+            <div ref={canvasWrapRef} className="relative h-[420px] sm:h-[520px] md:h-[560px] lg:h-[600px] rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden bg-gradient-to-b from-[#141414] to-[#0B0B0B]">
               <div className="absolute inset-0 wood-stripes opacity-30 pointer-events-none" />
               <Canvas
-                shadows
+                shadows={!isTouch}
                 camera={{ position: [0, 1.8, 5.6], fov: 35 }}
-                dpr={[1, 1.4]}
-                gl={{ antialias: true, powerPreference: "high-performance" }}
+                dpr={isTouch ? [1, 1] : [1, 1.4]}
+                frameloop={inView ? "always" : "demand"}
+                gl={{
+                  antialias: !isTouch,
+                  powerPreference: isTouch ? "default" : "high-performance",
+                  alpha: false,
+                }}
                 data-testid="technology-3d-canvas"
               >
-                <PlyLights />
+                <PlyLights castShadow={!isTouch} />
                 <PlyExploded progress={progress} />
               </Canvas>
               <div className="absolute bottom-4 left-5 right-5 flex justify-between text-[10px] font-mono uppercase tracking-[0.22em] text-[#F6F1E9]/55 pointer-events-none">

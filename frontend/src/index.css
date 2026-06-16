@@ -243,3 +243,31 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: clip; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   iPad / iOS Safari smoothness pass
+   - `mix-blend-mode` over a noise SVG forces a full-section repaint every
+     scroll frame. We drop the overlay on touch/coarse pointer devices.
+   - `backdrop-filter: blur()` on a fixed header is the single most expensive
+     repaint trigger on iPad Safari. We swap to a solid translucent surface.
+   - `animate-ping` on the floating WhatsApp button continuously invalidates
+     a compositor layer above the scroller; we suppress it on touch.
+   - The big multi-channel `filter` on the hero watermark logo (invert + sepia
+     + hue-rotate + brightness + contrast) is GPU-expensive while parallaxing;
+     we collapse it to a single tint via `opacity` on touch.
+   ───────────────────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+    .bg-grain::after { display: none !important; }
+
+    .glass,
+    .glass-strong {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        background: rgba(11, 11, 11, 0.92) !important;
+    }
+
+    .animate-ping { animation: none !important; }
+
+    /* Reduce scroll-coupled compositor pressure */
+    html, body { -webkit-overflow-scrolling: touch; }
+}

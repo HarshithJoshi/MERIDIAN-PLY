@@ -4,14 +4,26 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Lenis from "lenis";
 import Landing from "@/pages/Landing";
 import { Toaster } from "@/components/ui/sonner";
+import { isIOSLike } from "@/lib/useIsTouchDevice";
 
 function App() {
   useEffect(() => {
+    // iOS / iPadOS Safari already has world-class native momentum scrolling.
+    // Lenis on top of it (even with smoothTouch:false) keeps a permanent RAF loop
+    // and intercepts wheel/trackpad events, which causes visible jank on iPad Safari.
+    // We skip it entirely on iOS-like devices and rely on native scroll there.
+    const ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
+    const isTouchOnly =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (isIOSLike() || isTouchOnly || /Android/i.test(ua)) {
+      return; // native scroll
+    }
+
     const lenis = new Lenis({
       duration: 0.9,
       smoothWheel: true,
-      // On touch devices (iPad/iOS), disable Lenis smoothing — iOS native momentum
-      // scroll is already excellent and Lenis can fight it. Native touch is buttery here.
       smoothTouch: false,
       syncTouch: false,
       wheelMultiplier: 1,

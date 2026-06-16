@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Leaf, TreePine, Recycle, ShieldCheck } from "lucide-react";
 import { IMAGES } from "@/lib/meridian";
+import useIsTouchDevice from "@/lib/useIsTouchDevice";
 
 const PILLARS = [
   { Icon: TreePine, title: "Responsibly Sourced", body: "Plantation-grown Gurjan from certified suppliers with chain-of-custody documentation." },
@@ -12,8 +13,9 @@ const PILLARS = [
 
 export default function Sustainability() {
   const ref = useRef(null);
+  const isTouch = useIsTouchDevice();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const yImg = useTransform(scrollYProgress, [0, 1], isTouch ? ["0%", "0%"] : ["-10%", "10%"]);
 
   return (
     <section

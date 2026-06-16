@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { GALLERY } from "@/lib/meridian";
+import useIsTouchDevice from "@/lib/useIsTouchDevice";
 
 export default function Interiors() {
   const sectionRef = useRef(null);
+  const isTouch = useIsTouchDevice();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
@@ -37,6 +39,7 @@ export default function Interiors() {
             progress={scrollYProgress}
             isMounted={Math.abs(i - active) <= 1}
             isLCP={i === 0}
+            isTouch={isTouch}
           />
         ))}
 
@@ -60,7 +63,7 @@ export default function Interiors() {
   );
 }
 
-function Slide({ item, index, total, progress, isMounted, isLCP }) {
+function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
   // Linear opacity ramp across an overlap window — no spring, no nested transforms.
   const seg = 1 / total;
   const segStart = index * seg;
@@ -79,8 +82,13 @@ function Slide({ item, index, total, progress, isMounted, isLCP }) {
   );
 
   // Single, gentle ken-burns: combined scale on a CSS variable — one transform, one layer.
-  // We use a SINGLE composite transform so the GPU only has to push one matrix per frame.
-  const kb = useTransform(progress, [segStart - seg * 0.5, segEnd + seg * 0.5], [1.12, 1.0]);
+  // On touch devices we freeze the scale — scroll-driven scale on a full-bleed
+  // image inside a sticky container is the biggest paint cost on iPad Safari.
+  const kb = useTransform(
+    progress,
+    [segStart - seg * 0.5, segEnd + seg * 0.5],
+    isTouch ? [1, 1] : [1.12, 1.0]
+  );
 
   // Mount nothing outside the active window — saves layout/paint cost on 4 hidden slides.
   if (!isMounted) return null;
