@@ -29,6 +29,12 @@ World-class luxury website for a premium BWP Gurjan plywood brand "Meridian Plyw
 - Contact — full inquiry form, role/project type selects, WhatsApp deep link, OpenStreetMap embed, MongoDB-backed submission, toast feedback
 - Footer — massive wordmark, brand grid
 
+## SEO + Admin Email Routing (Feb 2026)
+- Admin email routing: `ADMIN_EMAIL=admin@meridianply.com` set in `/app/backend/.env`. All 3 inquiry kinds (inquiry / dealer / sample) now route to this address. Verified via backend logs (`[EMAIL DISABLED] would send to admin@meridianply.com: ...`). Requires `RESEND_API_KEY` to actually deliver.
+- `/app/frontend/public/index.html`: full SEO meta (title + description + keywords + robots + canonical), Open Graph (type, title, description, url, image w/ alt + dimensions, locale), Twitter Card (`summary_large_image`), 4 JSON-LD schemas: **Organization**, **LocalBusiness** (Aghapura flagship with geo + opening hours), **ItemList** (3 hero products), **WebSite**
+- `/app/frontend/public/sitemap.xml`: 9 URLs with changefreq + priority
+- `/app/frontend/public/robots.txt`: allow all, disallow `/api/`, points to sitemap
+
 ## Polish Pass (Feb 2026)
 **Global CSS (`index.css`)**
 - Eyebrow refinement — small copper afterglow dot trails every section eyebrow
