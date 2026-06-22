@@ -1,0 +1,69 @@
+{
+  "summary": "Full polish + SEO + admin-email verification pass for Meridian Plywood. Backend pytest suite (19/19 passing) re-run. Frontend smoke + polish + SEO + end-to-end inquiry submission verified via Playwright. Admin email routing to admin@meridianply.com confirmed in backend logs for inquiry, dealer, and sample kinds (RESEND_API_KEY intentionally blank → [EMAIL DISABLED] log path).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_items": {
+    "backend": {
+      "POST /api/inquiries": "200, id + kind='inquiry', persisted (GET /api/inquiries returns it)",
+      "POST /api/dealers": "200, id + kind='dealer', persisted",
+      "POST /api/samples": "200, id + kind='sample', persisted",
+      "GET /api/inquiries": "Returns kind-filtered list with no _id leak",
+      "GET /api/health": "200 {ok:true, ts, email_enabled:false}",
+      "admin_email_routing": "10+ log lines '[EMAIL DISABLED] would send to admin@meridianply.com' covering all 3 kinds (inquiry, dealer, sample) including the live UI submission at 2026-06-22 14:03:46",
+      "pytest_results": "19/19 passed in 1.56s"
+    },
+    "frontend_seo": {
+      "sitemap.xml": "200 OK, valid XML, 9 URLs",
+      "og:title": "Present — 'Meridian Plywood — Premium BWP Gurjan Plywood | ISI 710 Certified'",
+      "og:image": "Present — https://meridianply.com/images/hero-plywood-slab.png",
+      "twitter:card": "summary_large_image",
+      "canonical": "https://meridianply.com/",
+      "jsonLdCount": 4
+    },
+    "frontend_polish": {
+      "scroll_progress_rail": "Present (.scroll-progress-rail div)",
+      "load_curtain": "Mounts initially with data-testid='load-curtain' then unmounts within 2.5s",
+      "contact_input_name_focus_ring": "box-shadow rgba(184,115,51,0.137) 0 0 0 2.75px + copper border rgba(185,117,53,0.65) — copper focus ring confirmed",
+      "technology_spec_stamp": "Renders '13 LAYERS · 19 MM · 8 × 4 FT · IS 710' inside [data-testid='technology-spec-stamp']",
+      "product_card_glow_hover": ".card-glow on hover applies copper inset border rgba(185,116,52,0.44) + copper drop-shadow rgba(184,115,51,0.337) — confirmed",
+      "hero_stats_with_dividers": "3 stats present with data-testid hero-stat-Boiling Water Test / hero-stat-Gurjan Hardwood Core / hero-stat-Performance Warranty; last two carry pl-6 md:pl-10 (divider spacing class)"
+    },
+    "end_to_end": {
+      "contact_form_submission": "Submitted via UI (name/email/phone/company + default role/project + message). 'Inquiry received — Our specifications team will respond within one business day.' toast displayed. Corresponding backend log line confirmed: '[EMAIL DISABLED] would send to admin@meridianply.com: New Inquiry — TEST_E2E User' at 14:03:46."
+    },
+    "sections_rendered": {
+      "technology": true,
+      "products": true,
+      "interiors": true,
+      "contact": true,
+      "hero": "Renders (top-of-page content includes 'Built to Endure. Designed to Inspire.' and the 3 stat blocks); the hero[data-testid='hero'] selector test missed but content+stats verified via DOM text + stat data-testids"
+    }
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Hero section root element does not carry a data-testid='hero' attribute. The hero content + per-stat testids exist (hero-stat-*), but adding a top-level data-testid='hero' on the hero <section> would make automated smoke tests cleaner. Low priority.",
+    "CORS allow_origins='*' with allow_credentials=True is invalid per CORS spec — already flagged in iteration_1, still present. Browsers will silently reject credentialed requests if any ever happen. Low priority while no auth exists.",
+    "Three.js console warnings on every render: 'THREE.Clock deprecated' and 'PCFSoftShadowMap deprecated' — non-blocking but noisy. Worth migrating to THREE.Timer / current shadow map enum at the next dependency bump.",
+    "GET /api/inquiries (and /api/dealers, /api/samples) are public, unauthenticated, and list every submission. Fine for an MVP / non-PII brochure site, but if these endpoints ever get linked from the UI or indexed, names+emails+phones leak. Recommend an admin token guard before launch.",
+    "fire-and-forget asyncio.create_task(send_email_async(...)) calls do not attach an exception handler. With Resend disabled they only log, but once enabled an exception inside the task (outside the try/except) would be silently swallowed by the event loop. Wrap with task.add_done_callback(lambda t: t.exception() and logger.error(...))."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (19/19)", "frontend": "100% (all polish + SEO + e2e checks passed)"},
+  "test_credentials": "none required",
+  "seed_data_creation": "TEST_E2E User inquiry created via UI submission, plus TEST_-prefixed inquiry/dealer/sample docs from pytest run. All stored in `inquiries` collection. Safe to leave or drop.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Frontend at https://plywood-studio.preview.emergentagent.com. Backend tests at /app/backend/tests/backend_test.py — run via `pytest backend/tests/backend_test.py -v`. Email is intentionally disabled (RESEND_API_KEY empty); admin routing target is ADMIN_EMAIL=admin@meridianply.com in /app/backend/.env. To verify admin routing without sending email, grep '[EMAIL DISABLED] would send to admin@meridianply.com' in /var/log/supervisor/backend.err.log. Contact form requires name+email+phone+company+message (role/project default-selected); 'Inquiry received' toast is the success signal. Hero stats use data-testid='hero-stat-{label}', product cards use class .card-glow, load curtain is data-testid='load-curtain'. All JSON-LD/OG/Twitter/canonical/sitemap markup lives in /app/frontend/public/index.html and /app/frontend/public/sitemap.xml.",
+  "rca of the issue": "No new bugs found in this iteration. All items in the review request verified passing."
+}
