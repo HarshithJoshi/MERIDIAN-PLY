@@ -3,21 +3,34 @@ import { Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer data-testid="footer" className="relative bg-[#080808] border-t border-white/[0.06] pt-10 md:pt-14 pb-8">
+    <footer data-testid="footer" className="relative bg-[#080808] border-t border-white/[0.06] pt-12 md:pt-16 pb-8">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24">
         {/* Official Meridian brand mark — boxed rectangular wordmark */}
-        <div className="overflow-hidden border-b border-white/5 pb-8 md:pb-12 flex flex-col items-center sm:flex-row sm:items-end sm:justify-between gap-6">
-          <img
-            src={IMAGES.logoBox}
-            alt="Meridian Plywood — always with you. Plywood · Block Board · Flush Door"
-            data-testid="footer-logo-full"
-            className="w-full max-w-[460px] sm:max-w-[520px] h-auto select-none"
-            draggable={false}
-          />
-          <div className="text-center sm:text-right">
-            <div className="eyebrow">— Tagline</div>
+        <div className="overflow-hidden pb-10 md:pb-14 flex flex-col items-center sm:flex-row sm:items-end sm:justify-between gap-8">
+          <div className="relative flex flex-col items-center sm:items-start">
+            <img
+              src={IMAGES.logoBox}
+              alt="Meridian Plywood — always with you. Plywood · Block Board · Flush Door"
+              data-testid="footer-logo-full"
+              className="w-full max-w-[480px] sm:max-w-[540px] h-auto select-none"
+              draggable={false}
+            />
+            {/* Subtle copper hairline + glow beneath the wordmark — a soft
+                signature seal that reads as "official" without shouting. */}
             <div
-              className="mt-3 font-display text-[15px] text-[#F6F1E9]/85"
+              aria-hidden
+              className="mt-5 h-px w-[80%] max-w-[420px]"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(184,115,51,0.55) 50%, transparent 100%)",
+                boxShadow: "0 0 12px rgba(184,115,51,0.25)",
+              }}
+            />
+          </div>
+          <div className="text-center sm:text-right">
+            <div className="eyebrow eyebrow-no-dot">Tagline</div>
+            <div
+              className="mt-3 font-display text-[15.5px] text-[#F6F1E9]/85"
               style={{ fontWeight: 500, letterSpacing: "-0.005em" }}
             >
               {BRAND.tagline}
@@ -25,7 +38,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="border-t border-white/5 pt-10 md:pt-12 grid grid-cols-2 md:grid-cols-4 gap-10">
           <div>
             <div className="eyebrow">Brand</div>
             <p className="mt-4 text-[13px] text-[#F6F1E9]/55 leading-relaxed max-w-xs">

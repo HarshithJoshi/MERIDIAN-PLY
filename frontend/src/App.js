@@ -17,7 +17,11 @@ function App() {
       typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-    if (isIOSLike() || isTouchOnly || /Android/i.test(ua)) {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isIOSLike() || isTouchOnly || prefersReducedMotion || /Android/i.test(ua)) {
       return; // native scroll
     }
 

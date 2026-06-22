@@ -29,6 +29,27 @@ World-class luxury website for a premium BWP Gurjan plywood brand "Meridian Plyw
 - Contact — full inquiry form, role/project type selects, WhatsApp deep link, OpenStreetMap embed, MongoDB-backed submission, toast feedback
 - Footer — massive wordmark, brand grid
 
+## Polish Pass (Feb 2026)
+**Global CSS (`index.css`)**
+- Eyebrow refinement — small copper afterglow dot trails every section eyebrow
+- `.card-glow` utility — copper border + ambient shadow + `translateY(-2px)` lift on hover (applied to Products & Sustainability cards)
+- `.section-divider` — copper hairline w/ gradient fade between sections (continuous cinematic rhythm)
+- `.scroll-progress-rail` — 2px copper-to-gold scroll progress hairline at top of every page
+- `.load-curtain` — black curtain that retracts upward after first paint (~400ms delay, ~1100ms slide)
+- Refined `.input` — copper focus border + 3px soft copper glow ring + hover state
+- Accessibility — keyboard `:focus-visible` rings (2px copper, 3px offset) on all `a/button/input/select/textarea`
+- `prefers-reduced-motion` — strips animations/parallax/pulses globally; Lenis also skips initialisation when reduced motion is preferred
+- `btn-pill:active` — subtle press-scale (0.985)
+
+**Components**
+- `ScrollProgress.jsx` — new, rAF-driven, no re-renders
+- `LoadCurtain.jsx` — new, two-stage retract/unmount, ~1.8s total
+- Navbar logo — larger (h-10→h-12), subtle ivory backdrop only over transparent hero
+- Hero — tagline moved to own line, stat-row dividers via `divide-x`
+- Technology — new "13 LAYERS · 19 MM · 8 × 4 FT · IS 710" spec stamp under heading
+- Footer — wordmark grouped with copper hairline + ambient glow underneath
+- Contact — removed component-local `<style>` block (now consumes global `.input`)
+
 ## iPad / iOS Safari Smoothness Pass (Feb 2026)
 - Lenis smooth-scroll skipped entirely on iOS / iPadOS / Android (native momentum is better; Lenis RAF was fighting it and causing jank)
 - Three.js canvas: lowered dpr to `[1,1]` on touch, dropped shadows on touch, paused frameloop ("demand") when section off-screen via IntersectionObserver

@@ -11,20 +11,32 @@ import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 import FloatingWhatsApp from "@/components/sections/FloatingWhatsApp";
+import ScrollProgress from "@/components/sections/ScrollProgress";
+import LoadCurtain from "@/components/sections/LoadCurtain";
 
 export default function Landing() {
   return (
     <main data-testid="landing-page" className="bg-[#0B0B0B] text-[#F6F1E9] overflow-x-clip">
+      <LoadCurtain />
+      <ScrollProgress />
       <Navbar />
       <Hero />
+      <div className="section-divider" aria-hidden />
       <MaterialStory />
+      <div className="section-divider" aria-hidden />
       <Technology />
+      <div className="section-divider" aria-hidden />
       <Products />
+      <div className="section-divider" aria-hidden />
       <Performance />
       <Interiors />
+      <div className="section-divider" aria-hidden />
       <Sustainability />
+      <div className="section-divider" aria-hidden />
       <Portal />
+      <div className="section-divider" aria-hidden />
       <Testimonials />
+      <div className="section-divider" aria-hidden />
       <Contact />
       <Footer />
       <FloatingWhatsApp />

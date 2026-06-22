@@ -127,14 +127,14 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Trust pills — ISO 9001 + 25-year warranty, plus secondary tagline.
-            Cue from the official brand sheet ("AN ISO 9001:2008 CERTIFIED CO"
-            badge and "25 Year Warranty" mark on the product door). */}
+        {/* Trust pills — ISO 9001 + 25-year warranty. The product-line
+            tagline now lives on its own line beneath the pills (was
+            crowding the trust row before). */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.15, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3"
+          className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-3"
         >
           <span
             data-testid="hero-trust-iso"
@@ -150,24 +150,29 @@ export default function Hero() {
             <BadgeCheck size={13} className="text-[#B87333]" strokeWidth={2.2} />
             25-Year Warranty
           </span>
-          <span className="hidden sm:inline italic text-[12.5px] tracking-[0.005em] text-[#F6F1E9]/55">
-            — {BRAND.buildTagline}
-          </span>
         </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.3, ease: [0.2, 0.7, 0.2, 1] }}
+          className="mt-4 italic text-[12.5px] tracking-[0.01em] text-[#F6F1E9]/55"
+        >
+          — {BRAND.buildTagline}
+        </motion.p>
 
-        {/* Stat row */}
+        {/* Stat row — copper hairline separators between stats add quiet rhythm */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 1.2, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-12 sm:mt-14 md:mt-16 grid grid-cols-3 max-w-3xl gap-6 md:gap-10 border-t border-white/10 pt-6 md:pt-8"
+          className="mt-12 sm:mt-14 md:mt-16 grid grid-cols-3 max-w-3xl gap-6 md:gap-10 border-t border-white/10 pt-6 md:pt-8 divide-x divide-white/[0.07]"
         >
           {[
             { k: "72 hrs", v: "Boiling Water Test" },
             { k: "100%", v: "Gurjan Hardwood Core" },
             { k: "Lifetime", v: "Performance Warranty" },
-          ].map((s) => (
-            <div key={s.v} data-testid={`hero-stat-${s.v}`}>
+          ].map((s, idx) => (
+            <div key={s.v} data-testid={`hero-stat-${s.v}`} className={idx > 0 ? "pl-6 md:pl-10" : ""}>
               <div className="font-display text-[22px] sm:text-[26px] md:text-[32px] text-[#F6F1E9] tracking-tight" style={{ fontWeight: 600 }}>
                 {s.k}
               </div>

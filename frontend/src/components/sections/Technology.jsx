@@ -68,6 +68,22 @@ export default function Technology() {
               veneers, bonded under high pressure with phenolic resin — performance
               built layer by layer.
             </p>
+
+            {/* Spec stamp — small technical fingerprint that balances the
+                vertical 3D viewport on the right. */}
+            <div
+              className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.025] pl-2.5 pr-4 py-2 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#F6F1E9]/65"
+              data-testid="technology-spec-stamp"
+            >
+              <span className="inline-block h-2 w-2 rounded-full bg-[#B87333] shadow-[0_0_10px_rgba(184,115,51,0.7)]" />
+              <span>13 Layers</span>
+              <span className="text-[#F6F1E9]/25">·</span>
+              <span>19 mm</span>
+              <span className="text-[#F6F1E9]/25">·</span>
+              <span>8 × 4 ft</span>
+              <span className="text-[#F6F1E9]/25">·</span>
+              <span className="text-[#B87333]">IS 710</span>
+            </div>
           </div>
 
           <div className="md:col-span-7">

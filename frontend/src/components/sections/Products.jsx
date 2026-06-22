@@ -146,7 +146,7 @@ export default function Products() {
                 whileHover={{ y: -4 }}
                 onClick={() => setActive(p)}
                 data-testid={`product-card-${p.slug}`}
-                className="relative text-left rounded-2xl border border-white/10 bg-gradient-to-b from-[#141414] to-[#0E0E0E] p-8 overflow-hidden group hover:border-[#B87333]/60 transition-all duration-500"
+                className="card-glow relative text-left rounded-2xl border border-white/10 bg-gradient-to-b from-[#141414] to-[#0E0E0E] p-8 overflow-hidden group"
               >
                 <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[#6A442B]/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="flex items-start justify-between">

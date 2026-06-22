@@ -33,19 +33,32 @@ export default function Navbar() {
       }`}
       style={{ transition: "background-color 320ms ease, backdrop-filter 320ms ease" }}
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12 h-16 md:h-[68px] flex items-center justify-between">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between">
         <a
           href="#top"
           data-testid="navbar-logo"
-          className="flex items-center group shrink-0"
+          className="flex items-center group shrink-0 relative"
           aria-label="Meridian Plywood Home"
         >
+          {/* Subtle ivory backdrop appears only when navbar is over the
+              transparent hero — gives the boxed logo the contrast it needs
+              without adding visible chrome once the nav becomes solid. */}
+          <span
+            aria-hidden
+            className={`absolute -inset-x-2 -inset-y-1 rounded-md transition-opacity duration-500 ${
+              scrolled ? "opacity-0" : "opacity-100"
+            }`}
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(246,241,233,0.06) 0%, rgba(246,241,233,0) 70%)",
+            }}
+          />
           {/* Primary brand mark — boxed rectangular Meridian logo from the official brand sheet */}
           <img
             src={IMAGES.logoBox}
             alt={`${BRAND.name} — ${BRAND.legacyTagline}`}
             data-testid="navbar-logo-img"
-            className="h-9 sm:h-10 md:h-11 w-auto select-none transition-transform duration-500 group-hover:scale-[1.04]"
+            className="relative h-10 sm:h-11 md:h-12 w-auto select-none transition-transform duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.045]"
             draggable={false}
           />
         </a>

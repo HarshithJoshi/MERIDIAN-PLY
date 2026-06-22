@@ -79,7 +79,7 @@ export default function Sustainability() {
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.7, delay: i * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
               data-testid={`sustainability-pillar-${i}`}
-              className="glass rounded-2xl p-7 hover:border-[rgba(74,143,90,0.4)] transition-colors duration-500"
+              className="card-glow glass rounded-2xl p-7"
             >
               <Icon size={22} style={{ color: "#4a8f5a" }} />
               <h3 className="mt-5 font-display text-[18px] text-[#F6F1E9]" style={{ fontWeight: 600 }}>{title}</h3>

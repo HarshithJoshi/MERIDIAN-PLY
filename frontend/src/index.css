@@ -85,7 +85,24 @@ body {
     letter-spacing: 0.32em;
     text-transform: uppercase;
     color: rgba(184, 115, 51, 0.95);
+    position: relative;
+    display: inline-block;
 }
+/* Refined accent: a subtle copper "afterglow" dot trailing the eyebrow,
+   echoing Apple's confident-period styling. Pure decoration, no DOM. */
+.eyebrow::after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-left: 0.7rem;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.55;
+    transform: translateY(-2px);
+    box-shadow: 0 0 8px currentColor;
+}
+.eyebrow-no-dot::after { display: none !important; }
 
 /* Cinematic gradient overlays */
 .bg-grain {
@@ -142,6 +159,7 @@ body {
         box-shadow 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
     will-change: transform;
 }
+.btn-pill:active { transform: translateY(0) scale(0.985); }
 
 .btn-pill-primary {
     background: #F6F1E9;
@@ -236,6 +254,165 @@ body {
 .card-tilt {
     transform-style: preserve-3d;
     transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Copper hover-glow utility for premium cards.
+   Adds a subtle inner copper ring + outer ambient shadow on hover. */
+.card-glow {
+    position: relative;
+    transition:
+        border-color 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card-glow:hover {
+    border-color: rgba(184, 115, 51, 0.45);
+    box-shadow:
+        inset 0 0 0 1px rgba(184, 115, 51, 0.15),
+        0 30px 60px -30px rgba(184, 115, 51, 0.35);
+    transform: translateY(-2px);
+}
+
+/* Section divider — a thin copper hairline with soft gradient fade
+   to give cinematic "scene break" rhythm between adjacent sections. */
+.section-divider {
+    position: relative;
+    height: 1px;
+    margin: 0 auto;
+    max-width: 1400px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(184, 115, 51, 0) 8%,
+        rgba(184, 115, 51, 0.45) 50%,
+        rgba(184, 115, 51, 0) 92%,
+        transparent 100%
+    );
+    opacity: 0.7;
+}
+
+/* Top-of-page scroll progress hairline. Fixed, 1px, copper. */
+.scroll-progress-rail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 60;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(184, 115, 51, 0) 0%, rgba(184, 115, 51, 0.06) 100%);
+}
+.scroll-progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    background: linear-gradient(90deg, #B87333 0%, #D4AF37 100%);
+    box-shadow: 0 0 10px rgba(184, 115, 51, 0.65);
+    transform-origin: left center;
+    will-change: width;
+}
+
+/* Page-load curtain — black overlay that retracts after first paint
+   for a deliberate, cinematic intro. */
+.load-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #0B0B0B;
+    pointer-events: none;
+    transform: translateY(0);
+    transition: transform 1100ms cubic-bezier(0.76, 0, 0.24, 1), opacity 1100ms ease;
+}
+.load-curtain.is-retracted {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+.load-curtain__mark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 600ms ease;
+}
+.load-curtain__mark .pulse {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #B87333;
+    box-shadow: 0 0 24px #B87333;
+    animation: curtain-pulse 1.4s ease-in-out infinite;
+}
+@keyframes curtain-pulse {
+    0%, 100% { opacity: 0.25; transform: scale(0.85); }
+    50%      { opacity: 1;    transform: scale(1.25); }
+}
+
+/* Accessibility: visible focus-ring for keyboard users only (focus-visible).
+   Apple does this consistently — a copper ring that respects rounded corners. */
+*:focus { outline: none; }
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+    outline: 2px solid rgba(184, 115, 51, 0.85);
+    outline-offset: 3px;
+    border-radius: inherit;
+}
+.btn-pill:focus-visible {
+    box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.35), 0 0 0 1px rgba(184, 115, 51, 0.9);
+    outline: none;
+}
+
+/* Refined form input — copper focus border, soft inner highlight. */
+.input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: #F6F1E9;
+    font-size: 14.5px;
+    font-family: "General Sans", sans-serif;
+    transition:
+        border-color 280ms ease,
+        background-color 280ms ease,
+        box-shadow 280ms ease;
+}
+.input::placeholder { color: rgba(246, 241, 233, 0.32); }
+.input:hover { border-color: rgba(255, 255, 255, 0.16); }
+.input:focus {
+    outline: none;
+    border-color: rgba(184, 115, 51, 0.7);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 0 0 3px rgba(184, 115, 51, 0.15),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+}
+select.input {
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, #B87333 50%),
+        linear-gradient(135deg, #B87333 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 36px;
+}
+
+/* Respect users who request reduced motion — Apple does this religiously.
+   We strip all parallax, ken-burns, ping pulses, marquee, and curtain
+   transitions, while keeping discrete opacity changes (still readable). */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    .marquee { animation: none !important; }
+    .dot-pulse { animation: none !important; opacity: 1; }
+    .animate-ping { animation: none !important; }
+    .load-curtain { transform: translateY(-100%); opacity: 0; }
 }
 
 /* Lenis */

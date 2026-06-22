@@ -205,23 +205,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        .input {
-          width: 100%;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
-          border-radius: 14px;
-          padding: 14px 16px;
-          color: #F6F1E9;
-          font-size: 14.5px;
-          font-family: "General Sans", sans-serif;
-          transition: border-color 280ms ease, background-color 280ms ease;
-        }
-        .input::placeholder { color: rgba(246,241,233,0.32); }
-        .input:focus { outline: none; border-color: rgba(184,115,51,0.55); background: rgba(255,255,255,0.05); }
-        select.input { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #B87333 50%), linear-gradient(135deg, #B87333 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 36px; }
-      `}</style>
     </section>
   );
 }
