@@ -7,6 +7,7 @@ import { BRAND } from "@/lib/meridian";
 export default function FloatingWhatsApp() {
   const [visible, setVisible] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [hasTeased, setHasTeased] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -20,15 +21,22 @@ export default function FloatingWhatsApp() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    // Auto-tease tooltip once after a few seconds
-    const id = setTimeout(() => setTooltipOpen(true), 4500);
-    const id2 = setTimeout(() => setTooltipOpen(false), 9500);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(id);
-      clearTimeout(id2);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Tease the tooltip the FIRST time the button enters the viewport
+  // (i.e. on the user's first meaningful scroll). Open ~600ms after the
+  // button animates in, linger ~6s, then auto-dismiss. Only fires once.
+  useEffect(() => {
+    if (!visible || hasTeased) return;
+    setHasTeased(true);
+    const tOpen = setTimeout(() => setTooltipOpen(true), 600);
+    const tClose = setTimeout(() => setTooltipOpen(false), 6600);
+    return () => {
+      clearTimeout(tOpen);
+      clearTimeout(tClose);
+    };
+  }, [visible, hasTeased]);
 
   const number = BRAND.whatsapp.replace(/\D/g, "");
   const msg = encodeURIComponent(
