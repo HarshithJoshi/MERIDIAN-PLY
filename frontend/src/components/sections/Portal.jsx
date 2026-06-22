@@ -2,9 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Handshake, Package, Send, Loader2, Check, MapPin, Megaphone, ShieldCheck } from "lucide-react";
+import { Handshake, Package, Send, Loader2, Check, MapPin, Megaphone, ShieldCheck, MessageCircle } from "lucide-react";
+import { BRAND } from "@/lib/meridian";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
+// Build a wa.me deep-link with a context-specific prefilled message.
+const WA_NUMBER = BRAND.whatsapp.replace(/\D/g, "");
+const waLink = (text) =>
+  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
 const DEALER_BENEFITS = [
   {
@@ -88,13 +94,25 @@ export default function Portal() {
                 Request physical sample swatches delivered to your studio. Complimentary
                 for verified architects and design firms.
               </p>
-              <a
-                href="#contact"
-                data-testid="portal-sample-cta"
-                className="mt-6 inline-flex btn-pill btn-pill-copper"
-              >
-                Request Sample Kit
-              </a>
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="#contact"
+                  data-testid="portal-sample-cta"
+                  className="inline-flex btn-pill btn-pill-copper"
+                >
+                  Request Sample Kit
+                </a>
+                <a
+                  href={waLink("Hi Meridian — I'd like to request a sample kit for my project.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="portal-sample-whatsapp"
+                  className="inline-flex btn-pill btn-pill-ghost"
+                >
+                  <MessageCircle size={15} />
+                  Connect on WhatsApp
+                </a>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
@@ -316,15 +334,31 @@ function DealerApplicationForm() {
         </Field>
       </div>
 
-      <button
-        type="submit"
-        disabled={submitting}
-        data-testid="dealer-submit-button"
-        className="btn-pill btn-pill-copper mt-6 disabled:opacity-60"
-      >
-        {submitting ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
-        {submitting ? "Submitting…" : "Submit Application"}
-      </button>
+      <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        <button
+          type="submit"
+          disabled={submitting}
+          data-testid="dealer-submit-button"
+          className="btn-pill btn-pill-copper disabled:opacity-60"
+        >
+          {submitting ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
+          {submitting ? "Submitting…" : "Submit Application"}
+        </button>
+        <a
+          href={waLink(
+            `Hi Meridian — I'd like to apply to become an authorised dealer${
+              form.city ? ` in ${form.city}` : ""
+            }${form.company ? ` (${form.company})` : ""}.`
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="dealer-whatsapp-button"
+          className="btn-pill btn-pill-ghost"
+        >
+          <MessageCircle size={15} />
+          Connect on WhatsApp
+        </a>
+      </div>
 
       <style>{`
         .dealer-input {
