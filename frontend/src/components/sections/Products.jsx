@@ -86,8 +86,12 @@ export default function Products() {
       try {
         const res = await axios.get(`${API}/products`);
         if (res?.data?.products?.length) setProducts(res.data.products);
-      } catch (e) {
-        // fallback already set
+      } catch (err) {
+        // Backend product list is optional — keep the static fallback that's
+        // already in state and surface the failure in dev so we don't lose it.
+        if (process.env.NODE_ENV !== "production") {
+          console.warn("[Products] /api/products fetch failed, using fallback:", err?.message || err);
+        }
       }
     })();
   }, []);

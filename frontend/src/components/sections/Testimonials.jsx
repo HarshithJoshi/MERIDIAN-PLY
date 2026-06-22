@@ -48,7 +48,7 @@ export default function Testimonials() {
           className="mt-4 font-display text-[36px] sm:text-[48px] md:text-[60px] leading-[1.04] text-[#F6F1E9] max-w-3xl"
           style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
         >
-          Trusted by India's
+          Trusted by India&rsquo;s
           <br />
           <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>quiet specifiers</span>.
         </h2>
@@ -66,7 +66,7 @@ export default function Testimonials() {
                 className="mt-6 font-display text-[22px] sm:text-[26px] md:text-[32px] leading-[1.35] text-[#F6F1E9]"
                 style={{ fontWeight: 400, letterSpacing: "-0.01em" }}
               >
-                "{item.quote}"
+                &ldquo;{item.quote}&rdquo;
               </motion.blockquote>
             </AnimatePresence>
             <div className="mt-8 flex gap-2">
