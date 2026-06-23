@@ -7,7 +7,7 @@ import logging
 import asyncio
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 import uuid
 from datetime import datetime, timezone
 
@@ -99,7 +99,7 @@ async def send_email_async(to_email: str, subject: str, html: str) -> bool:
         return False
 
 
-def render_admin_email(kind: str, data: dict) -> str:
+def render_admin_email(kind: str, data: Dict[str, Any]) -> str:
     rows = "".join(
         f"<tr><td style='padding:8px 14px;border-bottom:1px solid #1f1f1f;color:#A3A3A3;font-family:Helvetica,Arial,sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:0.08em'>{k}</td>"
         f"<td style='padding:8px 14px;border-bottom:1px solid #1f1f1f;color:#F6F1E9;font-family:Helvetica,Arial,sans-serif;font-size:14px'>{v}</td></tr>"
@@ -307,7 +307,7 @@ PRODUCT_CATALOG = [
 
 
 @api_router.get("/products")
-async def list_products():
+async def list_products() -> Dict[str, List[Dict[str, Any]]]:
     return {"products": PRODUCT_CATALOG}
 
 
@@ -323,5 +323,5 @@ app.add_middleware(
 
 
 @app.on_event("shutdown")
-async def shutdown_db_client():
+async def shutdown_db_client() -> None:
     client.close()
