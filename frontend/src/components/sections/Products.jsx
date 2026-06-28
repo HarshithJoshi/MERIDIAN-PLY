@@ -22,7 +22,7 @@ const FALLBACK = [
     name: "Marine Plywood",
     category: "Plywood",
     description: "Engineered for prolonged submersion. Yacht-grade adhesion.",
-    thickness: ["9mm", "12mm", "19mm", "25mm"],
+    thickness: ["18mm", "16mm", "12mm", "9mm", "6mm"],
     grade: "IS 710 Marine",
     water_resistance: "Marine",
     warranty: "30 Years",
