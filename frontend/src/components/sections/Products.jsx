@@ -11,7 +11,7 @@ const FALLBACK = [
     name: "BWP Gurjan Plywood",
     category: "Plywood",
     description: "100% Gurjan hardwood core with boiling waterproof bonding.",
-    thickness: ["6mm", "9mm", "12mm", "16mm", "19mm", "25mm"],
+    thickness: ["18mm", "16mm", "12mm", "9mm", "6mm"],
     grade: "IS 710",
     water_resistance: "Boiling Waterproof",
     warranty: "Lifetime",
