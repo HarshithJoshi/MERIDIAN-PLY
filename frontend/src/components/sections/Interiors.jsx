@@ -69,24 +69,24 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
   const segStart = index * seg;
   const segEnd = (index + 1) * seg;
   const halo = seg * 0.18; // small overlap for crossfade
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
 
   const opacity = useTransform(
     progress,
     [
-      Math.max(0, segStart - halo),
-      segStart + halo * 0.6,
-      segEnd - halo * 0.6,
-      Math.min(1, segEnd + halo),
+      isFirst ? 0 : Math.max(0, segStart - halo),
+      isFirst ? 1e-6 : segStart + halo * 0.6,
+      isLast ? 0.999999 : segEnd - halo * 0.6,
+      isLast ? 1 : Math.min(1, segEnd + halo),
     ],
-    [0, 1, 1, 0]
+    [isFirst ? 1 : 0, 1, 1, isLast ? 1 : 0]
   );
 
   // Caption gets its own, tighter fade window so two slide titles are never
   // visible at the same time (fixes double-exposed text during crossfade on
   // slow iPad scrolling). All offsets stay within [0,1] (WAAPI requirement);
   // first slide is visible at progress 0, last slide stays visible at 1.
-  const isFirst = index === 0;
-  const isLast = index === total - 1;
   const captionOpacity = useTransform(
     progress,
     [
