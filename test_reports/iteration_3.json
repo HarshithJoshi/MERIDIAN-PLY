@@ -1,0 +1,92 @@
+{
+  "summary": "Frontend-only design-polish regression pass for Meridian Plywood. All layout fixes across Hero, Navbar, Footer, Performance, Interiors, Portal, and FloatingWhatsApp verified. Two end-to-end form submissions (dealer + contact) confirmed hitting live /api endpoints and returning 200. Zero console/page errors during the run.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_items": {
+    "page_load": {
+      "console_errors": 0,
+      "page_errors": 0,
+      "sections_rendered": ["hero-section (data-testid)", "#top", "#material", "#technology", "#products", "#performance", "#interiors", "#sustainability", "#portal", "#testimonials", "#contact", "footer (data-testid)"]
+    },
+    "hero_1920x800": {
+      "navbar_box": "y=0, height=72",
+      "eyebrow_position": "y=83.14 — sits BELOW navbar bottom (72); NO overlap",
+      "eyebrow_text": "BWP · GURJAN · ISI 710",
+      "last_stat_box": "x=894.65, y=688.6, width=229.3, height=88 (right edge ≈ 1124)",
+      "scroll_cue_box": "x=1752, y=727, width=56, height=37",
+      "floating_whatsapp_box": "x=1834, y=726, width=58, height=58",
+      "stat_vs_scroll_cue_collision": "NO horizontal overlap (stat right ≈1124, cue left =1752)",
+      "scroll_cue_vs_whatsapp_collision": "NO horizontal overlap (cue right =1808, wa left =1834; 26px gap)",
+      "scroll_cue_data_testid": "hero-scroll-cue present"
+    },
+    "navbar": {
+      "desktop_cta_text": "Speak to a Specifier",
+      "desktop_cta_href": "#contact",
+      "desktop_cta_testid": "navbar-cta-contact",
+      "mobile_cta_text": "Speak to a Specifier",
+      "mobile_cta_href": "#contact",
+      "mobile_cta_testid": "nav-mobile-cta"
+    },
+    "footer": {
+      "tagline_present": "'Built to Endure. Designed to Inspire.' rendered in right-side block",
+      "footer_cta_testid": "footer-cta-contact",
+      "footer_cta_text": "Speak to a Specifier",
+      "footer_cta_href": "#contact",
+      "layout": "no overflow observed, right column balances the Meridian logo on left"
+    },
+    "performance": {
+      "result_chips": ["+200%", "+92%", "+47%", "+163%", "+355%", "+75%"],
+      "bars_visible": true,
+      "rows_render_with_generous_spacing": true,
+      "no_layout_break": true
+    },
+    "interiors": {
+      "scroll_to_traverse_label_present": "SCROLL TO TRAVERSE (uppercase) rendered in progress rail",
+      "slide_counter_format": "01 / 05 present; counter DOM is live and correctly formatted",
+      "sticky_gallery_renders": true
+    },
+    "portal": {
+      "dealer_input_focus_ring": "box-shadow: rgba(184,115,51,0.15) 0px 0px 0px 3px; border-color: rgba(184,115,51,0.55) — copper ring confirmed",
+      "dealer_submission": "POST /api/dealers → 200",
+      "dealer_application_success_testid": "dealer-application-success rendered after submission",
+      "dealer_whatsapp_button_testid": "dealer-whatsapp-button present on Become a Dealer tab",
+      "portal_sample_whatsapp_testid": "portal-sample-whatsapp present + visible after clicking Samples tab (portal-tab-samples)"
+    },
+    "contact": {
+      "input_focus_ring": "box-shadow: rgba(184,115,51,0.15) 0 0 0 3px + inset white; border-color: rgba(184,115,51,0.7) — copper ring confirmed",
+      "form_submission": "POST /api/inquiries → 200 with valid name/email/phone/company/message payload"
+    },
+    "floating_whatsapp": {
+      "visible_on_load": true,
+      "visible_mid_scroll": true,
+      "visible_at_bottom": true,
+      "container_testid": "floating-whatsapp-container",
+      "button_testid": "floating-whatsapp-button"
+    }
+  },
+  "test_report_links": [
+    "/app/test_reports/hero_1920x800.png",
+    "/app/test_reports/performance.png"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Portal.jsx (line ~380): focus ring uses a 3px, 0.15-alpha copper box-shadow — visually correct, but the review note said '2.75px @ 0.137 alpha' (per iteration_2). Difference is negligible/imperceptible; flagging only for reference.",
+    "Hero.jsx hides the scroll cue below 700px viewport height via the [@media(min-height:700px)]:flex utility. Fine on desktop, and matches the design intent, but on stubby laptop windows (e.g. 1366x680) the cue silently disappears — not a bug, just documenting the intended behaviour so future regressions don't re-flag it.",
+    "Pre-existing items from iteration_2 still apply (CORS wildcard + credentials, Three.js deprecation warnings, unauthenticated GET /api/inquiries|dealers|samples). Not touched in this polish pass — no action needed for this iteration."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (frontend-only pass; two e2e API calls both 200)", "frontend": "100% — all 8 requested checks pass"},
+  "test_credentials": "none required (no auth on this site)",
+  "seed_data_creation": "1 dealer doc (TEST_DEALER Regression, test_dealer@example.com) + 1 inquiry doc (TEST_E2E Regression, test_e2e@example.com) inserted into the `inquiries` collection via the live UI. Safe to leave — both are TEST_-prefixed for easy cleanup.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Frontend at https://plywood-studio.preview.emergentagent.com. All polish fixes from the current review request render as expected — no regressions. Hero collision checks were done at 1920x800 exactly (per request); the scroll cue sits at right:24/28 (data-testid hero-scroll-cue), and the floating WhatsApp button sits at right:4/5/7 (data-testid floating-whatsapp-container). Both stay clear of each other and of the stat row. Portal has two tabs (portal-tab-become-dealer default, portal-tab-samples); portal-sample-whatsapp only mounts after switching to the Samples tab. Contact form success signal is the Sonner toast 'Inquiry received — Our specifications team will respond within one business day.' plus the POST /api/inquiries returning 200. Backend pytest suite from iteration_2 (/app/backend/tests/backend_test.py, 19/19 green) was not re-run in this pass since the review request explicitly scoped this to frontend only.",
+  "rca of the issue": "No bugs found. All polish fixes verified against the review checklist."
+}

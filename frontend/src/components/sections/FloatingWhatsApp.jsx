@@ -73,7 +73,7 @@ export default function FloatingWhatsApp() {
         rel="noopener noreferrer"
         data-testid="floating-whatsapp-button"
         aria-label="Message us on WhatsApp"
-        className="group relative flex h-14 w-14 sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_-12px_rgba(37,211,102,0.55)] transition-transform duration-300 hover:scale-[1.06] active:scale-95"
+        className="group relative flex h-14 w-14 sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_-12px_rgba(37,211,102,0.55)] transition-transform duration-300 hover:scale-[1.06] hover:-translate-y-1 active:scale-95"
         onClick={() => setTooltipOpen(false)}
       >
         {/* Pulsing ring */}

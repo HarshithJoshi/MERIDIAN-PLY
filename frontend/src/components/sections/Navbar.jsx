@@ -80,9 +80,9 @@ export default function Navbar() {
           <a
             data-testid="navbar-cta-contact"
             href="#contact"
-            className="btn-pill btn-pill-primary text-[11px] lg:text-[12px] whitespace-nowrap"
+            className="btn-pill btn-pill-primary text-[11px] lg:text-[12px] whitespace-nowrap tracking-wide"
           >
-            Speak to specifier
+            Speak to a Specifier
           </a>
         </div>
 
@@ -124,7 +124,7 @@ export default function Navbar() {
                 className="btn-pill btn-pill-primary mt-2 self-start"
                 data-testid="nav-mobile-cta"
               >
-                Speak to specifier
+                Speak to a Specifier
               </a>
             </div>
           </motion.div>

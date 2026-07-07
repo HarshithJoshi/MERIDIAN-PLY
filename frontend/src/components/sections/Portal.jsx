@@ -370,10 +370,15 @@ function DealerApplicationForm() {
           color: #F6F1E9;
           font-size: 14px;
           font-family: "General Sans", sans-serif;
-          transition: border-color 280ms ease, background-color 280ms ease;
+          transition: border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease;
         }
         .dealer-input::placeholder { color: rgba(246,241,233,0.32); }
-        .dealer-input:focus { outline: none; border-color: rgba(184,115,51,0.55); background: rgba(255,255,255,0.05); }
+        .dealer-input:focus {
+          outline: none;
+          border-color: rgba(184,115,51,0.55);
+          background: rgba(255,255,255,0.05);
+          box-shadow: 0 0 0 3px rgba(184,115,51,0.15);
+        }
       `}</style>
     </form>
   );

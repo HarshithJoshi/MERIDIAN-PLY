@@ -63,7 +63,7 @@ export default function Hero() {
       {/* Foreground content */}
       <motion.div
         style={{ y: yText, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-center px-6 md:px-12 lg:px-24"
+        className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 md:pt-28 pb-12 md:pb-14"
       >
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -98,7 +98,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.85, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-7 max-w-[640px] text-[15px] md:text-[17px] leading-relaxed text-[#F6F1E9]/75"
+          className="mt-6 max-w-[640px] text-[15px] md:text-[17px] leading-relaxed text-[#F6F1E9]/75"
         >
           Premium BWP Gurjan plywood engineered for timeless durability and
           architectural elegance. A single sheet, decades of integrity.
@@ -108,7 +108,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.0, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-10 flex flex-col sm:flex-row gap-3"
+          className="mt-8 flex flex-col sm:flex-row gap-3"
         >
           <a
             href="#products"
@@ -165,7 +165,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 1.2, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-12 sm:mt-14 md:mt-16 grid grid-cols-3 max-w-3xl gap-6 md:gap-10 border-t border-white/10 pt-6 md:pt-8 divide-x divide-white/[0.07]"
+          className="mt-10 md:mt-12 grid grid-cols-3 max-w-3xl gap-6 md:gap-10 border-t border-white/10 pt-5 md:pt-7 divide-x divide-white/[0.07]"
         >
           {[
             { k: "72 hrs", v: "Boiling Water Test" },
@@ -188,7 +188,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#F6F1E9]/55"
+        className="absolute bottom-9 right-24 md:right-28 z-10 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#F6F1E9]/55 hidden [@media(min-height:700px)]:flex"
         data-testid="hero-scroll-cue"
       >
         Scroll

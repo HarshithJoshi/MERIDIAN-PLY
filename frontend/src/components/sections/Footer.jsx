@@ -27,14 +27,26 @@ export default function Footer() {
               }}
             />
           </div>
-          <div className="text-center sm:text-right">
+          <div className="flex flex-col items-center sm:items-end text-center sm:text-right gap-5">
             <div className="eyebrow eyebrow-no-dot">Tagline</div>
             <div
-              className="mt-3 font-display text-[15.5px] text-[#F6F1E9]/85"
-              style={{ fontWeight: 500, letterSpacing: "-0.005em" }}
+              className="font-display text-[24px] md:text-[30px] leading-[1.15] text-[#F6F1E9] max-w-sm"
+              style={{ fontWeight: 600, letterSpacing: "-0.02em" }}
             >
-              {BRAND.tagline}
+              Built to Endure.
+              <br />
+              <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>
+                Designed
+              </span>{" "}
+              to Inspire.
             </div>
+            <a
+              href="#contact"
+              data-testid="footer-cta-contact"
+              className="btn-pill btn-pill-ghost text-[12px]"
+            >
+              Speak to a Specifier
+            </a>
           </div>
         </div>
 

@@ -169,6 +169,12 @@ function ProgressRail({ progress, total }) {
         <span className="text-[10px] tracking-[0.28em] uppercase text-[#F6F1E9]/45 font-mono">
           Scroll to traverse
         </span>
+        <motion.span
+          aria-hidden
+          animate={{ x: [0, 8, 0], opacity: [0.4, 0.85, 0.4] }}
+          transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+          className="h-px w-6 bg-[#B87333]"
+        />
       </div>
       <div className="relative h-px w-full bg-white/15 overflow-hidden">
         <motion.div style={{ width: fill }} className="absolute left-0 top-0 h-full bg-[#B87333]" />

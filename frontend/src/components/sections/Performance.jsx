@@ -69,7 +69,7 @@ function Row({ row, index, inView }) {
   return (
     <div
       data-testid={`performance-row-${index}`}
-      className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-6 md:py-7 items-center"
+      className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-7 md:py-9 items-center"
     >
       <div className="md:col-span-4 font-display text-[16px] md:text-[18px] text-[#F6F1E9]" style={{ fontWeight: 500 }}>
         {row.label}
@@ -78,9 +78,14 @@ function Row({ row, index, inView }) {
         <Bar value={row.m} label={`Meridian · ${row.mLabel}`} color="#B87333" delay={index * 0.08} inView={inView} />
         <Bar value={row.o} label={`Ordinary · ${row.oLabel}`} color="rgba(246,241,233,0.22)" delay={index * 0.08 + 0.08} inView={inView} />
       </div>
-      <div className="md:col-span-1 md:text-right font-mono text-[12px] text-[#B87333]">
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+        transition={{ duration: 0.6, delay: index * 0.08 + 1.2, ease: [0.2, 0.7, 0.2, 1] }}
+        className="md:col-span-1 md:text-right font-mono text-[12px] text-[#B87333]"
+      >
         +{Math.round(((row.m - row.o) / Math.max(1, row.o)) * 100)}%
-      </div>
+      </motion.div>
     </div>
   );
 }
