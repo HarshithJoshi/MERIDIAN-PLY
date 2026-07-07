@@ -83,16 +83,19 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
 
   // Caption gets its own, tighter fade window so two slide titles are never
   // visible at the same time (fixes double-exposed text during crossfade on
-  // slow iPad scrolling). Adjacent caption windows do not overlap.
+  // slow iPad scrolling). All offsets stay within [0,1] (WAAPI requirement);
+  // first slide is visible at progress 0, last slide stays visible at 1.
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
   const captionOpacity = useTransform(
     progress,
     [
-      index === 0 ? 0 : segStart + halo,
-      index === 0 ? 0.001 : segStart + halo * 2.2,
-      index === total - 1 ? 1.5 : segEnd - halo * 2.2,
-      index === total - 1 ? 1.6 : segEnd - halo,
+      isFirst ? 0 : segStart + halo,
+      isFirst ? halo : segStart + halo * 2.2,
+      isLast ? 0.999 : segEnd - halo * 2.2,
+      isLast ? 1 : segEnd - halo,
     ],
-    [index === 0 ? 1 : 0, 1, 1, 0]
+    [isFirst ? 1 : 0, 1, 1, isLast ? 1 : 0]
   );
 
   // Single, gentle ken-burns: combined scale on a CSS variable — one transform, one layer.
