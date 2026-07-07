@@ -1,0 +1,39 @@
+{
+  "summary": "Frontend-only bug-fix verification for iPad landscape overlaps. BUG FIX 1 (Hero eyebrow below navbar) PASSES at both 1194x760 and 1024x690 — all hero elements (eyebrow, headline, paragraph, CTAs, trust pills, stat row) render without any overlap. BUG FIX 2 (Interiors caption double-exposure) is PARTIALLY correct (no double-captions detected in middle slides) but INTRODUCES A NEW CRITICAL RUNTIME ERROR that crashes the app whenever the last slide (index 4) is mounted — the captionOpacity useTransform uses offset values 1.5 and 1.6, which framer-motion rejects (offsets must be within [0,1]). This regression affects both iPad landscape AND desktop, so it also breaks the 1920x800 regression scenario. Edge case 'last slide caption visible at bottom' cannot be verified because the app is crashed by then.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Interiors.jsx captionOpacity useTransform (lines ~87-96)",
+        "issue": "Uncaught runtime error: 'Failed to execute animate on Element: Offsets must be null or in the range [0,1]'. Triggered on framer-motion HTMLVisualElement.bindToMotionValue → startWaapiAnimation when the last slide (index === total - 1, i.e. index 4) mounts. Root cause: the fix uses sentinel offsets 1.5 and 1.6 in the useTransform input array — these are out of range for scroll-progress-driven motion values. Result: red 'Uncaught runtime errors' overlay covers the entire viewport, blocking all interaction with the page once the user scrolls past ~60% of the interiors section. Reproducible on every viewport tested (1194x760, 1024x690, 1920x800). Interiors counter also stops updating (05/05 never reached because component crashed).",
+        "selector": "[data-testid='interior-slide-4'] (parent Slide component)",
+        "priority": "CRITICAL"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Interiors sticky gallery scroll",
+        "issue": "App crashes with runtime error overlay when scrolling past ~60% of #interiors section; counter [data-testid='interiors-counter-current'] becomes unreachable/stops updating after the crash",
+        "affected_selectors": ["[data-testid='interiors-counter-current']", "[data-testid='interior-slide-4']"]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [".screenshots/ipad_landscape_1194x760.png", ".screenshots/ipad_landscape_1024x690.png", ".screenshots/desktop_1920_end_interiors.png"],
+  "action_items": [
+    "URGENT: In /app/frontend/src/components/sections/Interiors.jsx (lines 87-96), replace the out-of-range offsets 1.5 and 1.6 with in-range values. Framer-motion's useTransform requires offset arrays to be strictly ascending AND (when the source is scrollYProgress in [0,1]) each offset must lie within [0,1]. Suggested rewrite that preserves the 'special case for last slide' semantics: for index === total - 1, use offsets [Math.max(0, segStart - halo), segStart + halo, 1, 1] with output [0, 1, 1, 1] — this keeps caption fully visible from segStart+halo through progress=1 and never fires WAAPI validation. Similarly for index === 0, the current [0, 0.001, ...] pattern is legal but risky — prefer [0, 0, segEnd - halo*2.2, segEnd - halo] with output [1, 1, 1, 0]. NOTE: strictly-ascending offsets are required, so if two are equal use tiny epsilon (0 and 1e-6) or restructure the array.",
+    "After fix, re-verify: (a) no runtime errors when scrolling to 100% of #interiors, (b) counter reaches 05/05, (c) slide 5 caption 'The Atrium Ceiling' (or last title) is visible at scroll bottom, (d) no double-caption exposure at 20/40/60/80% progress on 1194x760."
+  ],
+  "critical_code_review_comments": [
+    "Interiors.jsx captionOpacity: using 1.5/1.6 as sentinel offsets is a framer-motion API misuse — offset arrays passed to useTransform whose source is a bounded MotionValue (scrollYProgress in [0,1]) get forwarded to WAAPI's Element.animate() offsets which strictly require [0,1]. This is a subtle but reliably-crashing bug that only surfaces when the affected component mounts (index 4 only mounts near the bottom of the interiors section, which is why unit-testing hero didn't catch it).",
+    "Hero.jsx: layout fix is clean — min-h-[100svh] + pt-24 md:pt-28 pb-16 md:pb-20 works correctly on both iPad landscape sizes. Stat row correctly extending below fold on short viewports as designed.",
+    "Consider extracting the captionOpacity edge-case branching (index===0, index===total-1) into a small helper — the ternary chains inside useTransform args are hard to reason about and were the source of this bug."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "50% (Hero fix passes, Interiors fix crashes app)"},
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "After main agent fixes Interiors.jsx captionOpacity offsets, retest: (1) scroll entire #interiors section on 1194x760 without any 'Uncaught runtime errors' overlay, (2) at progress=1.0 the counter shows 05/05 and the last slide's caption is visible with effective opacity > 0.5, (3) at 20/40/60/80% no two captions have effective opacity > 0.15 simultaneously (effective = slideOpacity * captionOpacity — must multiply because Slide wrapper opacity dominates). Test viewport 1194x760 primarily. Hero layout fix already verified passing at 1194x760 and 1024x690; no need to re-verify hero unless code changes.",
+  "rca of the issue": "USER-REPORTED BUG (iPad landscape overlap) — Hero portion FIXED CORRECTLY. Interiors portion partially fixed but introduces a NEW critical bug. RCA of new bug: In Interiors.jsx `captionOpacity = useTransform(progress, [...], [...])`, the developer added edge-case branches that produce input offsets 1.5 and 1.6 when index === total-1 (last slide). Framer-motion's useTransform, when wired to a HTML element's opacity, ultimately calls Element.animate() (WAAPI) with those offsets as keyframe offsets. WAAPI spec requires keyframe offsets ∈ [0,1] (nullable), so it throws TypeError: 'Offsets must be null or in the range [0,1]'. Framer-motion propagates this as an uncaught runtime error. Repro: load site, scroll down until #interiors section's last slide begins mounting (~60% progress). Mitigation: constrain all four offsets to [0,1] while preserving the intent (last-slide caption stays visible through progress=1). Concrete patch given in action_items."
+}

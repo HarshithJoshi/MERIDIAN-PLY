@@ -20,7 +20,7 @@ export default function Hero() {
       id="top"
       ref={ref}
       data-testid="hero-section"
-      className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-grain"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-grain"
     >
       {/* Background image */}
       <motion.div
@@ -63,7 +63,7 @@ export default function Hero() {
       {/* Foreground content */}
       <motion.div
         style={{ y: yText, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 md:pt-28 pb-12 md:pb-14"
+        className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1400px] flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 md:pt-28 pb-16 md:pb-20"
       >
         <motion.div
           initial={{ opacity: 0, y: 14 }}

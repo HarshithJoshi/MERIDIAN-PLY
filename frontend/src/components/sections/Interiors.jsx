@@ -81,6 +81,20 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
     [0, 1, 1, 0]
   );
 
+  // Caption gets its own, tighter fade window so two slide titles are never
+  // visible at the same time (fixes double-exposed text during crossfade on
+  // slow iPad scrolling). Adjacent caption windows do not overlap.
+  const captionOpacity = useTransform(
+    progress,
+    [
+      index === 0 ? 0 : segStart + halo,
+      index === 0 ? 0.001 : segStart + halo * 2.2,
+      index === total - 1 ? 1.5 : segEnd - halo * 2.2,
+      index === total - 1 ? 1.6 : segEnd - halo,
+    ],
+    [index === 0 ? 1 : 0, 1, 1, 0]
+  );
+
   // Single, gentle ken-burns: combined scale on a CSS variable — one transform, one layer.
   // On touch devices we freeze the scale — scroll-driven scale on a full-bleed
   // image inside a sticky container is the biggest paint cost on iPad Safari.
@@ -127,7 +141,7 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
 
       {/* Caption — animated via CSS opacity inheritance from parent for performance.
           (We tied it to the slide's own opacity rather than a separate motion value.) */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      <motion.div style={{ opacity: captionOpacity }} className="absolute bottom-0 left-0 right-0 z-10">
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-24 md:pb-28">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 text-[10px] tracking-[0.32em] uppercase text-[#B87333] font-mono">
@@ -146,7 +160,7 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
