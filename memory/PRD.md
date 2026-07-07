@@ -79,6 +79,11 @@ Design agent review saved at `/app/design_guidelines.json`. All P0/P1/P2 items a
 - Portal (P2): dealer inputs gained copper focus ring (box-shadow)
 - FloatingWhatsApp (P2): hover lift (-translate-y-1)
 
+## iPad Landscape Overlap Fix (June 2026)
+User reported overlapping in iPad landscape Safari. Two root causes found & fixed (verified 100% by testing agent, `iteration_6.json`):
+- Hero: content overflowed short landscape viewports (~760px), tucking the eyebrow under the fixed navbar. Section changed from fixed `h-[100svh]` to `min-h-[100svh]` so it grows instead of overflowing.
+- Interiors: slide caption titles double-exposed during crossfade. Captions now have their own tight, non-overlapping fade windows (`captionOpacity`); wrapper + caption opacity both use isFirst/isLast branches so slide 1 is visible at progress 0 and slide 5 at progress 1. NOTE: framer-motion useTransform offsets MUST stay within [0,1] — out-of-range sentinels (e.g. 1.5) crash WAAPI with 'Offsets must be null or in the range [0,1]'.
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
