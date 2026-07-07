@@ -1,150 +1,93 @@
 {
-  "theme": "dark",
-  "archetype": "5",
-  "archetype_name": "Luxury & Swiss Precision",
-  "brand_name": "Meridian Plywood",
-  "tagline": "Built to Endure. Designed to Inspire.",
-  "colors": {
-    "background": "#0B0B0B",
-    "surface": "#141414",
-    "surface_glass": "rgba(20, 20, 20, 0.6)",
-    "primary": "#6A442B",
-    "primary_foreground": "#F6F1E9",
-    "accent_copper": "#B87333",
-    "accent_gold": "#D4AF37",
-    "accent_green": "#1A3626",
-    "text_primary": "#F6F1E9",
-    "text_secondary": "#A3A3A3",
-    "border": "rgba(246, 241, 233, 0.1)"
+  "project": {
+    "name": "Meridian Plywood",
+    "theme": "Dark",
+    "archetype": "5 (Luxury)",
+    "aesthetic": "Cinematic, minimalist, Apple-inspired storytelling"
   },
-  "typography": {
-    "headings": {
-      "family": "Satoshi, sans-serif",
-      "weight": "700",
-      "tracking": "tracking-tight"
-    },
-    "body": {
-      "family": "General Sans, sans-serif",
-      "weight": "400",
-      "tracking": "tracking-normal"
-    },
-    "mono": {
-      "family": "JetBrains Mono, monospace"
-    }
-  },
-  "layout_and_spacing": {
-    "container_padding": "px-6 md:px-12 lg:px-24",
-    "section_spacing": "py-24 md:py-32 lg:py-48",
-    "grid_system": "Bento Grid and Asymmetrical Layouts",
-    "border_radius": "rounded-2xl md:rounded-3xl"
-  },
-  "motion_and_interactions": {
-    "scrolling": "lenis for smooth momentum scrolling",
-    "animations": "framer-motion for scroll-triggered reveals, slow cinematic pacing",
-    "hover_effects": "subtle scale up, border glow, image parallax"
-  },
-  "sections": [
-    {
-      "name": "HERO",
-      "description": "Cinematic background with parallax/lighting effects, overlay text, minimal",
-      "components": ["Custom HTML/Tailwind", "Framer Motion", "Parallax Wrapper"]
-    },
-    {
-      "name": "MATERIAL STORY",
-      "description": "Sticky scroll storytelling on Gurjan superiority",
-      "components": ["Framer Motion useScroll", "Sticky Container"]
-    },
-    {
-      "name": "BWP TECHNOLOGY",
-      "description": "Technical showcase with Three.js layered cross-section plywood animation (exploded view)",
-      "components": ["@react-three/fiber", "@react-three/drei", "framer-motion-3d"]
-    },
-    {
-      "name": "PRODUCT COLLECTION",
-      "description": "Floating product cards, hover expand",
-      "components": ["Shadcn Card heavily customized", "Framer Motion layout animations"]
-    },
-    {
-      "name": "PERFORMANCE COMPARISON",
-      "description": "Animated benchmark bars comparing Meridian vs ordinary plywood",
-      "components": ["Framer Motion", "Custom Progress Bars"]
-    },
-    {
-      "name": "INTERIOR APPLICATION SHOWCASE",
-      "description": "Horizontal scrolling cinematic gallery",
-      "components": ["Framer Motion useScroll", "Horizontal Scroll Container"]
-    },
-    {
-      "name": "SUSTAINABILITY",
-      "description": "Minimal eco section with deep forest green accents",
-      "components": ["Custom HTML/Tailwind"]
-    },
-    {
-      "name": "DEALER & ARCHITECT PORTAL",
-      "description": "Glassmorphism dashboard preview with downloads and dealer locator",
-      "components": ["Shadcn Tabs", "Glassmorphism Surface", "Lucide Icons"]
-    },
-    {
-      "name": "TESTIMONIALS",
-      "description": "Monochrome portraits, cinematic fade transitions",
-      "components": ["Framer Motion AnimatePresence", "Custom Carousel"]
-    },
-    {
-      "name": "CONTACT/FINAL CTA",
-      "description": "Inquiry form, WhatsApp, dealer registration",
-      "components": ["Shadcn Form", "Shadcn Input", "Shadcn Button"]
-    }
-  ],
-  "image_urls": {
-    "hero_background": {
-      "url": "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/0cf3f068a0a6780383a3819febba2773ee1ddc84e807f489a9da368e4c591b9d.png",
-      "description": "Cinematic dark walnut wood panels perfectly aligned, architectural lighting casting copper metallic highlights"
-    },
-    "plywood_exploded_reference": {
-      "url": "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/25815b3d59b495af0f8b427a7748dbd9e8ade893e183e2c9e418d2e114d8f20b.png",
-      "description": "3D render of premium plywood floating with its individual wood veneer layers separated. Use this as texture reference for Three.js"
-    },
-    "marine_grade_water": {
-      "url": "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/2a6cd08a03fb3fe92afa18861a3d661122f5a97f52aeb629248ab2a6c00e4e63.png",
-      "description": "Macro photography of water droplets beading off perfectly smooth premium dark wood surface"
-    },
-    "sustainability_forest": {
-      "url": "https://static.prod-images.emergentagent.com/jobs/a398aedd-9258-477b-b0f6-a8e34e2373a5/images/fe21622034f19fc80e351856410744b8a40b577d32237a8c502b1a784982ada1.png",
-      "description": "Moody cinematic shot of a deep dark green pine forest shrouded in thick morning mist"
-    },
-    "interior_kitchen": {
-      "url": "https://images.unsplash.com/photo-1663811396777-05505d999151?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxkYXJrJTIwbHV4dXJ5JTIwbW9kZXJuJTIwa2l0Y2hlbiUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3Nzk5MDg4NTd8MA&ixlib=rb-4.1.0&q=85",
-      "description": "Sleek and modern kitchen design featuring dark cabinetry and ambient lighting"
-    },
-    "interior_wardrobe": {
-      "url": "https://images.unsplash.com/photo-1771270731051-9cfbb7222946?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjB3YXJkcm9iZSUyMGRhcmslMjB3b29kJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzc5OTA4ODU3fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Modern dark kitchen with wood accents, serving as wardrobe/interior reference"
-    },
-    "architect_portrait_1": {
-      "url": "https://images.unsplash.com/photo-1506863530036-1efeddceb993?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxibGFjayUyMGFuZCUyMHdoaXRlJTIwYXJjaGl0ZWN0JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc5OTA4ODU3fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Black and white architect portrait 1"
-    },
-    "architect_portrait_2": {
-      "url": "https://images.unsplash.com/photo-1558730234-d8b2281b0d00?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxibGFjayUyMGFuZCUyMHdoaXRlJTIwYXJjaGl0ZWN0JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc5OTA4ODU3fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Black and white architect portrait 2"
-    },
-    "architect_portrait_3": {
-      "url": "https://images.unsplash.com/photo-1613064756072-52b429a1e06f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxibGFjayUyMGFuZCUyMHdoaXRlJTIwYXJjaGl0ZWN0JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc5OTA4ODU3fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Black and white architect portrait 3"
-    }
-  },
-  "instructions_to_main_agent": {
-    "libraries_to_install": [
-      "lenis",
-      "framer-motion",
-      "lucide-react",
-      "@react-three/fiber",
-      "@react-three/drei",
-      "framer-motion-3d",
-      "three"
+  "expert_critique": "The foundational design successfully targets the luxury architectural market using a dark, cinematic motif with a 3D Hero. However, the execution currently suffers from minor structural collisions (Hero overlap), typographic inconsistencies (Title Case vs Sentence Case), and compositional imbalance (Footer void). Applying a focused polish pass focusing on optical alignment, generous spacing (E1 Spacing Protocol), and refined typography will elevate this from a good functional site to a world-class experiential destination.",
+  "polish_checklist": {
+    "P0_critical_fixes": [
+      {
+        "section": "Hero",
+        "issue": "Headline slightly overlaps the top ticker/marquee text.",
+        "fix": "Increase the top padding of the hero container (e.g., add `pt-24` or `pt-32`). Verify z-index stacking context so the ticker is clearly separated. Use `mt-[header-height]` buffer if header is fixed."
+      },
+      {
+        "section": "Hero",
+        "issue": "Stat row 'Lifetime PERFORMANCE WARRANTY' label collides with a 'SCROLL \u2193' indicator.",
+        "fix": "Reconfigure the bottom alignment. Anchor the SCROLL indicator strictly to `absolute bottom-8 left-1/2 -translate-x-1/2`. Group the stat rows neatly to the left or distribute them with flex-wrap so they stack elegantly on narrower viewports without crossing the center axis."
+      }
     ],
-    "threejs_implementation_rules": "Use R3F and drei. The BWP Technology section MUST include a true 3D exploded view of plywood layers. Do not just use images. Create simple box geometries mapped with the provided plywood_exploded_reference or solid dark wood colors and animate their Y-axis separation on scroll using framer-motion-3d useScroll.",
-    "accessibility_rules": "All interactive elements MUST have data-testid attributes (e.g., data-testid='contact-submit-button').",
-    "styling_rules": "Never use pure black or gray; always tint. Ensure overlay text over the hero image is perfectly readable (e.g., using text-shadow or a delicate dark gradient overlay). Use optical alignment and generous paddings."
-  }
+    "P1_high_priority_polish": [
+      {
+        "section": "Navigation",
+        "issue": "Nav 'Speak to specifier' capitalization inconsistent with title case elsewhere.",
+        "fix": "Update to 'Speak to Specifier'. Apply `tracking-wide` and `text-sm` font-medium for a crisper, premium button appearance. Ensure hover state transitions smoothly (e.g., background shifts slightly lighter, text remains high contrast)."
+      },
+      {
+        "section": "Footer",
+        "issue": "Footer right side next to logo appears largely empty (unbalanced).",
+        "fix": "Adopt a macro-grid for the footer. Place the vintage Meridian logo plate spanning 4-6 columns on the left. Expand the 4-column link grid to distribute evenly across the right side. Anchor the tagline block clearly to the bottom border spanning full width, or right-align it beneath the link columns to fill the void."
+      },
+      {
+        "category": "Typography",
+        "issue": "Mixed uppercase micro-labels and serif-italics need strict hierarchy.",
+        "fix": "Enforce `tracking-[0.2em]` or `tracking-widest` on all uppercase micro-labels (e.g., '\u2014 PERFORMANCE \u2733') with a reduced size (`text-xs`). Ensure the serif-italic accent words sit cleanly on the baseline alongside bold sans headings."
+      },
+      {
+        "category": "Spacing",
+        "issue": "Potential crowding in data-heavy sections (Performance).",
+        "fix": "Apply E1 generous spacing scale. Increase vertical gap between Performance table rows (`py-6` or `py-8` instead of standard `py-4`) to let the copper progress bars breathe."
+      }
+    ],
+    "P2_enhancements_and_micro_interactions": [
+      {
+        "section": "Performance",
+        "issue": "Copper progress bars need cinematic reveal.",
+        "fix": "Add `framer-motion` `whileInView` to animate width from 0% to X% with a smooth, ease-out duration (e.g., 1.5s). Ensure the +% result chips fade in slightly after the bar finishes."
+      },
+      {
+        "section": "Interiors",
+        "issue": "Carousel 'SCROLL TO TRAVERSE' indicator needs intuitive cue.",
+        "fix": "Add a subtle, infinite, 2px horizontal translation (pulsing left-to-right) to the indicator. Dim the counter (05/05) to `text-white/50` to maintain hierarchy."
+      },
+      {
+        "section": "Portal & Contact",
+        "issue": "Forms and WhatsApp buttons need tactile feedback.",
+        "fix": "Ensure all inputs have `focus:ring-1 focus:ring-[#c8824a]` and `focus:border-[#c8824a]`. Give the Floating WhatsApp button a hover state that slightly lifts (`-translate-y-1`) and drops a soft colored shadow (`shadow-[0_4px_20px_rgba(37,211,102,0.3)]`)."
+      }
+    ]
+  },
+  "global_design_system": {
+    "colors": {
+      "background": "Dark charcoal / Near-black (#0a0a0a or #111111)",
+      "text": "Cream / Off-white (#f5f5f0 or #fafafa)",
+      "accent": "Copper / Amber (#c8824a)",
+      "borders": "rgba(255, 255, 255, 0.1)"
+    },
+    "typography": {
+      "headings": "Bold geometric/humanist sans mixed with serif-italic accents.",
+      "body": "Clean sans, text-base, leading-relaxed, text-white/80.",
+      "micro_labels": "text-xs, uppercase, tracking-[0.2em], text-white/60."
+    },
+    "components": {
+      "buttons": "Pill shape (`rounded-full`), 1px solid border or filled. Fill text must contrast heavily (e.g., dark text on copper background). Hover states must include subtle scale/brightness change.",
+      "chips": "Subtle borders `border-white/10`, background `bg-white/5`, backdrop-blur if floating.",
+      "forms": "Dark card backgrounds (`bg-white/5`), inputs with bottom-borders only or subtle rounded rectangles, placeholder text `text-white/40`."
+    },
+    "motion": {
+      "philosophy": "Cinematic and deliberate. No fast, jarring moves.",
+      "transitions": "ease-out, 0.3s for micro-interactions, up to 1.5s for scroll reveals.",
+      "touch_devices": "Lenis/parallax/mix-blend disabled for iPad performance (Intentional constraint preserved)."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Do NOT rebuild the site architecture or sections. Only apply these targeted polish fixes to the existing components.",
+    "Fix the P0 overlapping issues immediately (Hero headline and bottom stat row).",
+    "Fix the P1 layout issue in the Footer to eliminate the empty right-side void.",
+    "Fix the P1 typography issue in the Navigation ('Speak to specifier' -> 'Speak to Specifier').",
+    "Implement P2 micro-interactions for the Performance progress bars and Portal inputs.",
+    "Ensure all new or modified interactive elements have `data-testid` attributes in kebab-case."
+  ]
 }
