@@ -69,6 +69,16 @@ World-class luxury website for a premium BWP Gurjan plywood brand "Meridian Plyw
 - Navbar + FloatingWhatsApp scroll listeners throttled via `requestAnimationFrame`
 - New util: `/app/frontend/src/lib/useIsTouchDevice.js` (`useIsTouchDevice()` hook + `isIOSLike()` UA helper)
 
+## Expert Design Review & Polish Pass (June 2026)
+Design agent review saved at `/app/design_guidelines.json`. All P0/P1/P2 items applied and regression-tested (`/app/test_reports/iteration_3.json`, 100% pass):
+- Hero (P0): content now clears fixed navbar (pt-24/28); vertical rhythm tightened so stat row never collides with scroll cue; scroll cue moved to bottom-right (right-24/28, clear of WhatsApp float) and hidden under 700px-tall viewports
+- Navbar (P1): CTA retitled "Speak to a Specifier" (desktop + mobile)
+- Footer (P1): empty right void balanced with large display tagline "Built to Endure. Designed to Inspire." + `footer-cta-contact` pill
+- Performance (P2): row spacing py-7/9; "+%" result chips fade in after bars complete
+- Interiors (P2): animated copper dash next to "Scroll to traverse"
+- Portal (P2): dealer inputs gained copper focus ring (box-shadow)
+- FloatingWhatsApp (P2): hover lift (-translate-y-1)
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
