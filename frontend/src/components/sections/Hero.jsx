@@ -30,7 +30,7 @@ export default function Hero() {
       >
         <img
           src={IMAGES.hero}
-          alt=""
+          alt="Premium Gurjan BWP marine plywood slab — Meridian Plywood, IS 710 boiling waterproof"
           className="h-full w-full object-cover"
           loading="eager"
         />

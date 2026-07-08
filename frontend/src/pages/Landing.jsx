@@ -8,6 +8,7 @@ import Interiors from "@/components/sections/Interiors";
 import Sustainability from "@/components/sections/Sustainability";
 import Portal from "@/components/sections/Portal";
 import Testimonials from "@/components/sections/Testimonials";
+import Faq from "@/components/sections/Faq";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 import FloatingWhatsApp from "@/components/sections/FloatingWhatsApp";
@@ -37,6 +38,9 @@ export default function Landing() {
       <div className="section-divider" aria-hidden />
       <Testimonials />
       <div className="section-divider" aria-hidden />
+      <Faq />
+      <div className="section-divider" aria-hidden />
+
       <Contact />
       <Footer />
       <FloatingWhatsApp />

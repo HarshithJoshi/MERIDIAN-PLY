@@ -126,7 +126,7 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
       {/* Image layer — ONE transform driving ken-burns. No nested motion divs. */}
       <motion.img
         src={item.src}
-        alt={item.title}
+        alt={`${item.title} — ${item.finish} (${item.location}) built with Meridian Gurjan BWP plywood`}
         loading={isLCP ? "eager" : "lazy"}
         decoding="async"
         fetchPriority={isLCP ? "high" : "auto"}
