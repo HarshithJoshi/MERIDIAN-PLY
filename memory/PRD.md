@@ -84,6 +84,13 @@ User reported overlapping in iPad landscape Safari. Two root causes found & fixe
 - Hero: content overflowed short landscape viewports (~760px), tucking the eyebrow under the fixed navbar. Section changed from fixed `h-[100svh]` to `min-h-[100svh]` so it grows instead of overflowing.
 - Interiors: slide caption titles double-exposed during crossfade. Captions now have their own tight, non-overlapping fade windows (`captionOpacity`); wrapper + caption opacity both use isFirst/isLast branches so slide 1 is visible at progress 0 and slide 5 at progress 1. NOTE: framer-motion useTransform offsets MUST stay within [0,1] — out-of-range sentinels (e.g. 1.5) crash WAAPI with 'Offsets must be null or in the range [0,1]'.
 
+## SEO Pass — "Gurjan Marine BWP Plywood" (June 2026)
+User requested keyword targeting for GURJAN MARINE BWP PLYWOOD + Hyderabad local SEO. All verified 100% (`iteration_7.json`):
+- index.html: keyword-front-loaded title, description, keywords, OG/Twitter; geo meta (IN-TG, ICBM Hyderabad); ItemList products renamed keyword-rich with thickness props; LocalBusiness enriched (areaServed Hyderabad/Telangana/India); NEW FAQPage JSON-LD (6 Q&As)
+- NEW visible FAQ section (`Faq.jsx`, id=#faq) between Testimonials and Contact — luxury native <details> accordion, 6 keyword-rich Q&As incl. "Where to buy in Hyderabad"
+- Keyword-rich image alts (hero + interiors slides); sitemap.xml refreshed with #faq + lastmod
+- GOTCHA: editing public/index.html requires `sudo supervisorctl restart frontend` (CRA HtmlWebpackPlugin caches the template). FAQPage JSON-LD text must stay in lockstep with FAQS[] in Faq.jsx.
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
