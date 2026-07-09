@@ -99,7 +99,7 @@ export default function Footer() {
             <div className="mt-5 flex gap-3 text-[#F5F5F7]/60">
               <a href="https://www.instagram.com/meridianply" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-testid="social-instagram" className="hover:text-[#B87333] transition-colors"><Instagram size={17} /></a>
               <a href="#" aria-label="LinkedIn" data-testid="social-linkedin" className="hover:text-[#B87333] transition-colors"><Linkedin size={17} /></a>
-              <a href="https://youtube.com/@merdianply" target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-testid="social-youtube" className="hover:text-[#B87333] transition-colors"><Youtube size={17} /></a>
+              <a href="https://www.youtube.com/@MeridianPly" target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-testid="social-youtube" className="hover:text-[#B87333] transition-colors"><Youtube size={17} /></a>
             </div>
           </div>
         </div>
