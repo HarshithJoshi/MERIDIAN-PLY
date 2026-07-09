@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram, Youtube } from "lucide-react";
 import { BRAND, IMAGES, NAV } from "@/lib/meridian";
 
 export default function Navbar() {
@@ -126,6 +126,28 @@ export default function Navbar() {
               >
                 Speak to a Specifier
               </a>
+              <div className="mt-3 flex items-center gap-6 border-t border-white/10 pt-4 text-[#F5F5F7]/70">
+                <a
+                  href="https://www.instagram.com/meridianply"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  data-testid="nav-mobile-social-instagram"
+                  className="flex items-center gap-2 text-[13px] hover:text-[#B87333] transition-colors"
+                >
+                  <Instagram size={17} /> Instagram
+                </a>
+                <a
+                  href="https://www.youtube.com/@MeridianPly"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  data-testid="nav-mobile-social-youtube"
+                  className="flex items-center gap-2 text-[13px] hover:text-[#B87333] transition-colors"
+                >
+                  <Youtube size={17} /> YouTube
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
