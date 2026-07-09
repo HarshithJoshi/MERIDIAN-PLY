@@ -91,6 +91,13 @@ User requested keyword targeting for GURJAN MARINE BWP PLYWOOD + Hyderabad local
 - Keyword-rich image alts (hero + interiors slides); sitemap.xml refreshed with #faq + lastmod
 - GOTCHA: editing public/index.html requires `sudo supervisorctl restart frontend` (CRA HtmlWebpackPlugin caches the template). FAQPage JSON-LD text must stay in lockstep with FAQS[] in Faq.jsx.
 
+## Apple Typography System Migration (June 2026)
+User requested apple.com-style typography. User choices: SF Pro stack everywhere; serif italic copper accents kept as brand exception (Instrument Serif webfont, `.font-accent` class); uppercase mono eyebrows kept as signature. Verified 100% (`iteration_8.json`):
+- index.css tokens: `--font-sans` (SF Pro/system stack), `--font-serif` (Instrument Serif), `--text-primary #F5F5F7 / secondary #AEAEB2 / muted #8E8E93`; body line-height 1.65; h1-h4 text-wrap:balance
+- Removed Satoshi/General Sans (Fontshare import deleted); global color migration #F6F1E9 → #F5F5F7 (incl. rgba + --m-ivory)
+- Hero h1: weight 600, 44/60/76/92px; section H2s 38/48/58-60 leading-1.08; body paragraphs bumped to 16-19px; nav links 15px sentence case; .input/.dealer-input 16px; .btn-pill 0.95rem weight 500 normal tracking
+- GOTCHA: all accent spans use `.font-accent` (Instrument Serif italic); don't reintroduce `italic` alone for accents
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
