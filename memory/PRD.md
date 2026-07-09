@@ -107,6 +107,9 @@ Full scroll-through audit at 390x844 after typography migration. Fixes (verified
 - Interiors caption meta: flex-wrap + whitespace-nowrap on "01 / 05" counter — no mid-token wrapping
 - All other sections (products, performance, technology, portal, testimonials, faq, contact, footer) verified clean, no horizontal overflow
 
+## Social Links Wired (June 2026)
+Footer social icons all live (target=_blank, verified): Instagram → instagram.com/meridianply · LinkedIn → linkedin.com/company/meridianply · YouTube → youtube.com/@MeridianPly. JSON-LD Organization sameAs kept in sync.
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
