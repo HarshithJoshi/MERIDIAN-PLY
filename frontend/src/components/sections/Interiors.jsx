@@ -147,8 +147,8 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
       <motion.div style={{ opacity: captionOpacity }} className="absolute bottom-0 left-0 right-0 z-10">
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12 lg:px-24 pb-24 md:pb-28">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-3 text-[10px] tracking-[0.32em] uppercase text-[#B87333] font-mono">
-              <span>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
+            <div className="flex flex-wrap items-center gap-3 text-[10px] tracking-[0.32em] uppercase text-[#B87333] font-mono">
+              <span className="whitespace-nowrap">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
               <span className="h-px w-10 bg-[#B87333]/55" />
               <span className="text-[#F5F5F7]/55">{item.location}</span>
             </div>

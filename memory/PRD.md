@@ -100,6 +100,13 @@ User requested apple.com-style typography. User choices: SF Pro stack everywhere
 
 - REVERTED per user (June 2026): headlines back to Satoshi — `.font-display` = "Satoshi", var(--font-sans) with ss01/ss02; Satoshi Fontshare import restored (700/500/400). Body/nav/buttons remain SF stack. Serif accents unchanged.
 
+## Mobile (390px) Visual QA Pass (June 2026)
+Full scroll-through audit at 390x844 after typography migration. Fixes (verified via screenshots + DOM measurement, stat right edge 366<390):
+- Hero stat grid: gap-3/pl-3 on mobile + tighter label tracking (0.12em) — no more right-edge clipping
+- Hero scroll cue hidden on mobile (`hidden md:[@media(min-height:700px)]:flex`)
+- Interiors caption meta: flex-wrap + whitespace-nowrap on "01 / 05" counter — no mid-token wrapping
+- All other sections (products, performance, technology, portal, testimonials, faq, contact, footer) verified clean, no horizontal overflow
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 

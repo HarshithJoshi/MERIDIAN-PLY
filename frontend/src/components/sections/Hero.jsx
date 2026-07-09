@@ -165,18 +165,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 1.2, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-10 md:mt-12 grid grid-cols-3 max-w-3xl gap-6 md:gap-10 border-t border-white/10 pt-5 md:pt-7 divide-x divide-white/[0.07]"
+          className="mt-10 md:mt-12 grid grid-cols-3 max-w-3xl gap-3 sm:gap-6 md:gap-10 border-t border-white/10 pt-5 md:pt-7 divide-x divide-white/[0.07]"
         >
           {[
             { k: "72 hrs", v: "Boiling Water Test" },
             { k: "100%", v: "Gurjan Hardwood Core" },
             { k: "Lifetime", v: "Performance Warranty" },
           ].map((s, idx) => (
-            <div key={s.v} data-testid={`hero-stat-${s.v}`} className={idx > 0 ? "pl-6 md:pl-10" : ""}>
+            <div key={s.v} data-testid={`hero-stat-${s.v}`} className={idx > 0 ? "pl-3 sm:pl-6 md:pl-10" : ""}>
               <div className="font-display text-[22px] sm:text-[26px] md:text-[32px] text-[#F5F5F7] tracking-tight" style={{ fontWeight: 600 }}>
                 {s.k}
               </div>
-              <div className="mt-1 text-[10px] md:text-[12px] tracking-[0.18em] uppercase text-[#A3A3A3]">{s.v}</div>
+              <div className="mt-1 text-[10px] md:text-[12px] tracking-[0.12em] md:tracking-[0.18em] uppercase text-[#A3A3A3]">{s.v}</div>
             </div>
           ))}
         </motion.div>
@@ -188,7 +188,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-9 right-24 md:right-28 z-10 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#F5F5F7]/55 hidden [@media(min-height:700px)]:flex"
+        className="absolute bottom-9 right-24 md:right-28 z-10 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#F5F5F7]/55 hidden md:[@media(min-height:700px)]:flex"
         data-testid="hero-scroll-cue"
       >
         Scroll
