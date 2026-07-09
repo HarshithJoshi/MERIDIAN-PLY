@@ -69,7 +69,7 @@ export default function Navbar() {
               key={n.id}
               data-testid={`nav-link-${n.id}`}
               href={`#${n.id}`}
-              className="link-underline text-[12px] lg:text-[13px] text-[#F6F1E9]/80 hover:text-[#F6F1E9] transition-colors"
+              className="link-underline text-[14px] lg:text-[15px] text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors"
             >
               {n.label}
             </a>
@@ -80,7 +80,7 @@ export default function Navbar() {
           <a
             data-testid="navbar-cta-contact"
             href="#contact"
-            className="btn-pill btn-pill-primary text-[11px] lg:text-[12px] whitespace-nowrap tracking-wide"
+            className="btn-pill btn-pill-primary text-[13px] lg:text-[14px] whitespace-nowrap"
           >
             Speak to a Specifier
           </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
 
         <button
           data-testid="navbar-mobile-toggle"
-          className="md:hidden text-[#F6F1E9]"
+          className="md:hidden text-[#F5F5F7]"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -112,7 +112,7 @@ export default function Navbar() {
                   key={n.id}
                   href={`#${n.id}`}
                   onClick={() => setOpen(false)}
-                  className="text-[15px] text-[#F6F1E9]/85"
+                  className="text-[15px] text-[#F5F5F7]/85"
                   data-testid={`nav-mobile-link-${n.id}`}
                 >
                   {n.label}

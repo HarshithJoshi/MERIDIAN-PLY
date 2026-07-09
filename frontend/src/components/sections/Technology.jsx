@@ -55,15 +55,15 @@ export default function Technology() {
           <div className="md:col-span-5">
             <span className="eyebrow">— BWP Technology</span>
             <h2
-              className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[72px] leading-[1.02] text-[#F6F1E9]"
+              className="mt-4 font-display text-[38px] sm:text-[48px] md:text-[60px] leading-[1.08] text-[#F5F5F7]"
               style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
             >
               Engineered at
               <br />
               every{" "}
-              <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>layer</span>.
+              <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>layer</span>.
             </h2>
-            <p className="mt-6 max-w-md text-[15px] md:text-[16px] leading-relaxed text-[#F6F1E9]/65">
+            <p className="mt-6 max-w-md text-[16px] md:text-[17px] leading-relaxed text-[#F5F5F7]/65">
               Scroll to deconstruct a Meridian panel. Thirteen cross-banded Gurjan
               veneers, bonded under high pressure with phenolic resin — performance
               built layer by layer.
@@ -72,16 +72,16 @@ export default function Technology() {
             {/* Spec stamp — small technical fingerprint that balances the
                 vertical 3D viewport on the right. */}
             <div
-              className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.025] pl-2.5 pr-4 py-2 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#F6F1E9]/65"
+              className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.025] pl-2.5 pr-4 py-2 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#F5F5F7]/65"
               data-testid="technology-spec-stamp"
             >
               <span className="inline-block h-2 w-2 rounded-full bg-[#B87333] shadow-[0_0_10px_rgba(184,115,51,0.7)]" />
               <span>13 Layers</span>
-              <span className="text-[#F6F1E9]/25">·</span>
+              <span className="text-[#F5F5F7]/25">·</span>
               <span>19 mm</span>
-              <span className="text-[#F6F1E9]/25">·</span>
+              <span className="text-[#F5F5F7]/25">·</span>
               <span>8 × 4 ft</span>
-              <span className="text-[#F6F1E9]/25">·</span>
+              <span className="text-[#F5F5F7]/25">·</span>
               <span className="text-[#B87333]">IS 710</span>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function Technology() {
                 <PlyLights castShadow={!isTouch} />
                 <PlyExploded progress={progress} />
               </Canvas>
-              <div className="absolute bottom-4 left-5 right-5 flex justify-between text-[10px] font-mono uppercase tracking-[0.22em] text-[#F6F1E9]/55 pointer-events-none">
+              <div className="absolute bottom-4 left-5 right-5 flex justify-between text-[10px] font-mono uppercase tracking-[0.22em] text-[#F5F5F7]/55 pointer-events-none">
                 <span>13 layers · gurjan</span>
                 <span>cross-banded · phenolic</span>
               </div>
@@ -124,10 +124,10 @@ export default function Technology() {
               className="bg-[#0E0E0E] p-7 md:p-10 hover:bg-[#141414] transition-colors duration-500 group"
             >
               <Icon size={22} className="text-[#B87333] group-hover:scale-110 transition-transform duration-500" />
-              <h4 className="mt-5 font-display text-[18px] md:text-[20px] text-[#F6F1E9]" style={{ fontWeight: 600 }}>
+              <h4 className="mt-5 font-display text-[18px] md:text-[20px] text-[#F5F5F7]" style={{ fontWeight: 600 }}>
                 {title}
               </h4>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-[#F6F1E9]/55">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-[#F5F5F7]/55">
                 {body}
               </p>
             </motion.div>

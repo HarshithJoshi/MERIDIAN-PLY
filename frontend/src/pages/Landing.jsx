@@ -17,7 +17,7 @@ import LoadCurtain from "@/components/sections/LoadCurtain";
 
 export default function Landing() {
   return (
-    <main data-testid="landing-page" className="bg-[#0B0B0B] text-[#F6F1E9] overflow-x-clip">
+    <main data-testid="landing-page" className="bg-[#0B0B0B] text-[#F5F5F7] overflow-x-clip">
       <LoadCurtain />
       <ScrollProgress />
       <Navbar />

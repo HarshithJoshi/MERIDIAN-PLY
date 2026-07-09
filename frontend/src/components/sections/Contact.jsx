@@ -55,14 +55,14 @@ export default function Contact() {
         <div className="max-w-3xl">
           <span className="eyebrow">— Final Word</span>
           <h2
-            className="mt-4 font-display text-[44px] sm:text-[64px] md:text-[88px] leading-[1.02] text-[#F6F1E9]"
-            style={{ fontWeight: 700, letterSpacing: "-0.03em" }}
+            className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[72px] leading-[1.04] text-[#F5F5F7]"
+            style={{ fontWeight: 600, letterSpacing: "-0.03em" }}
           >
             Build spaces that
             <br />
-            <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>last generations</span>.
+            <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>last generations</span>.
           </h2>
-          <p className="mt-7 text-[15px] md:text-[17px] text-[#F6F1E9]/65 max-w-xl leading-relaxed">
+          <p className="mt-7 text-[17px] md:text-[19px] text-[#F5F5F7]/65 max-w-xl leading-relaxed">
             Specifications, samples, or a quiet conversation with our team — start here.
           </p>
         </div>
@@ -198,7 +198,7 @@ export default function Contact() {
                 loading="lazy"
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-white/10 rounded-2xl" />
-              <div className="absolute bottom-3 right-3 glass-strong rounded-full px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase font-mono text-[#F6F1E9]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-3 right-3 glass-strong rounded-full px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase font-mono text-[#F5F5F7]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Open in Maps ↗
               </div>
             </motion.a>
@@ -232,7 +232,7 @@ function InfoCard({ icon, label, value, href, testid }) {
         {icon}
         <span className="eyebrow" style={{ color: "#B87333" }}>{label}</span>
       </div>
-      <div className="mt-3 font-display text-[16px] md:text-[17px] text-[#F6F1E9] group-hover:text-[#F6F1E9]" style={{ fontWeight: 500 }}>
+      <div className="mt-3 font-display text-[16px] md:text-[17px] text-[#F5F5F7] group-hover:text-[#F5F5F7]" style={{ fontWeight: 500 }}>
         {value}
       </div>
     </Tag>
@@ -256,7 +256,7 @@ function PhoneCard() {
       <a
         href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
         data-testid="contact-phone-link"
-        className="mt-3 block font-display text-[18px] md:text-[20px] text-[#F6F1E9] hover:text-[#F6F1E9] tracking-tight"
+        className="mt-3 block font-display text-[18px] md:text-[20px] text-[#F5F5F7] hover:text-[#F5F5F7] tracking-tight"
         style={{ fontWeight: 500 }}
       >
         {BRAND.phone}
@@ -277,7 +277,7 @@ function PhoneCard() {
         <a
           href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
           data-testid="contact-phone-call-btn"
-          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-[12.5px] text-[#F6F1E9]/85 hover:text-[#F6F1E9] hover:border-[#B87333]/60 transition-colors"
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-[12.5px] text-[#F5F5F7]/85 hover:text-[#F5F5F7] hover:border-[#B87333]/60 transition-colors"
         >
           <Phone size={13} /> Call
         </a>
@@ -316,13 +316,13 @@ function ShowroomCard() {
       </div>
 
       <div
-        className="mt-4 font-display text-[15.5px] md:text-[16px] leading-relaxed text-[#F6F1E9] relative"
+        className="mt-4 font-display text-[16px] md:text-[17px] leading-relaxed text-[#F5F5F7] relative"
         style={{ fontWeight: 500 }}
       >
         {BRAND.showroomAddress}
       </div>
 
-      <div className="mt-3 text-[11px] tracking-[0.22em] uppercase font-mono text-[#F6F1E9]/45 group-hover:text-[#B87333] transition-colors duration-300 relative">
+      <div className="mt-3 text-[11px] tracking-[0.22em] uppercase font-mono text-[#F5F5F7]/45 group-hover:text-[#B87333] transition-colors duration-300 relative">
         Open in Maps ↗
       </div>
     </a>

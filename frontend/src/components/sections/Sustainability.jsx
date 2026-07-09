@@ -35,14 +35,14 @@ export default function Sustainability() {
           <div className="md:col-span-8 max-w-2xl">
             <span className="eyebrow" style={{ color: "rgba(74,143,90,0.95)" }}>— Sustainability</span>
             <h2
-              className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[72px] leading-[1.02] text-[#F6F1E9]"
+              className="mt-4 font-display text-[38px] sm:text-[48px] md:text-[60px] leading-[1.08] text-[#F5F5F7]"
               style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
             >
               Strength with
               <br />
-              <span className="italic" style={{ color: "#4a8f5a", fontWeight: 500 }}>responsibility</span>.
+              <span className="font-accent" style={{ color: "#4a8f5a", fontWeight: 500 }}>responsibility</span>.
             </h2>
-            <p className="mt-6 text-[15px] md:text-[16px] leading-relaxed text-[#F6F1E9]/70 max-w-xl">
+            <p className="mt-6 text-[16px] md:text-[17px] leading-relaxed text-[#F5F5F7]/70 max-w-xl">
               Every Meridian sheet carries a quiet promise — that the forest it
               came from remains stronger than when we sourced it.
             </p>
@@ -82,8 +82,8 @@ export default function Sustainability() {
               className="card-glow glass rounded-2xl p-7"
             >
               <Icon size={22} style={{ color: "#4a8f5a" }} />
-              <h3 className="mt-5 font-display text-[18px] text-[#F6F1E9]" style={{ fontWeight: 600 }}>{title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-[#F6F1E9]/60">{body}</p>
+              <h3 className="mt-5 font-display text-[18px] text-[#F5F5F7]" style={{ fontWeight: 600 }}>{title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-[#F5F5F7]/60">{body}</p>
             </motion.div>
           ))}
         </div>

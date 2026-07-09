@@ -25,14 +25,14 @@ export default function Performance() {
         <div className="max-w-3xl">
           <span className="eyebrow">— Performance</span>
           <h2
-            className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[68px] leading-[1.02] text-[#F6F1E9]"
+            className="mt-4 font-display text-[38px] sm:text-[48px] md:text-[58px] leading-[1.08] text-[#F5F5F7]"
             style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
           >
             Performance beyond
             <br />
-            <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>industry standards</span>.
+            <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>industry standards</span>.
           </h2>
-          <p className="mt-6 text-[15px] md:text-[16px] text-[#F6F1E9]/65 max-w-xl">
+          <p className="mt-6 text-[16px] md:text-[17px] text-[#F5F5F7]/65 max-w-xl">
             Independently benchmarked against generic BWP plywood from leading Indian mills.
             Higher is better.
           </p>
@@ -52,10 +52,10 @@ export default function Performance() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-6 text-[11px] tracking-[0.18em] uppercase">
-            <span className="flex items-center gap-2 text-[#F6F1E9]/80">
+            <span className="flex items-center gap-2 text-[#F5F5F7]/80">
               <span className="h-2.5 w-2.5 rounded-full bg-[#B87333]" /> Meridian
             </span>
-            <span className="flex items-center gap-2 text-[#F6F1E9]/55">
+            <span className="flex items-center gap-2 text-[#F5F5F7]/55">
               <span className="h-2.5 w-2.5 rounded-full bg-white/25" /> Ordinary BWP
             </span>
           </div>
@@ -71,7 +71,7 @@ function Row({ row, index, inView }) {
       data-testid={`performance-row-${index}`}
       className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-7 md:py-9 items-center"
     >
-      <div className="md:col-span-4 font-display text-[16px] md:text-[18px] text-[#F6F1E9]" style={{ fontWeight: 500 }}>
+      <div className="md:col-span-4 font-display text-[16px] md:text-[18px] text-[#F5F5F7]" style={{ fontWeight: 500 }}>
         {row.label}
       </div>
       <div className="md:col-span-7 flex flex-col gap-2.5">
@@ -94,7 +94,7 @@ function Bar({ value, label, color, delay, inView }) {
   return (
     <div>
       <div className="flex items-baseline justify-between mb-1.5">
-        <span className="text-[12px] text-[#F6F1E9]/70">{label}</span>
+        <span className="text-[12px] text-[#F5F5F7]/70">{label}</span>
       </div>
       <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
         <motion.div

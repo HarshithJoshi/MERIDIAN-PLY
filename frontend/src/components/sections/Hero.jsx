@@ -72,7 +72,7 @@ export default function Hero() {
           className="flex items-center gap-3"
         >
           <span className="eyebrow">BWP · GURJAN · ISI 710</span>
-          <span className="hidden sm:inline text-[#F6F1E9]/35">·</span>
+          <span className="hidden sm:inline text-[#F5F5F7]/35">·</span>
           <span className="hidden sm:inline italic text-[12px] tracking-[0.06em] text-[#B87333]/85">
             {BRAND.legacyTagline}
           </span>
@@ -83,12 +83,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.55, ease: [0.2, 0.7, 0.2, 1] }}
-          className="font-display mt-6 text-[44px] leading-[1.02] tracking-tight text-[#F6F1E9] sm:text-[64px] md:text-[88px] lg:text-[112px] text-shadow-cinema"
-          style={{ fontWeight: 700, letterSpacing: "-0.03em" }}
+          className="font-display mt-6 text-[44px] leading-[1.02] tracking-tight text-[#F5F5F7] sm:text-[60px] md:text-[76px] lg:text-[92px] text-shadow-cinema"
+          style={{ fontWeight: 600, letterSpacing: "-0.03em" }}
         >
           Built to Endure.
           <br />
-          <span className="text-[#B87333]/95 italic font-display" style={{ fontWeight: 500 }}>
+          <span className="text-[#B87333]/95 font-accent" style={{ fontWeight: 500 }}>
             Designed
           </span>{" "}
           to Inspire.
@@ -98,7 +98,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.85, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-6 max-w-[640px] text-[15px] md:text-[17px] leading-relaxed text-[#F6F1E9]/75"
+          className="mt-6 max-w-[640px] text-[17px] md:text-[19px] leading-relaxed text-[#F5F5F7]/75"
         >
           Premium BWP Gurjan plywood engineered for timeless durability and
           architectural elegance. A single sheet, decades of integrity.
@@ -138,14 +138,14 @@ export default function Hero() {
         >
           <span
             data-testid="hero-trust-iso"
-            className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/10 px-3.5 py-1.5 text-[11px] tracking-[0.16em] uppercase font-mono text-[#F6F1E9]/85"
+            className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/10 px-3.5 py-1.5 text-[11px] tracking-[0.16em] uppercase font-mono text-[#F5F5F7]/85"
           >
             <ShieldCheck size={13} className="text-[#B87333]" strokeWidth={2.2} />
             ISO 9001:2008 Certified
           </span>
           <span
             data-testid="hero-trust-warranty"
-            className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/10 px-3.5 py-1.5 text-[11px] tracking-[0.16em] uppercase font-mono text-[#F6F1E9]/85"
+            className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/10 px-3.5 py-1.5 text-[11px] tracking-[0.16em] uppercase font-mono text-[#F5F5F7]/85"
           >
             <BadgeCheck size={13} className="text-[#B87333]" strokeWidth={2.2} />
             25-Year Warranty
@@ -155,7 +155,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.3, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mt-4 italic text-[12.5px] tracking-[0.01em] text-[#F6F1E9]/55"
+          className="mt-4 italic text-[12.5px] tracking-[0.01em] text-[#F5F5F7]/55"
         >
           — {BRAND.buildTagline}
         </motion.p>
@@ -173,7 +173,7 @@ export default function Hero() {
             { k: "Lifetime", v: "Performance Warranty" },
           ].map((s, idx) => (
             <div key={s.v} data-testid={`hero-stat-${s.v}`} className={idx > 0 ? "pl-6 md:pl-10" : ""}>
-              <div className="font-display text-[22px] sm:text-[26px] md:text-[32px] text-[#F6F1E9] tracking-tight" style={{ fontWeight: 600 }}>
+              <div className="font-display text-[22px] sm:text-[26px] md:text-[32px] text-[#F5F5F7] tracking-tight" style={{ fontWeight: 600 }}>
                 {s.k}
               </div>
               <div className="mt-1 text-[10px] md:text-[12px] tracking-[0.18em] uppercase text-[#A3A3A3]">{s.v}</div>
@@ -188,7 +188,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-9 right-24 md:right-28 z-10 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#F6F1E9]/55 hidden [@media(min-height:700px)]:flex"
+        className="absolute bottom-9 right-24 md:right-28 z-10 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#F5F5F7]/55 hidden [@media(min-height:700px)]:flex"
         data-testid="hero-scroll-cue"
       >
         Scroll

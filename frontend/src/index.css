@@ -2,18 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts: Satoshi (headings) + General Sans (body) via Fontshare */
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@600,500,400&display=swap");
+/* Fonts: Apple system stack (SF Pro on Apple devices) + Instrument Serif (brand accent) + JetBrains Mono (data/eyebrows) */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
+    /* Apple typography tokens */
+    --font-sans: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-serif: "Instrument Serif", "New York", Georgia, serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --text-primary: #F5F5F7;
+    --text-secondary: #AEAEB2;
+    --text-muted: #8E8E93;
+    --track-hero: -0.03em;
+    --track-title: -0.025em;
+    --track-headline: -0.02em;
+    --leading-hero: 1.02;
+    --leading-title: 1.08;
+    --leading-body: 1.65;
     /* Meridian palette */
     --m-bg: 11 11 11;            /* #0B0B0B */
     --m-surface: 20 20 20;       /* #141414 */
     --m-surface-2: 26 26 26;     /* #1A1A1A */
     --m-walnut: 106 68 43;       /* #6A442B */
     --m-walnut-deep: 74 47 30;
-    --m-ivory: 246 241 233;      /* #F6F1E9 */
+    --m-ivory: 246 241 233;      /* #F5F5F7 */
     --m-copper: 184 115 51;      /* #B87333 */
     --m-gold: 212 175 55;        /* #D4AF37 */
     --m-forest: 26 54 38;        /* #1A3626 */
@@ -48,7 +61,7 @@
 
 html {
     background: #0B0B0B;
-    color: #F6F1E9;
+    color: #F5F5F7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -56,15 +69,20 @@ html {
 
 body {
     margin: 0;
-    font-family: "General Sans", system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     background: #0B0B0B;
-    color: #F6F1E9;
+    color: var(--text-primary);
+    line-height: var(--leading-body);
     overflow-x: hidden;
 }
 
+/* Micro typography: balanced headings, no widows in paragraphs */
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
 ::selection {
     background: rgba(184, 115, 51, 0.45);
-    color: #F6F1E9;
+    color: #F5F5F7;
 }
 
 /* Custom scrollbar */
@@ -74,9 +92,15 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #4a2f1c; }
 
 /* Typography utilities */
-.font-display { font-family: "Satoshi", "Inter", system-ui, sans-serif; font-feature-settings: "ss01" on, "ss02" on; }
-.font-body { font-family: "General Sans", system-ui, sans-serif; }
-.font-mono { font-family: "JetBrains Mono", monospace; }
+.font-display { font-family: var(--font-sans); }
+.font-body { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+/* Brand exception: serif italic accent words inside headlines */
+.font-accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    letter-spacing: -0.01em;
+}
 
 /* Eyebrow text */
 .eyebrow {
@@ -126,14 +150,14 @@ body {
     background: rgba(20, 20, 20, 0.55);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(246, 241, 233, 0.08);
+    border: 1px solid rgba(245, 245, 247, 0.08);
 }
 
 .glass-strong {
     background: rgba(20, 20, 20, 0.78);
     -webkit-backdrop-filter: blur(28px);
     backdrop-filter: blur(28px);
-    border: 1px solid rgba(246, 241, 233, 0.1);
+    border: 1px solid rgba(245, 245, 247, 0.1);
 }
 
 /* Subtle copper border glow */
@@ -148,10 +172,10 @@ body {
     gap: 0.55rem;
     padding: 0.85rem 1.6rem;
     border-radius: 999px;
-    font-family: "Satoshi", sans-serif;
+    font-family: var(--font-sans);
     font-weight: 500;
-    font-size: 0.92rem;
-    letter-spacing: 0.01em;
+    font-size: 0.95rem;
+    letter-spacing: 0;
     transition:
         background-color 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
         color 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
@@ -162,19 +186,19 @@ body {
 .btn-pill:active { transform: translateY(0) scale(0.985); }
 
 .btn-pill-primary {
-    background: #F6F1E9;
+    background: #F5F5F7;
     color: #0B0B0B;
 }
 .btn-pill-primary:hover {
     background: #ffffff;
     transform: translateY(-1px);
-    box-shadow: 0 18px 40px -18px rgba(246, 241, 233, 0.4);
+    box-shadow: 0 18px 40px -18px rgba(245, 245, 247, 0.4);
 }
 
 .btn-pill-ghost {
     background: transparent;
-    color: #F6F1E9;
-    border: 1px solid rgba(246, 241, 233, 0.22);
+    color: #F5F5F7;
+    border: 1px solid rgba(245, 245, 247, 0.22);
 }
 .btn-pill-ghost:hover {
     border-color: rgba(184, 115, 51, 0.7);
@@ -368,15 +392,15 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 14px 16px;
-    color: #F6F1E9;
-    font-size: 14.5px;
-    font-family: "General Sans", sans-serif;
+    color: #F5F5F7;
+    font-size: 16px;
+    font-family: var(--font-sans);
     transition:
         border-color 280ms ease,
         background-color 280ms ease,
         box-shadow 280ms ease;
 }
-.input::placeholder { color: rgba(246, 241, 233, 0.32); }
+.input::placeholder { color: rgba(245, 245, 247, 0.32); }
 .input:hover { border-color: rgba(255, 255, 255, 0.16); }
 .input:focus {
     outline: none;

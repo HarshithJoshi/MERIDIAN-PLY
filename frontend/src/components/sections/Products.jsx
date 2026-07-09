@@ -109,10 +109,10 @@ export default function Products() {
           <div className="max-w-2xl">
             <span className="eyebrow">— The Collection</span>
             <h2
-              className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[68px] leading-[1.02] text-[#F6F1E9]"
+              className="mt-4 font-display text-[38px] sm:text-[48px] md:text-[58px] leading-[1.08] text-[#F5F5F7]"
               style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
             >
-              Six surfaces. <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>One standard.</span>
+              Six surfaces. <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>One standard.</span>
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -123,8 +123,8 @@ export default function Products() {
                 onClick={() => setFilter(c)}
                 className={`px-4 py-2 rounded-full text-[12px] tracking-[0.16em] uppercase transition-all duration-300 border ${
                   filter === c
-                    ? "bg-[#F6F1E9] text-[#0B0B0B] border-[#F6F1E9]"
-                    : "border-white/15 text-[#F6F1E9]/70 hover:text-[#F6F1E9] hover:border-[#B87333]/60"
+                    ? "bg-[#F5F5F7] text-[#0B0B0B] border-[#F5F5F7]"
+                    : "border-white/15 text-[#F5F5F7]/70 hover:text-[#F5F5F7] hover:border-[#B87333]/60"
                 }`}
               >
                 {c}
@@ -151,12 +151,12 @@ export default function Products() {
                 <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[#6A442B]/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="flex items-start justify-between">
                   <span className="text-[10px] uppercase tracking-[0.28em] text-[#B87333]">{p.category}</span>
-                  <ArrowUpRight size={16} className="text-[#F6F1E9]/40 group-hover:text-[#B87333] group-hover:rotate-12 transition-all" />
+                  <ArrowUpRight size={16} className="text-[#F5F5F7]/40 group-hover:text-[#B87333] group-hover:rotate-12 transition-all" />
                 </div>
-                <h3 className="mt-7 font-display text-[24px] md:text-[28px] leading-tight text-[#F6F1E9]" style={{ fontWeight: 600, letterSpacing: "-0.015em" }}>
+                <h3 className="mt-7 font-display text-[22px] md:text-[26px] leading-tight text-[#F5F5F7]" style={{ fontWeight: 600, letterSpacing: "-0.015em" }}>
                   {p.name}
                 </h3>
-                <p className="mt-3 text-[13.5px] leading-relaxed text-[#F6F1E9]/55 line-clamp-2">{p.description}</p>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-[#F5F5F7]/55 line-clamp-2">{p.description}</p>
 
                 <div className="mt-7 grid grid-cols-2 gap-y-3 text-[12px] border-t border-white/10 pt-5">
                   <Field label="Grade" value={p.grade} />
@@ -179,7 +179,7 @@ function Field({ label, value }) {
   return (
     <div>
       <div className="text-[10px] uppercase tracking-[0.22em] text-[#A3A3A3]">{label}</div>
-      <div className="mt-0.5 text-[#F6F1E9]/90 font-mono text-[12.5px]">{value}</div>
+      <div className="mt-0.5 text-[#F5F5F7]/90 font-mono text-[12.5px]">{value}</div>
     </div>
   );
 }
@@ -207,16 +207,16 @@ function ProductModal({ product, onClose }) {
             <button
               onClick={onClose}
               data-testid="product-modal-close"
-              className="absolute top-5 right-5 text-[#F6F1E9]/60 hover:text-[#F6F1E9]"
+              className="absolute top-5 right-5 text-[#F5F5F7]/60 hover:text-[#F5F5F7]"
               aria-label="Close"
             >
               ✕
             </button>
             <span className="eyebrow">{product.category}</span>
-            <h3 className="mt-3 font-display text-[32px] md:text-[40px] text-[#F6F1E9] leading-tight" style={{ fontWeight: 600, letterSpacing: "-0.02em" }}>
+            <h3 className="mt-3 font-display text-[32px] md:text-[40px] text-[#F5F5F7] leading-tight" style={{ fontWeight: 600, letterSpacing: "-0.02em" }}>
               {product.name}
             </h3>
-            <p className="mt-3 text-[14.5px] leading-relaxed text-[#F6F1E9]/65">{product.description}</p>
+            <p className="mt-3 text-[14.5px] leading-relaxed text-[#F5F5F7]/65">{product.description}</p>
 
             <div className="mt-7 grid grid-cols-2 gap-4">
               <Field label="Grade" value={product.grade} />
@@ -229,7 +229,7 @@ function ProductModal({ product, onClose }) {
               <div className="text-[10px] uppercase tracking-[0.22em] text-[#A3A3A3] mb-3">Applications</div>
               <div className="flex flex-wrap gap-2">
                 {product.applications.map((a) => (
-                  <span key={a} className="px-3 py-1.5 rounded-full text-[12px] bg-white/5 border border-white/10 text-[#F6F1E9]/85">
+                  <span key={a} className="px-3 py-1.5 rounded-full text-[12px] bg-white/5 border border-white/10 text-[#F5F5F7]/85">
                     {a}
                   </span>
                 ))}

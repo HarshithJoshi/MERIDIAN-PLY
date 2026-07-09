@@ -40,16 +40,16 @@ export default function Faq() {
           <div className="lg:col-span-5">
             <span className="eyebrow">— Plywood Knowledge</span>
             <h2
-              className="mt-4 font-display text-[36px] sm:text-[48px] md:text-[56px] leading-[1.04] text-[#F6F1E9]"
+              className="mt-4 font-display text-[36px] sm:text-[48px] md:text-[56px] leading-[1.08] text-[#F5F5F7]"
               style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
             >
               Gurjan Marine BWP plywood,{" "}
-              <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>
+              <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>
                 explained
               </span>
               .
             </h2>
-            <p className="mt-6 text-[14.5px] md:text-[15.5px] text-[#F6F1E9]/65 max-w-md leading-relaxed">
+            <p className="mt-6 text-[16px] md:text-[17px] text-[#F5F5F7]/65 max-w-md leading-relaxed">
               Straight answers on IS 710 grades, Gurjan hardwood cores, and choosing
               the right waterproof plywood for your project.
             </p>
@@ -68,7 +68,7 @@ export default function Faq() {
                     className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 md:py-7 [&::-webkit-details-marker]:hidden"
                   >
                     <span
-                      className="font-display text-[16.5px] md:text-[18px] text-[#F6F1E9] transition-colors duration-300 group-hover:text-[#B87333]"
+                      className="font-display text-[16.5px] md:text-[18px] text-[#F5F5F7] transition-colors duration-300 group-hover:text-[#B87333]"
                       style={{ fontWeight: 500, letterSpacing: "-0.01em" }}
                     >
                       {f.q}
@@ -79,7 +79,7 @@ export default function Faq() {
                   </summary>
                   <p
                     data-testid={`faq-answer-${i}`}
-                    className="faq-answer pb-7 pr-2 md:pr-14 text-[13.5px] md:text-[14.5px] leading-relaxed text-[#F6F1E9]/65"
+                    className="faq-answer pb-7 pr-2 md:pr-14 text-[16px] md:text-[17px] leading-relaxed text-[#F5F5F7]/65"
                   >
                     {f.a}
                   </p>

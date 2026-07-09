@@ -38,18 +38,18 @@ export default function MaterialStory() {
         <div className="max-w-3xl">
           <span className="eyebrow" data-testid="material-eyebrow">— The Material</span>
           <h2
-            className="mt-4 font-display tracking-tight text-[#F6F1E9] text-[40px] sm:text-[56px] md:text-[72px] leading-[1.03]"
+            className="mt-4 font-display tracking-tight text-[#F5F5F7] text-[40px] sm:text-[56px] md:text-[72px] leading-[1.03]"
             style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
           >
             Crafted from the
             <br />
             strength of{" "}
-            <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>
+            <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>
               Gurjan
             </span>
             .
           </h2>
-          <p className="mt-6 max-w-2xl text-[15px] md:text-[17px] leading-relaxed text-[#F6F1E9]/65">
+          <p className="mt-6 max-w-2xl text-[17px] md:text-[19px] leading-relaxed text-[#F5F5F7]/65">
             A material biography — three quiet truths about why our plywood
             stands apart from the industry.
           </p>
@@ -111,12 +111,12 @@ function StoryPanel({ item, index }) {
       >
         <span className="eyebrow">{item.eyebrow}</span>
         <h3
-          className="mt-4 font-display text-[28px] sm:text-[36px] md:text-[44px] leading-[1.08] text-[#F6F1E9]"
+          className="mt-4 font-display text-[28px] sm:text-[36px] md:text-[44px] leading-[1.08] text-[#F5F5F7]"
           style={{ fontWeight: 600, letterSpacing: "-0.02em" }}
         >
           {item.title}
         </h3>
-        <p className="mt-5 text-[15px] md:text-[16px] leading-relaxed text-[#F6F1E9]/65 max-w-md">
+        <p className="mt-5 text-[16px] md:text-[17px] leading-relaxed text-[#F5F5F7]/65 max-w-md">
           {item.body}
         </p>
       </motion.div>

@@ -51,13 +51,13 @@ export default function FloatingWhatsApp() {
             className="absolute bottom-1/2 right-[calc(100%+12px)] translate-y-1/2 glass-strong rounded-full pl-4 pr-3 py-2 flex items-center gap-2 whitespace-nowrap shadow-xl"
             data-testid="floating-whatsapp-tooltip"
           >
-            <span className="text-[12.5px] text-[#F6F1E9]">Chat with a specifier</span>
+            <span className="text-[12.5px] text-[#F5F5F7]">Chat with a specifier</span>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setTooltipOpen(false);
               }}
-              className="text-[#F6F1E9]/55 hover:text-[#F6F1E9] -mr-0.5"
+              className="text-[#F5F5F7]/55 hover:text-[#F5F5F7] -mr-0.5"
               aria-label="Dismiss"
               data-testid="floating-whatsapp-tooltip-close"
             >

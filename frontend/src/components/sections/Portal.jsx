@@ -46,17 +46,17 @@ export default function Portal() {
         <div className="max-w-2xl">
           <span className="eyebrow">— Architect & Dealer Portal</span>
           <h2
-            className="mt-4 font-display text-[40px] sm:text-[56px] md:text-[68px] leading-[1.02] text-[#F6F1E9]"
+            className="mt-4 font-display text-[38px] sm:text-[48px] md:text-[58px] leading-[1.08] text-[#F5F5F7]"
             style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
           >
             Specifications,
             <br />
-            <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>
+            <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>
               at your desk
             </span>
             .
           </h2>
-          <p className="mt-6 text-[15px] md:text-[16px] text-[#F6F1E9]/65 max-w-xl">
+          <p className="mt-6 text-[16px] md:text-[17px] text-[#F5F5F7]/65 max-w-xl">
             A working set of resources for architects, contractors, and our growing dealer network.
           </p>
         </div>
@@ -71,14 +71,14 @@ export default function Portal() {
                 <TabsTrigger
                   value="become-dealer"
                   data-testid="portal-tab-become-dealer"
-                  className="data-[state=active]:bg-[#F6F1E9] data-[state=active]:text-[#0B0B0B] text-[#F6F1E9]/70"
+                  className="data-[state=active]:bg-[#F5F5F7] data-[state=active]:text-[#0B0B0B] text-[#F5F5F7]/70"
                 >
                   <Handshake size={14} className="mr-2" /> Become a Dealer
                 </TabsTrigger>
                 <TabsTrigger
                   value="samples"
                   data-testid="portal-tab-samples"
-                  className="data-[state=active]:bg-[#F6F1E9] data-[state=active]:text-[#0B0B0B] text-[#F6F1E9]/70"
+                  className="data-[state=active]:bg-[#F5F5F7] data-[state=active]:text-[#0B0B0B] text-[#F5F5F7]/70"
                 >
                   <Package size={14} className="mr-2" /> Samples
                 </TabsTrigger>
@@ -90,7 +90,7 @@ export default function Portal() {
             </TabsContent>
 
             <TabsContent value="samples" className="p-6 md:p-8">
-              <p className="text-[14.5px] text-[#F6F1E9]/70 max-w-xl">
+              <p className="text-[14.5px] text-[#F5F5F7]/70 max-w-xl">
                 Request physical sample swatches delivered to your studio. Complimentary
                 for verified architects and design firms.
               </p>
@@ -127,16 +127,16 @@ function BecomeDealerPanel() {
       {/* Left — benefits */}
       <div className="md:col-span-6">
         <h3
-          className="font-display text-[28px] md:text-[34px] leading-[1.05] text-[#F6F1E9]"
+          className="font-display text-[28px] md:text-[34px] leading-[1.05] text-[#F5F5F7]"
           style={{ fontWeight: 600, letterSpacing: "-0.02em" }}
         >
           Build your business with{" "}
-          <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>
+          <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>
             Meridian
           </span>
           .
         </h3>
-        <p className="mt-4 text-[14.5px] md:text-[15px] leading-relaxed text-[#F6F1E9]/65 max-w-md">
+        <p className="mt-4 text-[16px] md:text-[17px] leading-relaxed text-[#F5F5F7]/65 max-w-md">
           We partner with serious building-material retailers and project distributors who share
           our standards. Apply to become an authorised Meridian dealer in your city.
         </p>
@@ -153,12 +153,12 @@ function BecomeDealerPanel() {
               </span>
               <div>
                 <div
-                  className="font-display text-[15px] md:text-[16px] text-[#F6F1E9]"
+                  className="font-display text-[16px] md:text-[17px] text-[#F5F5F7]"
                   style={{ fontWeight: 600 }}
                 >
                   {title}
                 </div>
-                <div className="mt-1 text-[13px] leading-relaxed text-[#F6F1E9]/55 max-w-md">
+                <div className="mt-1 text-[13px] leading-relaxed text-[#F5F5F7]/55 max-w-md">
                   {body}
                 </div>
               </div>
@@ -227,12 +227,12 @@ function DealerApplicationForm() {
           <Check size={22} className="text-[#B87333]" strokeWidth={2.5} />
         </div>
         <h4
-          className="mt-5 font-display text-[22px] md:text-[26px] text-[#F6F1E9]"
+          className="mt-5 font-display text-[22px] md:text-[26px] text-[#F5F5F7]"
           style={{ fontWeight: 600, letterSpacing: "-0.015em" }}
         >
           Application received.
         </h4>
-        <p className="mt-3 text-[14px] leading-relaxed text-[#F6F1E9]/70 max-w-sm">
+        <p className="mt-3 text-[14px] leading-relaxed text-[#F5F5F7]/70 max-w-sm">
           Our dealer development team will review your details and reach out within 2 business
           days. In the meantime, feel free to call us directly.
         </p>
@@ -248,7 +248,7 @@ function DealerApplicationForm() {
     >
       <div className="eyebrow mb-1">— Dealer Application</div>
       <h4
-        className="font-display text-[20px] md:text-[24px] text-[#F6F1E9]"
+        className="font-display text-[20px] md:text-[24px] text-[#F5F5F7]"
         style={{ fontWeight: 600, letterSpacing: "-0.015em" }}
       >
         Apply in 60 seconds.
@@ -367,9 +367,9 @@ function DealerApplicationForm() {
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 12px;
           padding: 12px 14px;
-          color: #F6F1E9;
-          font-size: 14px;
-          font-family: "General Sans", sans-serif;
+          color: #F5F5F7;
+          font-size: 16px;
+          font-family: var(--font-sans);
           transition: border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease;
         }
         .dealer-input::placeholder { color: rgba(246,241,233,0.32); }

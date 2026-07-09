@@ -1,0 +1,42 @@
+{
+  "summary": "Typography-system migration regression PASSED. Verified full-page smoke + typography tokens, colors, nav sizes, H2 sizes, form submissions (contact & dealer), FAQ accordion, interiors gallery counter reaches 05, iPad landscape hero-eyebrow clearance, mobile hero size, mobile menu, no console errors, no runtime overlay.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified": {
+    "body_font_family": "\"SF Pro Display\", \"SF Pro Text\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif (Satoshi/General Sans confirmed absent via grep + computed style)",
+    "hero_h1": "fontSize=92px, fontWeight=600, color=rgb(245,245,247) (new #F5F5F7), font-family SF Pro stack",
+    "hero_accent_span": "'Designed' -> font-family Instrument Serif, font-style italic (webfont loaded successfully)",
+    "hero_paragraph": "fontSize=19px, color=rgba(245,245,247,0.75)",
+    "old_ivory_count": "0 elements render in rgb(246,241,233) (#F6F1E9)",
+    "nav_links": "All 8 links (Material..Contact) at 15px, sentence case",
+    "cta_pill": "'Speak to a Specifier' visible",
+    "h2_sizes_desktop": "Material 72px, Technology 60px, Products 58px, Performance 58px, Sustainability 60px, Portal 58px, Testimonials 60px, FAQ 56px, Contact 72px — all with line-height ~1.08. No clipping/overlap.",
+    "faq_answer_fontsize": "17px, accordion open/close works",
+    "contact_input_fontsize": "16px, POST /api/inquiries -> 200, success toast 'Inquiry received' visible",
+    "dealer_input_fontsize": "16px, POST /api/dealers -> 200, [data-testid=dealer-application-success] visible",
+    "interiors_gallery": "Counter progresses 01 -> 05 on scroll; effective-opacity walk confirms only one caption visible at a time (no double caption)",
+    "floating_whatsapp": "Visible on all viewports",
+    "ipad_1194x760": "navBottom=72, hero eyebrowTop=116 (clears navbar); no horizontal overflow",
+    "mobile_390x844": "hero h1 fontSize=44px (within 40-48 range); no horizontal overflow; mobile menu opens with all nav links",
+    "console_errors": "0 across desktop/iPad/mobile runs",
+    "runtime_overlay": "not present"
+  },
+  "test_report_links": ["/app/test_reports/iteration_8.json"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Meridian ivory css var --m-ivory still comments '#F5F5F7' but rgb 246 241 233 (mismatch between token name/comment). Not functionally referenced by test-visible elements but should be updated for consistency (index.css line 29).",
+    "Material and Contact section H2s are 72px which exceeds the '48-60px' guidance in the spec — intentional hero-adjacent size, but worth confirming with design if a tighter cap is desired."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "100%", "frontend": "100%" },
+  "test_credentials": "None required",
+  "seed_data_creation": "Created 1 TEST inquiry (Test User) and 1 TEST dealer application (Dealer Test) via public forms. Contains 'test.typography@example.com' and 'dealer.test@example.com'.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iteration 8 = typography Apple-system migration regression. Everything passes. If future iteration touches fonts, re-check: (1) computed body font-family starts with 'SF Pro Display', (2) hero H1 weight 600 not 700, (3) primary text color rgb(245,245,247), (4) .font-accent spans render Instrument Serif italic, (5) no #F6F1E9 remains in computed styles.",
+  "rca_of_the_issue": "N/A - no issues found."
+}

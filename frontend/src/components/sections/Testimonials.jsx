@@ -45,12 +45,12 @@ export default function Testimonials() {
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-24">
         <span className="eyebrow">— Voices</span>
         <h2
-          className="mt-4 font-display text-[36px] sm:text-[48px] md:text-[60px] leading-[1.04] text-[#F6F1E9] max-w-3xl"
+          className="mt-4 font-display text-[36px] sm:text-[48px] md:text-[60px] leading-[1.08] text-[#F5F5F7] max-w-3xl"
           style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
         >
           Trusted by India&rsquo;s
           <br />
-          <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>quiet specifiers</span>.
+          <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>quiet specifiers</span>.
         </h2>
 
         <div className="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -63,7 +63,7 @@ export default function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -18 }}
                 transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}
-                className="mt-6 font-display text-[22px] sm:text-[26px] md:text-[32px] leading-[1.35] text-[#F6F1E9]"
+                className="mt-6 font-display text-[22px] sm:text-[26px] md:text-[32px] leading-[1.35] text-[#F5F5F7]"
                 style={{ fontWeight: 400, letterSpacing: "-0.01em" }}
               >
                 &ldquo;{item.quote}&rdquo;
@@ -100,8 +100,8 @@ export default function Testimonials() {
               </AnimatePresence>
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent" />
               <div className="absolute bottom-6 left-7 right-7">
-                <div className="font-display text-[18px] text-[#F6F1E9]" style={{ fontWeight: 600 }}>{item.name}</div>
-                <div className="mt-1 text-[12px] tracking-[0.16em] uppercase text-[#F6F1E9]/55 font-mono">{item.role}</div>
+                <div className="font-display text-[18px] text-[#F5F5F7]" style={{ fontWeight: 600 }}>{item.name}</div>
+                <div className="mt-1 text-[12px] tracking-[0.16em] uppercase text-[#F5F5F7]/55 font-mono">{item.role}</div>
               </div>
             </div>
           </div>

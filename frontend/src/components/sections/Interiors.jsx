@@ -150,15 +150,15 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
             <div className="flex items-center gap-3 text-[10px] tracking-[0.32em] uppercase text-[#B87333] font-mono">
               <span>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
               <span className="h-px w-10 bg-[#B87333]/55" />
-              <span className="text-[#F6F1E9]/55">{item.location}</span>
+              <span className="text-[#F5F5F7]/55">{item.location}</span>
             </div>
             <h3
-              className="mt-5 font-display text-[40px] sm:text-[56px] md:text-[72px] leading-[1.02] text-[#F6F1E9] text-shadow-cinema"
+              className="mt-5 font-display text-[38px] sm:text-[48px] md:text-[60px] leading-[1.08] text-[#F5F5F7] text-shadow-cinema"
               style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
             >
               {item.title}
             </h3>
-            <p className="mt-4 text-[12.5px] md:text-[13px] tracking-[0.18em] uppercase font-mono text-[#F6F1E9]/65">
+            <p className="mt-4 text-[12.5px] md:text-[13px] tracking-[0.18em] uppercase font-mono text-[#F5F5F7]/65">
               {item.finish}
             </p>
           </div>
@@ -170,10 +170,10 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
 
 function Counter({ active, total }) {
   return (
-    <div className="flex items-baseline gap-2 font-mono text-[11px] tracking-[0.28em] uppercase text-[#F6F1E9]/70 text-shadow-cinema">
+    <div className="flex items-baseline gap-2 font-mono text-[11px] tracking-[0.28em] uppercase text-[#F5F5F7]/70 text-shadow-cinema">
       <span data-testid="interiors-counter-current">{String(active + 1).padStart(2, "0")}</span>
-      <span className="text-[#F6F1E9]/35">/</span>
-      <span className="text-[#F6F1E9]/35">{String(total).padStart(2, "0")}</span>
+      <span className="text-[#F5F5F7]/35">/</span>
+      <span className="text-[#F5F5F7]/35">{String(total).padStart(2, "0")}</span>
     </div>
   );
 }
@@ -183,7 +183,7 @@ function ProgressRail({ progress, total }) {
   return (
     <div className="w-full">
       <div className="flex items-center gap-3 mb-3">
-        <span className="text-[10px] tracking-[0.28em] uppercase text-[#F6F1E9]/45 font-mono">
+        <span className="text-[10px] tracking-[0.28em] uppercase text-[#F5F5F7]/45 font-mono">
           Scroll to traverse
         </span>
         <motion.span

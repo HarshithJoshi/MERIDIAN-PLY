@@ -30,12 +30,12 @@ export default function Footer() {
           <div className="flex flex-col items-center sm:items-end text-center sm:text-right gap-5">
             <div className="eyebrow eyebrow-no-dot">Tagline</div>
             <div
-              className="font-display text-[24px] md:text-[30px] leading-[1.15] text-[#F6F1E9] max-w-sm"
+              className="font-display text-[24px] md:text-[30px] leading-[1.15] text-[#F5F5F7] max-w-sm"
               style={{ fontWeight: 600, letterSpacing: "-0.02em" }}
             >
               Built to Endure.
               <br />
-              <span className="italic text-[#B87333]" style={{ fontWeight: 500 }}>
+              <span className="font-accent text-[#B87333]" style={{ fontWeight: 500 }}>
                 Designed
               </span>{" "}
               to Inspire.
@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="border-t border-white/5 pt-10 md:pt-12 grid grid-cols-2 md:grid-cols-4 gap-10">
           <div>
             <div className="eyebrow">Brand</div>
-            <p className="mt-4 text-[13px] text-[#F6F1E9]/55 leading-relaxed max-w-xs">
+            <p className="mt-4 text-[13px] text-[#F5F5F7]/55 leading-relaxed max-w-xs">
               Meridian Plywood — BWP Gurjan engineered for architects who refuse to compromise on the substrate.
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-[13.5px]">
               {NAV.slice(0, 4).map((n) => (
                 <li key={n.id}>
-                  <a href={`#${n.id}`} className="text-[#F6F1E9]/65 hover:text-[#B87333] transition-colors" data-testid={`footer-link-${n.id}`}>
+                  <a href={`#${n.id}`} className="text-[#F5F5F7]/65 hover:text-[#B87333] transition-colors" data-testid={`footer-link-${n.id}`}>
                     {n.label}
                   </a>
                 </li>
@@ -74,7 +74,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-[13.5px]">
               {NAV.slice(4).map((n) => (
                 <li key={n.id}>
-                  <a href={`#${n.id}`} className="text-[#F6F1E9]/65 hover:text-[#B87333] transition-colors" data-testid={`footer-link-${n.id}`}>
+                  <a href={`#${n.id}`} className="text-[#F5F5F7]/65 hover:text-[#B87333] transition-colors" data-testid={`footer-link-${n.id}`}>
                     {n.label}
                   </a>
                 </li>
@@ -83,20 +83,20 @@ export default function Footer() {
           </div>
           <div>
             <div className="eyebrow">Contact</div>
-            <div className="mt-4 space-y-2 text-[13.5px] text-[#F6F1E9]/65">
+            <div className="mt-4 space-y-2 text-[13.5px] text-[#F5F5F7]/65">
               <div>{BRAND.phone}</div>
               <div>{BRAND.email}</div>
               <a
                 href={BRAND.mapShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[12.5px] leading-relaxed text-[#F6F1E9]/45 hover:text-[#B87333] transition-colors duration-300"
+                className="block text-[12.5px] leading-relaxed text-[#F5F5F7]/45 hover:text-[#B87333] transition-colors duration-300"
                 data-testid="footer-address"
               >
                 {BRAND.address}
               </a>
             </div>
-            <div className="mt-5 flex gap-3 text-[#F6F1E9]/60">
+            <div className="mt-5 flex gap-3 text-[#F5F5F7]/60">
               <a href="#" aria-label="Instagram" data-testid="social-instagram" className="hover:text-[#B87333] transition-colors"><Instagram size={17} /></a>
               <a href="#" aria-label="LinkedIn" data-testid="social-linkedin" className="hover:text-[#B87333] transition-colors"><Linkedin size={17} /></a>
               <a href="#" aria-label="YouTube" data-testid="social-youtube" className="hover:text-[#B87333] transition-colors"><Youtube size={17} /></a>
@@ -104,12 +104,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-7 border-t border-white/5 flex flex-col md:flex-row gap-3 md:items-center justify-between text-[11.5px] text-[#F6F1E9]/40 font-mono uppercase tracking-[0.18em]">
+        <div className="mt-14 pt-7 border-t border-white/5 flex flex-col md:flex-row gap-3 md:items-center justify-between text-[11.5px] text-[#F5F5F7]/40 font-mono uppercase tracking-[0.18em]">
           <div>© {new Date().getFullYear()} Meridian Plywood · IS 710 · ISO 9001</div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-[#F6F1E9]/80">Privacy</a>
-            <a href="#" className="hover:text-[#F6F1E9]/80">Terms</a>
-            <a href="#" className="hover:text-[#F6F1E9]/80">Warranty</a>
+            <a href="#" className="hover:text-[#F5F5F7]/80">Privacy</a>
+            <a href="#" className="hover:text-[#F5F5F7]/80">Terms</a>
+            <a href="#" className="hover:text-[#F5F5F7]/80">Warranty</a>
           </div>
         </div>
       </div>
