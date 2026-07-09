@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts: Apple system stack (SF Pro on Apple devices) + Instrument Serif (brand accent) + JetBrains Mono (data/eyebrows) */
+/* Fonts: Apple system stack (body/UI) + Satoshi (headlines) + Instrument Serif (brand accent) + JetBrains Mono (data/eyebrows) */
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
 
@@ -92,7 +93,7 @@ p { text-wrap: pretty; }
 ::-webkit-scrollbar-thumb:hover { background: #4a2f1c; }
 
 /* Typography utilities */
-.font-display { font-family: var(--font-sans); }
+.font-display { font-family: "Satoshi", var(--font-sans); font-feature-settings: "ss01" on, "ss02" on; }
 .font-body { font-family: var(--font-sans); }
 .font-mono { font-family: var(--font-mono); }
 /* Brand exception: serif italic accent words inside headlines */

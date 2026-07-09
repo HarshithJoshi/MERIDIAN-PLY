@@ -98,6 +98,8 @@ User requested apple.com-style typography. User choices: SF Pro stack everywhere
 - Hero h1: weight 600, 44/60/76/92px; section H2s 38/48/58-60 leading-1.08; body paragraphs bumped to 16-19px; nav links 15px sentence case; .input/.dealer-input 16px; .btn-pill 0.95rem weight 500 normal tracking
 - GOTCHA: all accent spans use `.font-accent` (Instrument Serif italic); don't reintroduce `italic` alone for accents
 
+- REVERTED per user (June 2026): headlines back to Satoshi — `.font-display` = "Satoshi", var(--font-sans) with ss01/ss02; Satoshi Fontshare import restored (700/500/400). Body/nav/buttons remain SF stack. Serif accents unchanged.
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
