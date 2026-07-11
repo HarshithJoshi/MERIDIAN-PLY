@@ -110,6 +110,12 @@ Full scroll-through audit at 390x844 after typography migration. Fixes (verified
 ## Social Links Wired (June 2026)
 Footer social icons all live (target=_blank, verified): Instagram → instagram.com/meridianply · LinkedIn → linkedin.com/company/meridianply · YouTube → youtube.com/@MeridianPly. JSON-LD Organization sameAs kept in sync.
 
+## Interiors Images Sharpened for Desktop (June 2026)
+Root cause: portrait 928×1152 AI images upscaled >2× when object-cover cropped to 1920px full-bleed. Fix:
+- Regenerated all 5 gallery scenes as LANDSCAPE via Nano Banana (image-edit mode with originals as reference), Lanczos-upscaled to 1920×1288 + unsharp mask → `/images/interior_*_wide.jpg`
+- `GALLERY` items now have `srcWide`; `Interiors.jsx` picks wide on ≥768px (`prefersWideImages()` — NOTE: must NOT be named use* or ESLint hooks rule breaks build), portrait originals kept for mobile
+- Verified: desktop serves *_wide.jpg (natural 1920×1288, visibly crisp), mobile serves portrait originals
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 

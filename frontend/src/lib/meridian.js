@@ -56,30 +56,35 @@ export const IMAGES = {
 export const GALLERY = [
   {
     src: "/images/interior_kitchen.jpg",
+    srcWide: "/images/interior_kitchen_wide.jpg",
     title: "The Atelier Kitchen",
     location: "Mumbai · Private Residence",
     finish: "BWP Gurjan 19mm · Fluted Walnut Veneer",
   },
   {
     src: "/images/interior_wardrobe.jpg",
+    srcWide: "/images/interior_wardrobe_wide.jpg",
     title: "Walk-In Wardrobe",
     location: "Bengaluru · Penthouse",
     finish: "BWP Gurjan 16mm · Vertical Reeded Walnut",
   },
   {
     src: "/images/interior_lobby.jpg",
+    srcWide: "/images/interior_lobby_wide.jpg",
     title: "Hotel Lobby Panels",
     location: "Goa · Boutique Hotel",
     finish: "Book-matched Walnut Veneer · Architectural Grade",
   },
   {
     src: "/images/interior_library.jpg",
+    srcWide: "/images/interior_library_wide.jpg",
     title: "Reading Library",
     location: "Delhi · Villa",
     finish: "Solid Walnut Shelving · Hand-finished Oil",
   },
   {
     src: "/images/interior_bath.jpg",
+    srcWide: "/images/interior_bath_wide.jpg",
     title: "Sculpted Bath",
     location: "Hyderabad · Apartment",
     finish: "Marine Grade 18mm · Slatted Walnut Screen",

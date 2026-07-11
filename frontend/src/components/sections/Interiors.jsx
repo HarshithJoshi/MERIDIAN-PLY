@@ -3,6 +3,11 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-mot
 import { GALLERY } from "@/lib/meridian";
 import useIsTouchDevice from "@/lib/useIsTouchDevice";
 
+// Wide (landscape 1920px) renders for desktop full-bleed sharpness;
+// portrait originals remain for narrow/mobile screens.
+const prefersWideImages = () =>
+  typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
+
 export default function Interiors() {
   const sectionRef = useRef(null);
   const isTouch = useIsTouchDevice();
@@ -125,7 +130,7 @@ function Slide({ item, index, total, progress, isMounted, isLCP, isTouch }) {
     >
       {/* Image layer — ONE transform driving ken-burns. No nested motion divs. */}
       <motion.img
-        src={item.src}
+        src={prefersWideImages() && item.srcWide ? item.srcWide : item.src}
         alt={`${item.title} — ${item.finish} (${item.location}) built with Meridian Gurjan BWP plywood`}
         loading={isLCP ? "eager" : "lazy"}
         decoding="async"
