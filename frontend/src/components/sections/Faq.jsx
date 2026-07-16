@@ -26,6 +26,14 @@ export const FAQS = [
     q: "Where can I buy Gurjan Marine BWP plywood in Hyderabad?",
     a: `Visit the Meridian flagship company store at Aghapura, Hyderabad — 14-1-327/328, Behind Prakash Talkies Lane, Near Jain Mandir — our authorised distributor for Telangana. Or call / WhatsApp ${BRAND.phone} for pan-India dealer routing and architect sample kits.`,
   },
+  {
+    q: "What is the price of BWP Gurjan plywood in Hyderabad?",
+    a: "Pricing depends on thickness (6mm–18mm), grade (BWP Gurjan or Gurjan Marine) and order volume. As a factory-direct brand, Meridian offers Hyderabad's most competitive rates for genuine IS 710 Gurjan plywood — visit our Aghapura flagship store or WhatsApp us for the current price list, architect quotations and project-volume rates.",
+  },
+  {
+    q: "Do you supply plywood across Telangana and pan-India?",
+    a: "Yes. Our Hyderabad flagship store services all of Telangana — including Secunderabad, Warangal, Karimnagar and Nizamabad — with fast local delivery. Through our authorised dealer network we supply BWP Gurjan and Marine plywood pan-India, including Mumbai, Delhi NCR, Bengaluru, Chennai, Pune and Kolkata. Bulk project orders ship directly from the factory.",
+  },
 ];
 
 export default function Faq() {

@@ -116,6 +116,13 @@ Root cause: portrait 928×1152 AI images upscaled >2× when object-cover cropped
 - `GALLERY` items now have `srcWide`; `Interiors.jsx` picks wide on ≥768px (`prefersWideImages()` — NOTE: must NOT be named use* or ESLint hooks rule breaks build), portrait originals kept for mobile
 - Verified: desktop serves *_wide.jpg (natural 1920×1288, visibly crisp), mobile serves portrait originals
 
+## Local + Pan-India SEO Pass (June 2026)
+Telangana/Hyderabad sales + pan-India targeting (verified: 8 FAQ items visible = 8 in FAQPage JSON-LD, all 5 schemas parse, footer line renders):
+- 2 new FAQ entries: "plywood price in Hyderabad" + "supply across Telangana and pan-India" (Secunderabad/Warangal/metros) — synced in Faq.jsx AND FAQPage JSON-LD
+- LocalBusiness: areaServed expanded to 11 entries (TG cities + Mumbai/Delhi/Bengaluru/Chennai/Pune/Kolkata + India), added hasMap Google Maps link
+- Meta description/keywords: added plywood dealer/shop/price Hyderabad, plywood Secunderabad, plywood suppliers Telangana, plywood manufacturer India
+- Footer: crawlable "serving areas" paragraph (data-testid footer-serving-line)
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 

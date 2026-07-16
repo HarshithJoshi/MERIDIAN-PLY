@@ -104,12 +104,23 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-7 border-t border-white/5 flex flex-col md:flex-row gap-3 md:items-center justify-between text-[11.5px] text-[#F5F5F7]/40 font-mono uppercase tracking-[0.18em]">
-          <div>© {new Date().getFullYear()} Meridian Plywood · IS 710 · ISO 9001</div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-[#F5F5F7]/80">Privacy</a>
-            <a href="#" className="hover:text-[#F5F5F7]/80">Terms</a>
-            <a href="#" className="hover:text-[#F5F5F7]/80">Warranty</a>
+        <div className="mt-14 pt-7 border-t border-white/5">
+          <p
+            data-testid="footer-serving-line"
+            className="text-[12px] leading-relaxed text-[#F5F5F7]/45 max-w-3xl"
+          >
+            Plywood dealer in Hyderabad, Telangana — flagship store at Aghapura. Supplying BWP
+            Gurjan &amp; Marine plywood across Secunderabad, Warangal and all of Telangana, with
+            pan-India delivery to Mumbai, Delhi NCR, Bengaluru, Chennai, Pune and Kolkata through
+            our authorised dealer network.
+          </p>
+          <div className="mt-6 flex flex-col md:flex-row gap-3 md:items-center justify-between text-[11.5px] text-[#F5F5F7]/40 font-mono uppercase tracking-[0.18em]">
+            <div>© {new Date().getFullYear()} Meridian Plywood · IS 710 · ISO 9001</div>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-[#F5F5F7]/80">Privacy</a>
+              <a href="#" className="hover:text-[#F5F5F7]/80">Terms</a>
+              <a href="#" className="hover:text-[#F5F5F7]/80">Warranty</a>
+            </div>
           </div>
         </div>
       </div>
