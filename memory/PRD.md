@@ -123,6 +123,9 @@ Telangana/Hyderabad sales + pan-India targeting (verified: 8 FAQ items visible =
 - Meta description/keywords: added plywood dealer/shop/price Hyderabad, plywood Secunderabad, plywood suppliers Telangana, plywood manufacturer India
 - Footer: crawlable "serving areas" paragraph (data-testid footer-serving-line)
 
+## Interiors Scroll Jank Fix (June 2026)
+User: "issues when scrolling near interior images". Root cause: slides mount on demand (active±1) → mid-scroll fetch + synchronous decode of ~500KB 1920px JPEGs = hitch/black flash at each slide boundary. Fix (verified 100%, `iteration_9.json`): idle-time preload + `img.decode()` of all 5 gallery images via requestIdleCallback (setTimeout fallback), breakpoint-aware (wide on desktop, portrait on mobile). Confirmed: all images fetched before section reached, complete=true/naturalWidth=1920 at every mount, zero double captions, counter recovers after fast-scroll stress.
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
