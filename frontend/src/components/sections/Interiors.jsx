@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { GALLERY } from "@/lib/meridian";
 import useIsTouchDevice from "@/lib/useIsTouchDevice";
@@ -20,6 +20,22 @@ export default function Interiors() {
   // Heavy reduction in concurrent layer work => smooth scroll on iPad / mid-range GPUs.
   const [active, setActive] = useState(0);
   const total = GALLERY.length;
+
+  // Pre-fetch + pre-decode every gallery image during idle time so a slide
+  // never triggers a network fetch / synchronous JPEG decode mid-scroll
+  // (that decode hitch was the source of scroll jank near this section).
+  useEffect(() => {
+    const preload = () => {
+      GALLERY.forEach((g) => {
+        const img = new Image();
+        img.src = prefersWideImages() && g.srcWide ? g.srcWide : g.src;
+        if (img.decode) img.decode().catch(() => {});
+      });
+    };
+    const idle = window.requestIdleCallback;
+    const id = idle ? idle(preload, { timeout: 3000 }) : setTimeout(preload, 1500);
+    return () => (idle ? window.cancelIdleCallback(id) : clearTimeout(id));
+  }, []);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const i = Math.min(total - 1, Math.max(0, Math.floor(v * total + 0.0001)));

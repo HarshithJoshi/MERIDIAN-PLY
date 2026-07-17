@@ -1,0 +1,42 @@
+{
+  "summary": "Frontend-only regression + fix-validation for Interiors gallery scroll jank fix (requestIdleCallback preload of GALLERY images). Verified preload happens before scroll reaches #interiors, every slide mounts with a fully decoded image (complete=true, naturalWidth>0), no black/empty frames, no console/page errors, counter recovers correctly after fast-scroll stress, and prior fixes (caption double-exposure, WAAPI offsets, ken-burns scale, first/last slide visibility) do not regress. Mobile portrait originals + desktop _wide.jpg selection logic both confirmed working.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Interiors.jsx preload effect correctly uses requestIdleCallback with setTimeout fallback and cancels on unmount — clean implementation.",
+    "prefersWideImages() is evaluated both in the preload effect and inside Slide render — consistent decision as long as viewport width isn't crossed post-preload; acceptable trade-off.",
+    "img.decode() promise catch is silent — fine for preloading."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested)", "frontend": "100%"},
+  "test_credentials": "N/A",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Interiors fix validated end-to-end at 1920x800 and 390x844. Objective checks used: (1) performance.getEntriesByType('resource') confirmed all 5 wide images (desktop) or portrait images (mobile) fetched during the ~4s idle window before section reached; (2) at every slide boundary, `img.complete===true` and `naturalWidth=1920` (desktop wide) / 928 or 768 (mobile portrait); (3) 30-sample sweep across the 5x-viewport-tall section detected zero instances of two captions both above opacity 0.5 (double-exposure regression clean); (4) ken-burns scale transitions 1.08 → 1.02 on desktop; (5) first slide opacity=1 at section top, last slide opacity=1 at section bottom; (6) counter returns to 01 after scroll-up and 05 after scroll-down through stress positions; (7) zero console errors and no runtime error overlay across all tests.",
+  "detailed_results": {
+    "desktop_1920x800": {
+      "preload_before_scroll": "ALL 5 wide JPEGs found in performance resources after 4.5s idle window (totalResources=34)",
+      "slide_mount_state": "slides 0..4 all had img.complete=true, naturalWidth=1920, naturalHeight=1288 when visited",
+      "counter_after_fast_scroll_stress": "05 at bottom, 01 at top — recovered correctly",
+      "console_errors": 0,
+      "runtime_overlay": false,
+      "double_caption_exposures": "0 / 30 samples",
+      "ken_burns": "matrix scale 1.08 → 1.02 across a slide (animates)",
+      "first_slide_at_top_opacity": 1,
+      "last_slide_at_bottom_opacity": 1
+    },
+    "mobile_390x844": {
+      "preload_before_scroll": "All 5 portrait originals fetched, NO _wide.jpg fetched (correct selection)",
+      "slide_mount_state": "slides 0..4 all had img.complete=true, portrait src loaded",
+      "console_errors": 0
+    }
+  },
+  "rca of the issue": "Not required — fix already applied by main agent and confirmed effective. Original jank came from per-slide mid-scroll fetch+decode of ~500KB 1920x1288 JPEGs; new idle-time preload+decode places them in the browser cache/decoded-image pool so <img src> assignment inside the mount window resolves synchronously without a decode hitch."
+}
