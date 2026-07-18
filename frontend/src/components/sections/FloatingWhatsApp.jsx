@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { BRAND } from "@/lib/meridian";
@@ -10,13 +10,12 @@ import { BRAND } from "@/lib/meridian";
 // stays present through the entire scroll journey.
 export default function FloatingWhatsApp() {
   const [tooltipOpen, setTooltipOpen] = useState(false);
-  const teasedRef = useRef(false);
 
   // Tease the tooltip once, ~1.6s after mount so it doesn't fight the
   // hero entrance animation. Dismisses after ~6s. User can also close it.
+  // (No ref guard: empty deps already fire once per instance, and a guard
+  // set before cleanup gets permanently cancelled under StrictMode.)
   useEffect(() => {
-    if (teasedRef.current) return;
-    teasedRef.current = true;
     const tOpen = setTimeout(() => setTooltipOpen(true), 1600);
     const tClose = setTimeout(() => setTooltipOpen(false), 7600);
     return () => {

@@ -126,6 +126,9 @@ Telangana/Hyderabad sales + pan-India targeting (verified: 8 FAQ items visible =
 ## Interiors Scroll Jank Fix (June 2026)
 User: "issues when scrolling near interior images". Root cause: slides mount on demand (active±1) → mid-scroll fetch + synchronous decode of ~500KB 1920px JPEGs = hitch/black flash at each slide boundary. Fix (verified 100%, `iteration_9.json`): idle-time preload + `img.decode()` of all 5 gallery images via requestIdleCallback (setTimeout fallback), breakpoint-aware (wide on desktop, portrait on mobile). Confirmed: all images fetched before section reached, complete=true/naturalWidth=1920 at every mount, zero double captions, counter recovers after fast-scroll stress.
 
+## WhatsApp Button Disappearing on Scroll — Fix #2 (June 2026)
+2nd recurrence (1st was scroll-gating). Root cause this time: framer-motion animated transform ON the position:fixed container then removed it — Safari drops the fixed layer intermittently under heavy compositing (sticky Interiors translate3d layers). Fix (testing agent 100% on primary, `iteration_10.json`): outer wrapper is now a plain div with PERMANENT transform:translateZ(0) + will-change:transform (stable GPU layer, constant matrix across scroll on 3 viewports); entrance animation moved to inner motion.div. Also fixed StrictMode tooltip suppression (removed teasedRef guard). RULE: never animate transforms directly on this fixed container.
+
 ## P0 Remaining
 - User to supply RESEND_API_KEY and ADMIN_EMAIL in /app/backend/.env to enable real email notifications (currently graceful no-op)
 
