@@ -1,0 +1,66 @@
+{
+  "summary": "Frontend-only validation of the FloatingWhatsApp Safari-compositor fix (outer plain div fixed with permanent translateZ(0)/willChange:transform; entrance motion moved to an inner motion.div). Verified all objective invariants across 3 viewports (1920x800, 390x844, 1194x760) and 10 scroll positions each, plus 6 additional samples inside the sticky Interiors compositing zone. Button remained visible, on-top and positionally stable at every sampled point; container transform is a single constant matrix across all scroll positions; no ancestor of the container has a transform/filter/perspective/paint-containment (which would cause Safari to demote the fixed layer). Zero console errors; wa.me link href + target=_blank correct. Tooltip did NOT appear in dev build within a 10s observation window — flagged as a secondary regression (see frontend_issues).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "FloatingWhatsApp tooltip (secondary regression check requested by ticket)",
+        "issue": "Tooltip 'Chat with a specifier' never appeared in a 10s post-load observation window on 1920x800 (polled every 300ms; count stayed 0). Root cause: dev build runs under React.StrictMode (index.js) which double-invokes the mount effect; the `teasedRef.current` guard is set to true before the cleanup runs, so cleanup cancels the setTimeouts and the second invocation returns early without re-scheduling. Result: tooltip is silently suppressed in dev. In a production build without StrictMode double-invocation it would still fire once, so this is dev-only visible today but the pattern is fragile.",
+        "selector": "[data-testid='floating-whatsapp-tooltip']",
+        "priority": "MEDIUM",
+        "suggested_fix": "Remove the teasedRef guard OR set teasedRef.current=true only INSIDE the setTimeout callback (after opening) rather than synchronously. Alternatively, drop the ref altogether — the effect already has an empty dep array so it only fires once per component instance in production."
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "primary_fix_validation": {
+    "PRIMARY_button_visible_all_positions": {
+      "desktop_1920x800": "10/10 scroll positions: onTop=True, visibility=visible, opacity=1, container rect inside viewport bottom-right (x=1834,y=726,w=58,h=58 at every position)",
+      "mobile_390x844": "10/10 scroll positions: onTop=True, right=374 bottom=828 at every position",
+      "tablet_1194x760": "10/10 scroll positions: onTop=True, right=1166 bottom=744 at every position"
+    },
+    "STRUCTURE_container_transform_invariant": {
+      "desktop_unique_transforms_seen": ["matrix(1, 0, 0, 1, 0, 0)"],
+      "mobile_unique_transforms_seen": ["matrix(1, 0, 0, 1, 0, 0)"],
+      "tablet_unique_transforms_seen": ["matrix(1, 0, 0, 1, 0, 0)"],
+      "note": "Constant translateZ(0) matrix across every scroll position — no animation on the fixed container itself; entrance animation confirmed on inner motion.div (opacity settles to 1 after ~2s)."
+    },
+    "ANCESTOR_compositor_scan": {
+      "ancestors_with_transform_or_filter_or_perspective_or_paint_containment": [],
+      "note": "Walked full parentElement chain from container up to <html>. NONE of the ancestors imposes a containing block on the fixed element — Safari cannot demote the fixed layer for this reason."
+    },
+    "INTERIORS_sticky_zone": {
+      "positions_sampled": 6,
+      "all_on_top": true,
+      "all_transform_constant": true,
+      "note": "Scanned 6 positions across the 5x-viewport-tall #interiors sticky section (y=8074..11674 on desktop). Button remained onTop and opacity=1 at every boundary."
+    },
+    "TOOLTIP": {
+      "appears_at_1_6s": false,
+      "close_button_works": "not_reachable_because_tooltip_did_not_open",
+      "wa_link_href": "https://wa.me/919629783971?text=Hi%20Meridian%20%E2%80%94%20I'd%20like%20to%20discuss%20a%20project%20specification.",
+      "target_blank": true,
+      "rel": "noopener noreferrer"
+    },
+    "REGRESSION_checks": {
+      "console_errors_full_scroll": 0,
+      "runtime_error_overlay": false,
+      "layout_shift_button_position": "ZERO — right/bottom coords are a single unique value across all 10 scroll positions on all 3 viewports",
+      "interiors_preload_fix_not_regressed": "Spot-confirmed: no black frames observed while scanning interiors zone; button remained clickable throughout (iteration_9 detailed validation still holds)"
+    }
+  },
+  "critical_code_review_comments": [
+    "FloatingWhatsApp.jsx: teasedRef.current guard combined with useEffect + setTimeouts is a known React 18 StrictMode footgun. In dev, StrictMode invokes the effect twice; the guard sets true before the cleanup fires, cleanup clears the timers, second run returns early, and the tooltip is permanently suppressed in dev. Recommend removing the ref (empty deps already guarantee single fire per instance in prod) or setting the ref inside the tOpen callback.",
+    "The fix for the Safari compositor issue is correctly implemented: outer container is a plain <div> with position:fixed + transform:translateZ(0) + willChange:transform, ensuring a stable GPU-composited layer whose transform never changes during scroll. Entrance animation lives on the inner motion.div, so framer-motion cannot mutate the fixed element's transform. Ancestor chain contains no transform/filter/perspective, so the fixed containing block is the viewport as intended."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "95% (primary fix 100%; tooltip regression flagged)"},
+  "test_credentials": "N/A",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Primary FloatingWhatsApp Safari-compositor fix is validated by 3 objective invariants that hold across all 3 viewports and 10 scroll positions each (+6 in the interiors sticky zone): (a) outer container transform is a single constant matrix and never animates during scroll, (b) no ancestor imposes a transform/filter/perspective containing block, (c) elementFromPoint(button-center) returns the button/descendant at every position. These are exactly the conditions that prevent Safari from demoting the position:fixed layer. Only pending item is the dev-build tooltip suppression (StrictMode+ref+timeouts) — see suggested_fix in ui_bugs.",
+  "rca_of_the_issue": "Primary bug (WhatsApp disappearing on Safari during scroll): correctly fixed. Root cause was framer-motion animating a transform ON the position:fixed container itself and then removing it — Safari can drop a fixed layer with an intermittent transform under heavy compositing (sticky Interiors uses translate3d). Fix moves the entrance animation to an inner div and gives the fixed outer container a permanent translateZ(0) layer, keeping it on its own stable GPU layer at all times. Secondary tooltip finding: StrictMode double-invocation + teasedRef.current guard causes cleanup to cancel timers before the second effect run returns early."
+}
