@@ -26,7 +26,7 @@ const DEALER_BENEFITS = [
   {
     Icon: MapPin,
     title: "Direct Logistics",
-    body: "Factory-direct dispatch from Yamunanagar with weekly replenishment on top SKUs.",
+    body: "Direct dispatch from our factory with weekly replenishment on top SKUs.",
   },
   {
     Icon: Handshake,
